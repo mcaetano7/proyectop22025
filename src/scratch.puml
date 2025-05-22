@@ -11,6 +11,12 @@ package "Dominio" {
         + avanzarTurno()
         + obtenerEstado()
     }
+    
+    class Facade{
+    + iniciarJuego()
+    + comando(jugador: Jugador, comando: String): string
+    + estado(jugador: Jugador): string
+    }
 
     class Jugador{
         - nombre: String
@@ -63,41 +69,62 @@ package "Dominio" {
     }
     
     abstract class Civilizacion{
-        - nombre: List<String>
+        - nombre: string
+        - bonificacion: List<String>
+        - unidadEspecial: UnidadMilitar
     
     }
     
-    interface IEdificios{
+    interface IEdificio {
         - nombre: List<String>
-        - capacidad: int 
-    }
-    
-    class UnidadMilitar implements IEdificios {
-        - tipo: String
-        - bonificiacion: int
+        - tipo: TipoEdificio
+        - capacidad: int
         - ubicacion: Coordenada
-        - cantidad: int
+        - recursos: List<string>
+    }
+    
+    class UnidadMilitar {
+        - tipo: String
+        - ataque: int
+        - defensa: int
+        - velocidad: int
+        - ubicacion: Coordenada
+    }
+    
+    class Cuartel implements IEdificio{
+    
+    }
+    
+    class Almacen implements IEdificio{
+    
+    }
+    
+    class Casa implements IEdificio{
+    }
+    
+    class CentroCivico implements IEdificio{
+    
     }
 
     
-    class UnidadCivil implements IEdificios{
+    class UnidadCivil {
         - tipo: String
         - ubicacion: Coordenada
         - cantidad: int
+        - creadoPor: Edificio
     
     }
     
     class Recursos implements IRecurso {
-        - recursos: Map<TipoRecurso, Integer>
+        - recursos: Map<TipoRecurso, int>
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
         + mover(...) ...
         + alerta: boolean
     }
     
-    abstract class Recurso {
-    - tipo: TipoRecurso
-    - cantidad: int
+    abstract ActividadEconomica{
+      
     }
        
     class Construir extends Recurso{
