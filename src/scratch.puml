@@ -3,7 +3,7 @@
 ' Paquete principal
 package "Dominio" {
     
-    class Juego {
+    class Program {
         - mapa: Mapa
         - jugadores: List<Jugador>
         - turnoActual: int
@@ -12,7 +12,7 @@ package "Dominio" {
         + obtenerEstado()
     }
 
-    class Jugador {
+    class Jugador{
         - nombre: String
         - civilizacion: Civilizacion
         - recursos: Recursos
@@ -24,6 +24,8 @@ package "Dominio" {
         + entrenarUnidad(tipo: TipoUnidad)
         + moverUnidad(idUnidad: int, destino: Coordenada)
         + atacar(idAtacante: int, objetivo: Coordenada)
+        + accesible: boolean
+        + info()
     }
 
     class Mapa {
@@ -32,7 +34,7 @@ package "Dominio" {
         + obtenerCelda(coordenada: Coordenada): Celda
     }
 
-    class Celda {
+    class Celda{
         - coordenada: Coordenada
         - contenido: List<ElementoMapa>
     }
@@ -42,84 +44,83 @@ package "Dominio" {
         - y: int
     }
 
-    interface ElementoMapa {
-    }
-
-    class Recurso implements ElementoMapa {
+    interface IRecurso {
         - tipo: TipoRecurso
         - cantidad: int
+        - tasaRecoleccion: int
+        + mover(coordenada: Coordenada) : edificio
+        + agregar(tipo: TipoRecurso, cantidad: int)
+        + consumir(tipo: TipoRecurso, cantidad: int): boolean
+        + alerta: boolean 
+        
     }
 
     enum TipoRecurso {
         Alimento
         Madera
-        Oro
+        Oro 
         Piedra
     }
+    
+    abstract class Civilizacion{
+        - nombre: List<String>
+    
+    }
+    
+    interface IEdificios{
+        - nombre: List<String>
+        - capacidad: int 
+    }
+    
+    class UnidadMilitar implements IEdificios {
+        - tipo: String
+        - bonificiacion: int
+        - ubicacion: Coordenada
+        - cantidad: int
+    }
 
-    class Recursos {
-        - alimento: int
-        - madera: int
-        - oro: int
-        - piedra: int
+    
+    class UnidadCivil implements IEdificios{
+        - tipo: String
+        - ubicacion: Coordenada
+        - cantidad: int
+    
+    }
+    
+    class Recursos implements IRecurso {
+        - recursos: Map<TipoRecurso, Integer>
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
+        + mover(...) ...
+        + alerta: boolean
     }
-
-    class Civilizacion {
-        - nombre: String
-        - bonificaciones: List<String>
-        - unidadEspecial: TipoUnidad
+    
+    abstract class Recurso {
+    - tipo: TipoRecurso
+    - cantidad: int
     }
-
-    abstract class Edificio implements ElementoMapa {
-        - ubicacion: Coordenada
-        - vida: int
-        - dueño: Jugador
+       
+    class Construir extends Recurso{
+    + contarDistancia()
+    + mostrarTiempo()    
     }
-
-    class CentroCivico extends Edificio {
-        - capacidadAldeanos: int
+    
+    class Recoleccion extends Recurso{
+    - tasaRecoleccion: int
+    + contarDistancia()
     }
-
-    class Almacen extends Edificio {
-        - tipo: TipoRecurso
-        - capacidad: int
-    }
-
-    class Casa extends Edificio {
-        - capacidadPoblacion: int
-    }
-
-    class Cuartel extends Edificio {
-    }
-
-    abstract class Unidad implements ElementoMapa {
-        - id: int
-        - ubicacion: Coordenada
-        - vida: int
-        - velocidad: int
-        - dueño: Jugador
-    }
-
-    class Aldeano extends Unidad {
-        + recolectar(recurso: Recurso, edificio: Almacen)
-    }
-
-    abstract class UnidadMilitar extends Unidad {
-        - ataque: int
-        - defensa: int
-    }
-
-    class Infanteria extends UnidadMilitar {
-    }
-
-    class Arquero extends UnidadMilitar {
-    }
-
-    class Caballeria extends UnidadMilitar {
-    }
-
+  
+  Program --> Mapa
+  Program --> Jugador
+  Mapa --> Celda
+  Jugador --> Civilizacion
+  Jugador --> UnidadMilitar
+  Jugador --> UnidadCivil
+  Jugador --> Recursos
+  Celda --> Coordenada
+  UnidadMilitar --> Coordenada
+  Construir --> TipoRecurso
+  Recoleccion --> TipoRecurso 
 }
 
 @enduml
