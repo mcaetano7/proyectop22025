@@ -12,7 +12,7 @@ package "Dominio" {
         + obtenerEstado()
     }
     
-    class Facade{
+    class Facade {
     + iniciarJuego()
     + comando(jugador: Jugador, comando: String): string
     + estado(jugador: Jugador): string
@@ -83,7 +83,7 @@ package "Dominio" {
         - recursos: List<string>
     }
     
-    class UnidadMilitar {
+    class UnidadMilitar implements IEdificio{
         - tipo: String
         - ataque: int
         - defensa: int
@@ -107,7 +107,7 @@ package "Dominio" {
     }
 
     
-    class UnidadCivil {
+    class UnidadCivil implements IEdificio {
         - tipo: String
         - ubicacion: Coordenada
         - cantidad: int
@@ -132,7 +132,7 @@ package "Dominio" {
     + mostrarTiempo()    
     }
     
-    class Recoleccion extends Recurso{
+    class Recoleccion extends Recursos{
     - tasaRecoleccion: int
     + contarDistancia()
     }
