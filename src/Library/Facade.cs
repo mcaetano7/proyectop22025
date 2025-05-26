@@ -18,6 +18,7 @@ namespace Library;
  13. destruir los centros cívicos para ganar la partida por dominación militar.
  14. usar comandos intuitivos para interactuar con el juego 
  15. quiero ver un mapa simplificado del juego en ASCII para visualizar la dispo del terreno y unidades. 
+ 16. como jugador quiero gardar la partida y continuarla más tarde. 
  */
 
 public class Facade
