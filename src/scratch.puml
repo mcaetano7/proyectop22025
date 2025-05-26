@@ -19,7 +19,7 @@ package "Dominio" {
         - aldeanos: List<Aldeano>
         - edificios: List<Edificio>
         - unidades: List<UnidadMilitar>
-        + recolectarRecurso(tipo: TipoRecurso, ubicacion: Coordenada)
+        + recolectarRecurso(tipo: TipoRecurso, ubicacion: Coordenada, string nombre)
         + construir(edificio: Edificio, ubicacion: Coordenada)
         + entrenarUnidad(tipo: TipoUnidad)
         + moverUnidad(idUnidad: int, destino: Coordenada)
