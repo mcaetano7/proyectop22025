@@ -22,5 +22,5 @@ namespace Library;
 
 public class Facade
 {
-    
+    //cargar partida, guardar partida, crear partida
 }
