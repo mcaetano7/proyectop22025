@@ -50,7 +50,7 @@ package "Dominio" {
         - cantidad: int
     }
 
-    enum TipoRecurso {
+    class TipoRecurso {
         Alimento
         Madera
         Oro
