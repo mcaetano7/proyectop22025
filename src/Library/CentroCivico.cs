@@ -1,6 +1,6 @@
 namespace Library;
 
-public class TipoUnidad
+public class CentroCivico
 {
     
 }
