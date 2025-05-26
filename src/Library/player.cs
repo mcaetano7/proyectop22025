@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using Library;
+
 namespace Library
 {
 
@@ -7,7 +9,7 @@ namespace Library
     {
         private string name;
         private Civilizacion civilizacion;
-        private Recursos recursos;
+        private Recurso recurso;
         private List<Aldeano> aldeanos;
         private List<Edificio> edificios;
         private List<UnidadMilitar> unidades;
@@ -17,7 +19,7 @@ namespace Library
         {
             this.name = name;
             this.civilizacion = civilizacion;
-            this.recursos = new Recursos();
+            this.recurso = new Recurso();
             this.aldeanos = new List<Aldeano>();
             this.edificios = new List<Edificio>();
             this.unidades = new List<UnidadMilitar>();
@@ -43,18 +45,6 @@ namespace Library
         {
             
         }
-
-        public void MoverUnidad(int idUnidad, Coordenada destino)
-        {
-            
-        }
-
-        public void Atacar(int idAtacante, Coordenada objetivo)
-        {
-            
-        }
-
-        public bool Accesible => accesible;
 
 
 
