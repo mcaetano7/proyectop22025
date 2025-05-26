@@ -2,7 +2,7 @@ namespace Library;
 
 public class Edificio
 {
-    public void Almacen()
+    public void Almacenar(Recurso recursos)
     {
         
     }
