@@ -15,7 +15,7 @@ package "Dominio" {
     class Jugador {
         - nombre: String
         - civilizacion: Civilizacion
-        - recursos: Recursos
+        - recurso: Recurso
         - aldeanos: List<Aldeano>
         - edificios: List<Edificio>
         - unidades: List<UnidadMilitar>
@@ -57,7 +57,7 @@ package "Dominio" {
         Piedra
     }
 
-    class Recursos {
+    class Recurso {
         - alimento: int
         - madera: int
         - oro: int
