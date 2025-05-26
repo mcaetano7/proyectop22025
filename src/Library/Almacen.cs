@@ -11,9 +11,4 @@ public class Almacen : Edificio
         Tipo = tipo;
         Capacidad = capacidad;
     }
-
-    public override string ToString()
-    {
-        return $"Almacen de {Tipo} (Capacidad: {Capacidad}) en {Ubicacion}, Vida: {Vida}, Dueño: {Owner}";
-    }
 }
