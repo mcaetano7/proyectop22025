@@ -3,7 +3,7 @@
 ' Paquete principal
 package "Dominio" {
     
-    class Program {
+    class Juego {
         - mapa: Mapa
         - jugadores: List<Jugador>
         - turnoActual: int
@@ -11,17 +11,11 @@ package "Dominio" {
         + avanzarTurno()
         + obtenerEstado()
     }
-    
-    class Facade {
-    + iniciarJuego()
-    + comando(jugador: Jugador, comando: String): string
-    + estado(jugador: Jugador): string
-    }
 
-    class Jugador{
+    class Jugador {
         - nombre: String
         - civilizacion: Civilizacion
-        - recursos: Recursos
+        - recurso: Recurso
         - aldeanos: List<Aldeano>
         - edificios: List<Edificio>
         - unidades: List<UnidadMilitar>
@@ -30,8 +24,6 @@ package "Dominio" {
         + entrenarUnidad(tipo: TipoUnidad)
         + moverUnidad(idUnidad: int, destino: Coordenada)
         + atacar(idAtacante: int, objetivo: Coordenada)
-        + accesible: boolean
-        + info()
     }
 
     class Mapa {
@@ -40,7 +32,7 @@ package "Dominio" {
         + obtenerCelda(coordenada: Coordenada): Celda
     }
 
-    class Celda{
+    class Celda {
         - coordenada: Coordenada
         - contenido: List<ElementoMapa>
     }
@@ -50,104 +42,84 @@ package "Dominio" {
         - y: int
     }
 
-    interface IRecurso {
+    interface ElementoMapa {
+    }
+
+    class Recurso implements ElementoMapa {
         - tipo: TipoRecurso
         - cantidad: int
-        - tasaRecoleccion: int
-        + mover(coordenada: Coordenada) : edificio
-        + agregar(tipo: TipoRecurso, cantidad: int)
-        + consumir(tipo: TipoRecurso, cantidad: int): boolean
-        + alerta: boolean 
-        
     }
 
     enum TipoRecurso {
         Alimento
         Madera
-        Oro 
+        Oro
         Piedra
     }
-    
-    abstract class Civilizacion{
-        - nombre: string
-        - bonificacion: List<String>
-        - unidadEspecial: UnidadMilitar
-    
-    }
-    
-    interface IEdificio {
-        - nombre: List<String>
-        - tipo: TipoEdificio
-        - capacidad: int
-        - ubicacion: Coordenada
-        - recursos: List<string>
-    }
-    
-    class UnidadMilitar implements IEdificio{
-        - tipo: String
-        - ataque: int
-        - defensa: int
-        - velocidad: int
-        - ubicacion: Coordenada
-    }
-    
-    class Cuartel implements IEdificio{
-    
-    }
-    
-    class Almacen implements IEdificio{
-    
-    }
-    
-    class Casa implements IEdificio{
-    }
-    
-    class CentroCivico implements IEdificio{
-    
-    }
 
-    
-    class UnidadCivil implements IEdificio {
-        - tipo: String
-        - ubicacion: Coordenada
-        - cantidad: int
-        - creadoPor: Edificio
-    
-    }
-    
-    class Recursos implements IRecurso {
-        - recursos: Map<TipoRecurso, int>
+    class Recurso {
+        - alimento: int
+        - madera: int
+        - oro: int
+        - piedra: int
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
-        + mover(...) ...
-        + alerta: boolean
     }
-    
-    abstract ActividadEconomica{
-      
+
+    class Civilizacion {
+        - nombre: String
+        - bonificaciones: List<String>
+        - unidadEspecial: TipoUnidad
     }
-       
-    class Construir extends Recursos{
-    + contarDistancia()
-    + mostrarTiempo()    
+
+    abstract class Edificio implements ElementoMapa {
+        - ubicacion: Coordenada
+        - vida: int
+        - dueño: Jugador
     }
-    
-    class Recoleccion extends Recursos{
-    - tasaRecoleccion: int
-    + contarDistancia()
+
+    class CentroCivico extends Edificio {
+        - capacidadAldeanos: int
     }
-  
-  Program --> Mapa
-  Program --> Jugador
-  Mapa --> Celda
-  Jugador --> Civilizacion
-  Jugador --> UnidadMilitar
-  Jugador --> UnidadCivil
-  Jugador --> Recursos
-  Celda --> Coordenada
-  UnidadMilitar --> Coordenada
-  Construir --> TipoRecurso
-  Recoleccion --> TipoRecurso 
+
+    class Almacen extends Edificio {
+        - tipo: TipoRecurso
+        - capacidad: int
+    }
+
+    class Casa extends Edificio {
+        - capacidadPoblacion: int
+    }
+
+    class Cuartel extends Edificio {
+    }
+
+    abstract class Unidad implements ElementoMapa {
+        - id: int
+        - ubicacion: Coordenada
+        - vida: int
+        - velocidad: int
+        - dueño: Jugador
+    }
+
+    class Aldeano extends Unidad {
+        + recolectar(recurso: Recurso, edificio: Almacen)
+    }
+
+    abstract class UnidadMilitar extends Unidad {
+        - ataque: int
+        - defensa: int
+    }
+
+    class Infanteria extends UnidadMilitar {
+    }
+
+    class Arquero extends UnidadMilitar {
+    }
+
+    class Caballeria extends UnidadMilitar {
+    }
+
 }
 
 @enduml
