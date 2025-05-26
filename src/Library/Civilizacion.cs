@@ -6,7 +6,7 @@ namespace Library
         public List<string> Bonificaciones { get; set; } 
         public Unidad UnidadEspecial { get; set; }
 
-        public Civilizacion(string name, List<string> Bonificaciones, TipoUnidad unidadEspecial)
+        public Civilizacion(string name, List<string> Bonificaciones, Unidad unidadEspecial)
         {
         Name = name;
         Bonificaciones = Bonificaciones;
