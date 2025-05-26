@@ -12,7 +12,7 @@ namespace Library
         private Recurso recurso;
         private List<Aldeano> aldeanos;
         private List<Edificio> edificios;
-        private List<UnidadMilitar> unidades;
+        private List<Unidad> unidades;
         private bool accesible;
 
         public Player(string name, Civilizacion civilizacion)
@@ -22,7 +22,7 @@ namespace Library
             this.recurso = new Recurso();
             this.aldeanos = new List<Aldeano>();
             this.edificios = new List<Edificio>();
-            this.unidades = new List<UnidadMilitar>();
+            this.unidades = new List<Unidad>();
             this.accesible = true;
         }
 
