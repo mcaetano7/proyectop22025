@@ -107,17 +107,24 @@ package "Dominio" {
     }
 
     abstract class UnidadMilitar extends Unidad {
-        - ataque: int
-        - defensa: int
+        + ataque: int
+        + defensa: int
     }
 
     class Infanteria extends UnidadMilitar {
+        + ataque: int 
+        + defensa: int
+    
     }
 
     class Arquero extends UnidadMilitar {
+        + ataque: int 
+        + defensa: int 
     }
 
     class Caballeria extends UnidadMilitar {
+        + ataque: int 
+        + defensa: int 
     }
 
 }
