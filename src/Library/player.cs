@@ -41,7 +41,7 @@ namespace Library
             
         }
 
-        public void EntrenarUnidad(TipoUnidad tipo)
+        public void EntrenarUnidad(Unidad tipo)
         {
             
         }
