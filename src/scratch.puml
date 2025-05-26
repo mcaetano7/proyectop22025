@@ -127,7 +127,7 @@ package "Dominio" {
       
     }
        
-    class Construir extends Recurso{
+    class Construir extends Recursos{
     + contarDistancia()
     + mostrarTiempo()    
     }
