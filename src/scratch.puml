@@ -106,7 +106,7 @@ package "Dominio" {
         + recolectar(recurso: Recurso, edificio: Almacen)
     }
 
-    abstract class UnidadMilitar extends Unidad {
+    class UnidadMilitar extends Unidad {
         + ataque: int
         + defensa: int
     }
