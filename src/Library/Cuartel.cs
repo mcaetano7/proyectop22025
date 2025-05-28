@@ -1,6 +1,5 @@
 namespace Library;
 
-public class Cuartel
+public class Cuartel : Edificio
 {
-    
 }
