@@ -30,10 +30,23 @@ namespace Library
         {
             
         }
-
-        public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion)
+        
+        private List<Aldeano> aldeanosDisponibles = new();
+        public void RecolectarRecurso(string tipo, Coordenada ubicacion, string nombre)
         {
+            if (aldeanosDisponibles.Count == 0)
+            {
+                Console.WriteLine("No hay aldeanos disponibles para recolectar recursos.");
+                return;
+            }
+            var aldeano = aldeanosDisponibles[0];
+            aldeanosDisponibles.Remove(aldeano);
             
+            var recurso1 = new Recurso(tipo, 10);
+            var almacen = new Edificio(tipo);
+            
+            aldeano.Recolectar(recurso1, almacen);
+            Console.WriteLine($"{nombre} recolectó {recurso1.Cantidad} de {tipo.Length}.");
         }
 
         public void Construir(Edificio edificio, Coordenada ubicacion)
@@ -45,11 +58,5 @@ namespace Library
         {
             
         }
-
-
-
-
-
-
     }
 }
