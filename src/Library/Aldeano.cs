@@ -2,8 +2,13 @@ namespace Library;
 
 public class Aldeano
 {
-    public void Recolectar(Recurso recurso, Edificio almacen)
+    public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion)
     {
-        almacen.Almacenar(recurso);
+        var aldeano = GetAldeanoDisponible();
+        if (aldeano != null)
+        {
+            aldeano.IniciarRecoleccion(tipo, ubicacion);
+            
+        }
     }
 }

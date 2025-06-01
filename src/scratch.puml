@@ -22,7 +22,7 @@ package "age" {
         + obtenerGanador(): Jugador
     }
 
-    class Jugador {
+    class Player {
         - nombre: String
         - civilizacion: Civilizacion
         - recurso: Recurso
