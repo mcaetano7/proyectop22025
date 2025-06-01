@@ -39,27 +39,30 @@ namespace Library
             this.edificios = new List<Edificio>();
             this.unidades = new List<Unidad>();
             
-            // seput de poblaxion incial
+            // seput de poblacion incial
             this.poblacionActual = 4;
             this.poblacionMaxima = 15;
             
-            // crear unidades y edfidcios al colmeinxo de la partida
+            // crear unidades y edificios al comienzo de la partida
             
         }
 
         public void InicializarJuego()
         {
-            var centroCivico = new CentroCivico(new Coordenada(50, 50));
+            var centroCivico = new CentroCivico(new Coordenada(50, 50), 1000, this, 10);
             edificios.Add(centroCivico);
             
             
             // crear primeros 3 negritos 
             for (int i = 0; i < 3; i++)
-            {
-                var aldeano = new Aldeano($"Aldeano_{i + 1}", new Coordenada(50 + i, 50));
+            { // this es owner pero no se que iria
+                var coordenada = new Coordenada(50 + i, 50);
+                var aldeano = new Aldeano(i + 1, coordenada, this);
                 aldeanos.Add(aldeano);
                 unidades.Add(aldeano);
             }
+
+            poblacionActual += 3;
         }
 
         public bool Victoria()
