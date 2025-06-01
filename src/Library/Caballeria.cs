@@ -3,8 +3,7 @@ namespace Library;
 public class Caballeria : UnidadMilitar
 {
     public Caballeria(int id, Coordenada ubicacion, Player owner)
-        : base(id, ubicacion, vida: 100, velocidad: 90, owner, ataque: 40)
+        : base(id, ubicacion, vida: 100, velocidad: 90, owner, ataque: 40, defensa : 30)
     {
-        Defensa = 30; 
     }  
 }
