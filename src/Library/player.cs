@@ -65,7 +65,7 @@ namespace Library
         public bool Victoria()
         {
             // se pierde la partida cuando no hay ningun centro urbanom, entre otrS CONDICIONES
-            return !edificios.Any(edificio => is CentroCivico);
+            return !edificios.Any(edificio => edificio is CentroCivico);
         }
         
         public bool PuedeCrearUnidad()
