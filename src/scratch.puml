@@ -1,7 +1,15 @@
 @startuml PIIProyecto2025
 
-' Paquete principal
-package "Dominio" {
+
+package "age" {
+
+    class Facade {
+    - juego: Mapa<String> Juego
+    + NuevoJuego(idJuego: String): String
+    + UnirseJuego(idJuego: String, nombreJugador: String, civilizacion: String): String
+    + ProcesarComando(idJuego: String, nombreJugador: String, comando: String): String
+    + obtenerEstado(idJuego: String, Jugador: String): String
+    }
     
     class Juego {
         - mapa: Mapa
@@ -10,6 +18,8 @@ package "Dominio" {
         + iniciarJuego()
         + avanzarTurno()
         + obtenerEstado()
+        + verificarVictoria(): boolean
+        + obtenerGanador(): Jugador
     }
 
     class Jugador {
@@ -19,7 +29,9 @@ package "Dominio" {
         - aldeanos: List<Aldeano>
         - edificios: List<Edificio>
         - unidades: List<UnidadMilitar>
-        + recolectarRecurso(tipo: TipoRecurso, ubicacion: Coordenada, string nombre)
+        - poblacionActual: int
+        - poblacionMaxima: int
+        + recolectarRecurso(tipo: TipoRecurso, ubicacion: Coordenada, nombre: String)
         + construir(edificio: Edificio, ubicacion: Coordenada)
         + entrenarUnidad(tipo: TipoUnidad)
         + moverUnidad(idUnidad: int, destino: Coordenada)
@@ -45,7 +57,7 @@ package "Dominio" {
     interface ElementoMapa {
     }
 
-    class Recurso implements ElementoMapa {
+    class RecursoMapa implements ElementoMapa {
         - tipo: TipoRecurso
         - cantidad: int
     }
@@ -57,7 +69,7 @@ package "Dominio" {
         Piedra
     }
 
-    class Recurso {
+    class RecursoJugador {
         - alimento: int
         - madera: int
         - oro: int
@@ -126,6 +138,12 @@ package "Dominio" {
         + ataque: int 
         + defensa: int 
     }
+    
+    Juego "1" --> "*" Jugador
+    Jugador "1" --> "1" Civilizacion
+    Jugador "1" --> "1" RecursoJugador
+    Mapa "1" --> "*" Celda
+    Celda "1" --> "*" ElementoMapa
 
 }
 
