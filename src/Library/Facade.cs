@@ -33,5 +33,5 @@ public class Facade
         Jugador2 = new Player("Jugador 2", civ2);
         
     }
-    //cargar partida, guardar partida, crear partida
+    //cargar partida, guardar partida, crear partida 
 }
