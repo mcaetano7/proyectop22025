@@ -23,5 +23,15 @@ namespace Library;
 
 public class Facade
 {
+    public Mapa Mapa { get; private set; }
+    public Player Jugador1 { get; private set; }
+    public Player Jugador2 { get; private set; }
+    public void CrearPartida(Civilizacion civ1, Civilizacion civ2) //el user elige la civ desde program
+    {
+        Mapa = new Mapa(); 
+        Jugador1 = new Player("Jugador 1", civ1); 
+        Jugador2 = new Player("Jugador 2", civ2);
+        
+    }
     //cargar partida, guardar partida, crear partida
 }

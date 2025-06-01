@@ -47,7 +47,7 @@ namespace Library
             
         }
 
-        private void InicializarJuego()
+        public void InicializarJuego()
         {
             var centroCivico = new CentroCivico(new Coordenada(50, 50));
             edificios.Add(centroCivico);
