@@ -6,20 +6,20 @@ package "age" {
     class Facade {
     - juego: Mapa<String> Juego
     + NuevoJuego(idJuego: String): String
-    + UnirseJuego(idJuego: String, nombreJugador: String, civilizacion: String): String
-    + ProcesarComando(idJuego: String, nombreJugador: String, comando: String): String
-    + obtenerEstado(idJuego: String, Jugador: String): String
+    + UnirseJuego(idJuego: String, nombrePlayer: String, civilizacion: String): String
+    + ProcesarComando(idJuego: String, nombrePlayer: String, comando: String): String
+    + obtenerEstado(idJuego: String, Player: String): String
     }
     
     class Juego {
         - mapa: Mapa
-        - jugadores: List<Jugador>
+        - Playeres: List<Player>
         - turnoActual: int
         + iniciarJuego()
         + avanzarTurno()
         + obtenerEstado()
         + verificarVictoria(): boolean
-        + obtenerGanador(): Jugador
+        + obtenerGanador(): Player
     }
 
     class Player {
@@ -69,7 +69,7 @@ package "age" {
         Piedra
     }
 
-    class RecursoJugador {
+    class RecursoPlayer {
         - alimento: int
         - madera: int
         - oro: int
@@ -87,7 +87,7 @@ package "age" {
     abstract class Edificio implements ElementoMapa {
         - ubicacion: Coordenada
         - vida: int
-        - dueño: Jugador
+        - owner: Player
     }
 
     class CentroCivico extends Edificio {
@@ -111,7 +111,7 @@ package "age" {
         - ubicacion: Coordenada
         - vida: int
         - velocidad: int
-        - dueño: Jugador
+        - owner: Player
     }
 
     class Aldeano extends Unidad {
@@ -141,7 +141,7 @@ package "age" {
     
     Juego "1" --> "*" Player
     Player "1" --> "1" Civilizacion
-    Player "1" --> "1" RecursoJugador
+    Player "1" --> "1" RecursoPlayer
     Mapa "1" --> "*" Celda
     Celda "1" --> "*" ElementoMapa
 
