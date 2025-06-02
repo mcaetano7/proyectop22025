@@ -1,6 +1,6 @@
 namespace Library;
 
-public class Edificio
+public abstract class Edificio
 {
     public Coordenada Ubicacion { get; set; }
     public int Vida { get; set; }
@@ -19,5 +19,7 @@ public class Edificio
     {
         
     }
-    
-}
+
+    public abstract Dictionary<TipoRecurso, int> obtenerCosto();
+
+    }

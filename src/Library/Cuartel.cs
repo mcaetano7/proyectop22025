@@ -21,4 +21,12 @@ public class Cuartel : Edificio
     {
         return new Arquero(id, this.Ubicacion, this.Owner);
     }
+
+    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    {
+        return new Dictionary<TipoRecurso, int>()
+        {
+            { TipoRecurso.Madera, 125 }
+        };
+    }
 }

@@ -12,4 +12,12 @@ public class Casa : Edificio
   {
       CapacidadPoblacion = capacidad; 
   }
+
+  public override Dictionary<TipoRecurso, int> obtenerCosto()
+  {
+      return new Dictionary<TipoRecurso, int>
+      {
+          { TipoRecurso.Madera, 25 }
+      };
+  }
 }

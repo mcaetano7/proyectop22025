@@ -126,5 +126,20 @@ namespace Library
         {
             
         }
+
+        public Aldeano GetAldeanoDisponible()
+        {
+            return aldeanos.FirstOrDefault(a => a.EstaDisponible());
+        }
+        
+        public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion)
+        {
+            var aldeano = GetAldeanoDisponible();
+            if (aldeano != null)
+            {
+                aldeano.IniciarRecoleccion(tipo, ubicacion);
+            
+            }
+        }
     }
 }

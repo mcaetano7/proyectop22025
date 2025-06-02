@@ -2,6 +2,8 @@ namespace Library;
 
 public class Aldeano : Unidad
 {
+
+    private bool ocupado = false;
     public Aldeano(int id, Coordenada ubicacion, Player owner)
         : base (id, ubicacion, vida: 50, velocidad : 1, owner)
     {}
@@ -10,13 +12,16 @@ public class Aldeano : Unidad
     {
         Ubicacion = nuevaUbicacion;
     }
-    public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion)
+
+    public bool EstaDisponible()
     {
-        var aldeano = GetAldeanoDisponible();
-        if (aldeano != null)
-        {
-            aldeano.IniciarRecoleccion(tipo, ubicacion);
-            
-        }
+        return !ocupado;
+    }
+
+    public void IniciarRecoleccion(TipoRecurso tipo, Coordenada ubicacion)
+    {
+        ocupado = true;
+        Owner.AgregarRecurso(tipo, 10);
+        ocupado = false;
     }
 }
