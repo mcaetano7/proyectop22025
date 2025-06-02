@@ -6,11 +6,12 @@ public class Casa : Edificio
   public int CapacidadPoblacion { get; set; }
   public int CapacidadMaxima = 5;
   
+  
 
   public Casa(Coordenada ubicacion, int vida, Player owner, string tipo, int capacidad)
-      : base(ubicacion, vida, owner)
+      : base(ubicacion, 100, owner)
   {
-      CapacidadPoblacion = capacidad; 
+      Resistencia = 500;
   }
 
   public override Dictionary<TipoRecurso, int> obtenerCosto()

@@ -23,6 +23,7 @@ namespace Library;
 
 public class Facade
 {
+    
     public Mapa Mapa { get; private set; }
     public Player Jugador1 { get; private set; }
     public Player Jugador2 { get; private set; }

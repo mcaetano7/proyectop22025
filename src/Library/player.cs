@@ -12,7 +12,6 @@ namespace Library
         private Dictionary<TipoRecurso, int> recursos;
         private List<Aldeano> aldeanos;
         private List<Edificio> edificios;
-        private List<Unidad> unidades;
         private bool accesible;
         private int poblacionActual;
         private int poblacionMaxima;
@@ -37,7 +36,6 @@ namespace Library
             // inicilizar listas
             this.aldeanos = new List<Aldeano>();
             this.edificios = new List<Edificio>();
-            this.unidades = new List<Unidad>();
             
             // seput de poblacion incial
             this.poblacionActual = 4;
@@ -59,7 +57,6 @@ namespace Library
                 var coordenada = new Coordenada(50 + i, 50);
                 var aldeano = new Aldeano(i + 1, coordenada, this);
                 aldeanos.Add(aldeano);
-                unidades.Add(aldeano);
             }
 
             poblacionActual += 3;

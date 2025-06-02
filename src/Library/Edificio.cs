@@ -6,7 +6,7 @@ public abstract class Edificio
     public int Vida { get; set; }
     public Player Owner { get; set; }
     
-    
+    public int Resistencia { get; set; } 
 
     public Edificio(Coordenada ubicacion, int vida, Player owner)
     {
