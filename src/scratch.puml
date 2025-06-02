@@ -57,11 +57,6 @@ package "age" {
     interface ElementoMapa {
     }
 
-    class RecursoMapa implements ElementoMapa {
-        - tipo: TipoRecurso
-        - cantidad: int
-    }
-
     class TipoRecurso {
         Alimento
         Madera
@@ -69,11 +64,13 @@ package "age" {
         Piedra
     }
 
-    class RecursoJugador {
+    class RecursoJugador implements ElementoMapa {
         - alimento: int
         - madera: int
         - oro: int
         - piedra: int
+        - tipo: TipoRecurso
+        - cantidad: int
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
     }
