@@ -49,11 +49,11 @@ namespace Library
 
         public void InicializarJuego()
         {
-            var centroCivico = new CentroCivico(new Coordenada(50, 50), 1000, this, 10);
+            var centroCivico = new CentroCivico(new Coordenada(50, 50), 100, this, 10);
             edificios.Add(centroCivico);
             
             
-            // crear primeros 3 negritos 
+            // crear primeros 3 aldeanos 
             for (int i = 0; i < 3; i++)
             { // this es owner pero no se que iria
                 var coordenada = new Coordenada(50 + i, 50);
@@ -67,7 +67,7 @@ namespace Library
 
         public bool Victoria()
         {
-            // se pierde la partida cuando no hay ningun centro urbanom, entre otrS CONDICIONES
+            // se pierde la partida cuando no hay ningun centro urbano, entre otras condiciones
             return !edificios.Any(edificio => edificio is CentroCivico);
         }
         
