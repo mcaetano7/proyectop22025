@@ -11,13 +11,13 @@ public class Cuartel : Edificio
     {
         return new Infanteria(id, this.Ubicacion, this.Owner);
     }
-                                                               //cada uno de los m{etodos crea una unidad
+                                                               //cada uno de los métodos crea una unidad
     public Caballeria EntrenarCaballeria(int id)
     {
         return new Caballeria(id, this.Ubicacion, this.Owner);
     }
 
-    public Arquero EntrenarAtquero(int id)
+    public Arquero EntrenarArquero(int id)
     {
         return new Arquero(id, this.Ubicacion, this.Owner);
     }

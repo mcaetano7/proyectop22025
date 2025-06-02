@@ -44,7 +44,6 @@ namespace Library
             // crear unidades y edificios al comienzo de la partida
             
         }
-
         public void InicializarJuego()
         {
             var centroCivico = new CentroCivico(new Coordenada(50, 50), 100, this, 10);
@@ -53,7 +52,7 @@ namespace Library
             
             // crear primeros 3 aldeanos 
             for (int i = 0; i < 3; i++)
-            { // this es owner pero no se que iria
+            { 
                 var coordenada = new Coordenada(50 + i, 50);
                 var aldeano = new Aldeano(i + 1, coordenada, this);
                 aldeanos.Add(aldeano);

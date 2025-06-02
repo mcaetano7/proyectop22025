@@ -52,6 +52,8 @@ package "age" {
     class Coordenada {
         - x: int
         - y: int
+        + Coordenada(X, Y)
+        + EsValida: boolean
     }
 
     interface ElementoMapa {
@@ -67,6 +69,7 @@ package "age" {
         Madera
         Oro
         Piedra
+        + TipoRecurso(nombre)
     }
 
     class RecursoJugador {
@@ -104,6 +107,12 @@ package "age" {
     }
 
     class Cuartel extends Edificio {
+        - Cuartel: ubicacion  
+        + entrenarInfanteria()
+        + entrenarArquero()
+        + entrenarCaballeria()
+        + Cuartel(coordenada, Player)
+        + ObtenerCosto 
     }
 
     abstract class Unidad implements ElementoMapa {
