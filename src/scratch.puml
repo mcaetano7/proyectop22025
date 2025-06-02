@@ -139,9 +139,9 @@ package "age" {
         + defensa: int 
     }
     
-    Juego "1" --> "*" Jugador
-    Jugador "1" --> "1" Civilizacion
-    Jugador "1" --> "1" RecursoJugador
+    Juego "1" --> "*" Player
+    Player "1" --> "1" Civilizacion
+    Player "1" --> "1" RecursoJugador
     Mapa "1" --> "*" Celda
     Celda "1" --> "*" ElementoMapa
 
