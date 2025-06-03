@@ -11,4 +11,12 @@ public class Almacen : Edificio
         Tipo = tipo;
         Capacidad = capacidad;
     }
+
+    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    {
+        return new Dictionary<TipoRecurso, int>()
+        {
+            { TipoRecurso.Madera, 500 }
+        };
+    }
 }

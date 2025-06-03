@@ -19,7 +19,7 @@ public class UnidadMilitar : Unidad
        Vida = Math.Max(0, Vida - damageFinal);
    }
 
-   public override void Mover(Coordenada nuevaUbicacion)
+   /*public override void Mover(Coordenada nuevaUbicacion)
    {
        if (nuevaUbicacion.EsValida())
        {
@@ -29,7 +29,7 @@ public class UnidadMilitar : Unidad
        {
            throw new InvalidOperationException("Ubicacion no valida");
        }
-   }
+   }*/ 
    
    public void Atacar(Unidad objetivo)
    {

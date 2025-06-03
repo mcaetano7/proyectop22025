@@ -32,4 +32,12 @@ public class CentroCivico : Edificio
     {
         return CapacidadAldeanos - aldeanos.Count;
     }
+
+    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    {
+        return new Dictionary<TipoRecurso, int>()
+        {
+            { TipoRecurso.Madera, 200 }
+        };
+    }
 }

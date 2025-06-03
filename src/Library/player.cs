@@ -12,8 +12,7 @@ namespace Library
         private Dictionary<TipoRecurso, int> recursos;
         private List<Aldeano> aldeanos;
         private List<Edificio> edificios;
-        private List<Unidad> unidades;
-        private bool accesible;
+        private bool accesible; // vivo o muerto
         private int poblacionActual;
         private int poblacionMaxima;
         
@@ -37,7 +36,6 @@ namespace Library
             // inicilizar listas
             this.aldeanos = new List<Aldeano>();
             this.edificios = new List<Edificio>();
-            this.unidades = new List<Unidad>();
             
             // seput de poblacion incial
             this.poblacionActual = 4;
@@ -49,17 +47,16 @@ namespace Library
 
         public void InicializarJuego()
         {
-            var centroCivico = new CentroCivico(new Coordenada(50, 50), 1000, this, 10);
+            var centroCivico = new CentroCivico(new Coordenada(50, 50), 100, this, 10);
             edificios.Add(centroCivico);
             
             
-            // crear primeros 3 negritos 
+            // crear primeros 3 aldeanos 
             for (int i = 0; i < 3; i++)
             { // this es owner pero no se que iria
                 var coordenada = new Coordenada(50 + i, 50);
                 var aldeano = new Aldeano(i + 1, coordenada, this);
                 aldeanos.Add(aldeano);
-                unidades.Add(aldeano);
             }
 
             poblacionActual += 3;
@@ -67,16 +64,16 @@ namespace Library
 
         public bool Victoria()
         {
-            // se pierde la partida cuando no hay ningun centro urbanom, entre otrS CONDICIONES
+            // se pierde la partida cuando no hay ningun centro urbano, entre otras condiciones
             return !edificios.Any(edificio => edificio is CentroCivico);
         }
         
-        public bool PuedeCrearUnidad()
+        public bool PuedeCrearUnidad() 
         {
             return poblacionActual < poblacionMaxima;
         }
 
-        public void AgregarRecurso(TipoRecurso tipo, int cantidad)
+        public void AgregarRecurso(TipoRecurso tipo, int cantidad) // recolcetar recurso uml 
         {
             if (recursos.ContainsKey(tipo))
             {
@@ -84,7 +81,7 @@ namespace Library
             }
         }
 
-        public bool TieneRecursos(Dictionary<TipoRecurso, int> costos) // ex info()
+        public bool TieneRecursos(Dictionary<TipoRecurso, int> costos) 
         {
             foreach (var costo in costos)
             {
@@ -122,9 +119,20 @@ namespace Library
             }
         }
         
-        public void EntrenarUnidad(Unidad tipo)
+
+        public Aldeano GetAldeanoDisponible()
         {
+            return aldeanos.FirstOrDefault(a => a.EstaDisponible());
+        }
+        
+        public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion)
+        {
+            var aldeano = GetAldeanoDisponible();
+            if (aldeano != null)
+            {
+                aldeano.IniciarRecoleccion(tipo, ubicacion);
             
+            }
         }
     }
 }

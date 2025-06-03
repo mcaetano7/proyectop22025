@@ -6,20 +6,20 @@ package "age" {
     class Facade {
     - juego: Mapa<String> Juego
     + NuevoJuego(idJuego: String): String
-    + UnirseJuego(idJuego: String, nombrePlayer: String, civilizacion: String): String
-    + ProcesarComando(idJuego: String, nombrePlayer: String, comando: String): String
-    + obtenerEstado(idJuego: String, Player: String): String
+    + UnirseJuego(idJuego: String, nombreJugador: String, civilizacion: String): String
+    + ProcesarComando(idJuego: String, nombreJugador: String, comando: String): String
+    + obtenerEstado(idJuego: String, Jugador: String): String
     }
     
     class Juego {
         - mapa: Mapa
-        - Playeres: List<Player>
+        - jugadores: List<Jugador>
         - turnoActual: int
         + iniciarJuego()
         + avanzarTurno()
         + obtenerEstado()
         + verificarVictoria(): boolean
-        + obtenerGanador(): Player
+        + obtenerGanador(): Jugador
     }
 
     class Player {
@@ -57,11 +57,6 @@ package "age" {
     interface ElementoMapa {
     }
 
-    class RecursoMapa implements ElementoMapa {
-        - tipo: TipoRecurso
-        - cantidad: int
-    }
-
     class TipoRecurso {
         Alimento
         Madera
@@ -69,11 +64,13 @@ package "age" {
         Piedra
     }
 
-    class RecursoPlayer {
+    class RecursoJugador implements ElementoMapa {
         - alimento: int
         - madera: int
         - oro: int
         - piedra: int
+        - tipo: TipoRecurso
+        - cantidad: int
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
     }
@@ -87,7 +84,7 @@ package "age" {
     abstract class Edificio implements ElementoMapa {
         - ubicacion: Coordenada
         - vida: int
-        - owner: Player
+        - dueño: Jugador
     }
 
     class CentroCivico extends Edificio {
@@ -111,7 +108,7 @@ package "age" {
         - ubicacion: Coordenada
         - vida: int
         - velocidad: int
-        - owner: Player
+        - dueño: Jugador
     }
 
     class Aldeano extends Unidad {
@@ -141,7 +138,7 @@ package "age" {
     
     Juego "1" --> "*" Player
     Player "1" --> "1" Civilizacion
-    Player "1" --> "1" RecursoPlayer
+    Player "1" --> "1" RecursoJugador
     Mapa "1" --> "*" Celda
     Celda "1" --> "*" ElementoMapa
 
