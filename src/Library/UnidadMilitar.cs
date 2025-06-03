@@ -29,7 +29,7 @@ public class UnidadMilitar : Unidad
        {
            throw new InvalidOperationException("Ubicacion no valida");
        }
-   }*/ 
+   } chatgpt?? */ 
    
    public void Atacar(Unidad objetivo)
    {
