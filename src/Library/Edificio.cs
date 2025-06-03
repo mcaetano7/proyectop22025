@@ -15,7 +15,7 @@ public abstract class Edificio
         Owner = owner;
     }
     
-    public void Almacenar(Recurso recursos)
+    public void Almacenar(RecursoJugador recursosJugador)
     {
         
     }

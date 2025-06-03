@@ -4,22 +4,18 @@
 package "age" {
 
     class Facade {
-    - juego: Mapa<String> Juego
     + NuevoJuego(idJuego: String): String
     + UnirseJuego(idJuego: String, nombreJugador: String, civilizacion: String): String
     + ProcesarComando(idJuego: String, nombreJugador: String, comando: String): String
     + obtenerEstado(idJuego: String, Jugador: String): String
-    }
-    
-    class Juego {
-        - mapa: Mapa
-        - jugadores: List<Jugador>
-        - turnoActual: int
-        + iniciarJuego()
-        + avanzarTurno()
-        + obtenerEstado()
-        + verificarVictoria(): boolean
-        + obtenerGanador(): Jugador
+    - mapa: Mapa
+    - jugadores: List<Jugador>
+    - turnoActual: int
+    + iniciarJuego()
+    + avanzarTurno()
+    + obtenerEstado()
+    + verificarVictoria(): boolean
+    + obtenerGanador(): Jugador
     }
 
     class Player {
@@ -28,19 +24,22 @@ package "age" {
         - recurso: Recurso
         - aldeanos: List<Aldeano>
         - edificios: List<Edificio>
-        - unidades: List<UnidadMilitar>
+        - accesible
         - poblacionActual: int
         - poblacionMaxima: int
+        + InicializarJuego()
+        + Victoria(): boolean
+        + PuedeCrearUnidad(): boolean
         + recolectarRecurso(tipo: TipoRecurso, ubicacion: Coordenada, nombre: String)
         + construir(edificio: Edificio, ubicacion: Coordenada)
-        + entrenarUnidad(tipo: TipoUnidad)
-        + moverUnidad(idUnidad: int, destino: Coordenada)
-        + atacar(idAtacante: int, objetivo: Coordenada)
+        + TieneRecurso(): boolean
+        + GastarRecuerso()
+        + GetAldeanoDisponible()
     }
 
     class Mapa {
-        - tamaño: int
-        - celdas: List<Celda>
+        + Size: int
+        + celdas: List<Celda>
         + obtenerCelda(coordenada: Coordenada): Celda
     }
 
@@ -50,8 +49,10 @@ package "age" {
     }
 
     class Coordenada {
-        - x: int
-        - y: int
+        + x: int
+        + y: int
+        + Coordenada(X, Y)
+        + EsValida(): boolean
     }
 
     interface ElementoMapa {
@@ -62,6 +63,7 @@ package "age" {
         Madera
         Oro
         Piedra
+        - TipoRecurso(nombre)
     }
 
     class RecursoJugador implements ElementoMapa {
@@ -69,55 +71,84 @@ package "age" {
         - madera: int
         - oro: int
         - piedra: int
-        - tipo: TipoRecurso
-        - cantidad: int
+        + tipo: TipoRecurso
+        + cantidad: int
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
+        + RecursoJugador(tipo, cantidad)
     }
 
     class Civilizacion {
-        - nombre: String
-        - bonificaciones: List<String>
-        - unidadEspecial: TipoUnidad
+        + nombre: String
+        + bonificaciones: List<String>
+        + CivDisponibles: List<String>
     }
 
     abstract class Edificio implements ElementoMapa {
-        - ubicacion: Coordenada
-        - vida: int
-        - dueño: Jugador
+        + ubicacion: Coordenada
+        + vida: int
+        + dueño: Jugador
+        + resistencia: int
+        + Almacenar(RecursoJugador)
+        + ObtenerCosto()
     }
 
     class CentroCivico extends Edificio {
-        - capacidadAldeanos: int
+        + capacidadAldeanos: int
+        - Aldeanos: List<Aldeanos>
+        + AlojarAldeano(Aldeano): boolean
+        + SacarAldeano(Aldeano)
+        + CapacidadRestante()
+        + ObtenerCosto()
     }
 
     class Almacen extends Edificio {
-        - tipo: TipoRecurso
-        - capacidad: int
+        + tipo: TipoRecurso
+        + capacidad: int
+        + ObtenerCosto()
     }
 
     class Casa extends Edificio {
-        - capacidadPoblacion: int
+        + CapacidadMaxima: int
+        + capacidadPoblacion: int
+        + ObtenerCosto()
     }
 
-    class Cuartel extends Edificio {
+    class Cuartel extends Edificio {  
+        + entrenarInfanteria(id)
+        + entrenarArquero(id)
+        + entrenarCaballeria(id)
+        + ObtenerCosto 
     }
 
     abstract class Unidad implements ElementoMapa {
-        - id: int
-        - ubicacion: Coordenada
-        - vida: int
-        - velocidad: int
-        - dueño: Jugador
+        + id: int
+        + ubicacion: Coordenada
+        + vida: int
+        + velocidad: int
+        + owner: Jugador
+        + EstaMuerto: boolean
+        + RecibirDefensa()
+        + RecibirDamage()
+        + Mover(NuevaUbicacion)
     }
 
     class Aldeano extends Unidad {
-        + recolectar(recurso: Recurso, edificio: Almacen)
+        - Ocupado: boolean
+        + Mover(coordenada: NuevaUbicacion)
+        + EstaDisponible()
+        + recolectar(TipoRecurso: tipo, coordenada: ubicacion)
     }
 
     class UnidadMilitar extends Unidad {
         + ataque: int
         + defensa: int
+        - cantidad
+        + RecibirDamage(damage)
+        + Mover(NuevaUbicacion)
+        + atacar(objetivo)
+        + Defender()
+         
     }
 
     class Infanteria extends UnidadMilitar {
