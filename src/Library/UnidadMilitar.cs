@@ -19,7 +19,7 @@ public class UnidadMilitar : Unidad
        Vida = Math.Max(0, Vida - damageFinal);
    }
 
-   /*public override void Mover(Coordenada nuevaUbicacion)
+   public override void Mover(Coordenada nuevaUbicacion)
    {
        if (nuevaUbicacion.EsValida())
        {
@@ -27,9 +27,9 @@ public class UnidadMilitar : Unidad
        }
        else
        {
-           throw new InvalidOperationException("Ubicacion no valida");
+           throw new InvalidOperationException("Ubicacion no valida"); // chagpt ????
        }
-   } chatgpt?? */ 
+   } 
    
    public void Atacar(Unidad objetivo)
    {

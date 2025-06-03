@@ -5,17 +5,17 @@ package "age" {
 
     class Facade {
     + NuevoJuego(idJuego: String): String
-    + UnirseJuego(idJuego: String, nombreJugador: String, civilizacion: String): String
-    + ProcesarComando(idJuego: String, nombreJugador: String, comando: String): String
-    + obtenerEstado(idJuego: String, Jugador: String): String
+    + UnirseJuego(idJuego: String, nombrePlayer: String, civilizacion: String): String
+    + ProcesarComando(idJuego: String, nombrePlayer: String, comando: String): String
+    + obtenerEstado(idJuego: String, Player: String): String
     - mapa: Mapa
-    - jugadores: List<Jugador>
+    - Playeres: List<Player>
     - turnoActual: int
     + iniciarJuego()
     + avanzarTurno()
     + obtenerEstado()
     + verificarVictoria(): boolean
-    + obtenerGanador(): Jugador
+    + obtenerGanador(): Player
     }
 
     class Player {
@@ -66,7 +66,7 @@ package "age" {
         - TipoRecurso(nombre)
     }
 
-    class RecursoJugador implements ElementoMapa {
+    class RecursoPlayer implements ElementoMapa {
         - alimento: int
         - madera: int
         - oro: int
@@ -75,7 +75,7 @@ package "age" {
         + cantidad: int
         + agregar(tipo: TipoRecurso, cantidad: int)
         + consumir(tipo: TipoRecurso, cantidad: int): boolean
-        + RecursoJugador(tipo, cantidad)
+        + RecursoPlayer(tipo, cantidad)
     }
 
     class Civilizacion {
@@ -87,9 +87,9 @@ package "age" {
     abstract class Edificio implements ElementoMapa {
         + ubicacion: Coordenada
         + vida: int
-        + dueño: Jugador
+        + owner: Player
         + resistencia: int
-        + Almacenar(RecursoJugador)
+        + Almacenar(RecursoPlayer)
         + ObtenerCosto()
     }
 
@@ -126,7 +126,7 @@ package "age" {
         + ubicacion: Coordenada
         + vida: int
         + velocidad: int
-        + owner: Jugador
+        + owner: Player
         + EstaMuerto: boolean
         + RecibirDefensa()
         + RecibirDamage()
@@ -169,7 +169,7 @@ package "age" {
     
     Juego "1" --> "*" Player
     Player "1" --> "1" Civilizacion
-    Player "1" --> "1" RecursoJugador
+    Player "1" --> "1" RecursoPlayer
     Mapa "1" --> "*" Celda
     Celda "1" --> "*" ElementoMapa
 
