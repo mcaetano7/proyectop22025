@@ -2,16 +2,10 @@
 
 public class Celda
 {
-    private Coordenada coordenada;
+    public Coordenada Coordenada { get; }
     
     public Celda(Coordenada coordenada)
     {
-        this.coordenada = coordenada;
-    }
-    
-    public Coordenada Coordenada
-    {
-        get { return coordenada; }
-        set { coordenada = value; }
+        this.Coordenada = coordenada;
     }
 }
