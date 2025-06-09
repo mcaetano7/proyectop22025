@@ -1,6 +1,5 @@
 namespace Library;
 
-
 /* HISTORIAS DE USUARIO:
  
  1. poder crear una nueva partida especificando el tamaño del mapa y cantidad de jugadores.
@@ -32,6 +31,16 @@ public class Facade
         Mapa = new Mapa(); 
         Jugador1 = new Player("Jugador 1", civ1); 
         Jugador2 = new Player("Jugador 2", civ2);
+        
+    }
+
+    public void GuardarPartida()
+    {
+        
+    }
+
+    public void CargarPartida()
+    {
         
     }
     //cargar partida, guardar partida, crear partida 
