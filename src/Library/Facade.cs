@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices.ComTypes;
+
 namespace Library;
 
-/* HISTORIAS DE USUARIO:
+/* COSAS CON QUE CUMPLIR EN LA FACHADA:
  
  1. poder crear una nueva partida especificando el tamaño del mapa y cantidad de jugadores.
  2. elegir civilización (aprovechar sus ventajas estratégicas)
@@ -26,6 +28,10 @@ public class Facade
     public Mapa Mapa { get; private set; }
     public Player Jugador1 { get; private set; }
     public Player Jugador2 { get; private set; }
+    public void CrearArchivo(string ruta, string contenido)
+    {
+        File.WriteAllText(ruta, contenido);
+    }
     public void CrearPartida(Civilizacion civ1, Civilizacion civ2) //el user elige la civ desde program
     {
         Mapa = new Mapa(); 
