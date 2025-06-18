@@ -44,6 +44,9 @@ namespace Library
             // crear unidades y edificios al comienzo de la partida
             
         }
+        public string Nombre => name;
+        public Civilizacion Civilizacion => civilizacion;
+
         public void InicializarJuego()
         {
             var centroCivico = new CentroCivico(new Coordenada(50, 50), 100, this, 10);
