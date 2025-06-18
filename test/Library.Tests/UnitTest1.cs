@@ -12,21 +12,52 @@ public class Tests
     [Test]
     public void NuevaPartidaTest()
     {
+        var mapa = new Mapa();
+        Assert.That(mapa.Celdas.Count, Is.EqualTo(10000), "El mapa no contiene la cantidad esperada de celdas(100x100)");
         
+        var civ1 = new Civilizacion("bizantinos", new List<string>());
+        var civ2 = new Civilizacion("constantinopolitanos", new List<string>());
+        var jugador1 = new Player("Emperador Bizantino", civ1);
+        var jugador2 = new Player("Constantino I", civ2);
+        
+        List<Player> jugadores = new List<Player> { jugador1, jugador2 };
+        Assert.That(jugadores.Count, Is.EqualTo(2), "La cantidad de jugadores creados no es la esperada.");
+
+        Assert.That(jugadores[0].Nombre, Is.EqualTo("Jugador1"));
+        Assert.That(jugadores[1].Nombre, Is.EqualTo("Jugador2"));
+        Assert.That(jugadores[0].Civilizacion.Name, Is.EqualTo("vikingos"));
+        Assert.That(jugadores[1].Civilizacion.Name, Is.EqualTo("francos"));
     }
     
     //2. elegir civilización (aprovechar sus ventajas estratégicas)
     [Test]
     public void ElegirCivilizacion()
     {
+        var ventajas = new List<string> { "Recolectan madera más rápido", "Unidades más baratas" };
+        var civ = new Civilizacion("Mortífagos", ventajas);
+        var jugador = new Player("Lucius Malfoy", civ);
         
+        var civilizacionDelJugador = jugador.Civilizacion;
+        
+        Assert.That(civilizacionDelJugador.Name, Is.EqualTo("Chinos"), "La civilización asignada no es la esperada.");
+        //Assert.AreEqual(ventajas, civilizacionDelJugador./NO SE QUE VA ACA/, "Las ventajas estratégicas no se asignaron correctamente.");
     }
     
     //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolecci{on de recursos.
     [Test]
     public void EdificiosIniciales()
     {
-        
+        var civ = new Civilizacion("Bizantinos", new List<string>());
+        var jugador = new Player("Beto", civ);
+
+        jugador.InicializarJuego();
+
+        var centroCivicoExiste = jugador//terminar
+
+        var cantidadAldeanos = jugador//terminar
+
+        Assert.IsTrue(centroCivicoExiste, "El jugador no comenzó con un Centro Cívico.");
+        Assert.That(cantidadAldeanos, Is.EqualTo(3), "El jugador no comenzó con 3 aldeanos.");
     }
     
     //4. ordenar a los aldeanos recolectar diferentes tipos de recursos.
@@ -108,7 +139,7 @@ public class Tests
     
     //15. quiero ver un mapa simplificado del juego en ASCII para visualizar la dispo del terreno y unidades. 
     [Test]
-    public void MapaEnASCII()
+    public void MapaEnAscii()
     {
         
     }
