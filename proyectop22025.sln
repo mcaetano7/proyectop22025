@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3C7B9EBE-F5B3-458B-A5EC-C48FEB6DCA87}"
 	ProjectSection(SolutionItems) = preProject
 		src\scratch.puml = src\scratch.puml
++		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "src\Library\Library.csproj", "{1016C640-7A96-4571-B6E2-A7791CD83694}"
