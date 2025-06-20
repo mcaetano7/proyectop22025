@@ -5,17 +5,17 @@ namespace Library
 {
     
 }
-public class GenerarMapa
+public class GenerarMapa //genera el mapa dependiendo del terreno y unidades
 {
-    private char[,] mapa;
-    private Dictionary<(int x, int y), char> unidades;
-    private Dictionary<char, string> terrenos;
-    private Dictionary<char, string> simbolosUnidades;
+    private char[,] mapa; //matriz que genera el mapa
+    private Dictionary<(int x, int y), char> unidades; //diccionario que contiene unidades y posiciones 
+    private Dictionary<char, string> terrenos; //diccionario que contiene los terrenos
+    private Dictionary<char, string> simbolosUnidades; //diccionario que contiene los simbolos de unidades con sus tipos
     
-    public int Ancho { get; private set; }
-    public int Alto { get; private set; }
+    public int Ancho { get; private set; } //ancho del mapa
+    public int Alto { get; private set; } //alto del mapa
 
-    public GenerarMapa(int ancho = 20, int alto = 15)
+    public GenerarMapa(int ancho = 20, int alto = 15) //constructor inicializando un mapa especifico
     {
         Ancho = ancho;
         Alto = alto;
@@ -26,7 +26,7 @@ public class GenerarMapa
         InicializarMapa();
     }
 
-    private void InicializarDiccionarios()
+    private void InicializarDiccionarios() //iniciliza diccionarios con terrenos y unidades
     {
         terrenos = new Dictionary<char, string>
         {
@@ -38,7 +38,7 @@ public class GenerarMapa
             { ' ', "Empty" }
         };
 
-        simbolosUnidades = new Dictionary<char, string>()
+        simbolosUnidades = new Dictionary<char, string>() //tipo de unidades y simbolos
         {
             { 'P', "Player" },
             { 'E', "Enemigo" },
@@ -47,7 +47,7 @@ public class GenerarMapa
         };
     }
     
-    private void InicializarMapa()
+    private void InicializarMapa() //inicia el mapa con terrenos
     {
         for (int y = 0; y < Alto; y++)
         {
@@ -60,7 +60,7 @@ public class GenerarMapa
                 }
                 else if (y < 3)
                 {
-                    mapa[y, x] = '^'; // monta;as
+                    mapa[y, x] = '^'; // montañas
                 }
                 else if (y > Alto - 4)
                 {
@@ -68,7 +68,7 @@ public class GenerarMapa
                 }
                 else if (x % 4 == 0 && y % 3 == 0)
                 {
-                    mapa[y, x] = 'T'; //arboles por ahgi
+                    mapa[y, x] = 'T'; //arboles 
                 }
                 else
                 {
