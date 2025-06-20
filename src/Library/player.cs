@@ -7,14 +7,14 @@ namespace Library
 
     public class Player
     {
-        private string name;
-        private Civilizacion civilizacion;
-        private Dictionary<TipoRecurso, int> recursos;
-        private List<Aldeano> aldeanos;
-        private List<Edificio> edificios;
+        private string name; //nombre del jugador
+        private Civilizacion civilizacion; //civilizacion que va a pertenecer
+        private Dictionary<TipoRecurso, int> recursos; //diccionario con los recursos y cantidades
+        private List<Aldeano> aldeanos; //lista de aldeanos
+        private List<Edificio> edificios; //lista de los edificios del jugador
         private bool accesible; // vivo o muerto
-        private int poblacionActual;
-        private int poblacionMaxima;
+        private int poblacionActual; //unidades actuales de poblacion
+        private int poblacionMaxima; //limite maximo de poblacion
         
 
         public Player(string name, Civilizacion civilizacion)
