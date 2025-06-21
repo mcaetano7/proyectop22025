@@ -17,11 +17,11 @@ namespace Library
         private int poblacionMaxima; //limite maximo de poblacion
         
 
-        public Player(string name, Civilizacion civilizacion)
+        public Player(string name, Civilizacion civilizacion) //inicializa un jugador con civilizacion
         {
             this.name = name;
             this.civilizacion = civilizacion;
-            this.accesible = true;
+            this.accesible = true; 
 
             // valores de incio de juego
             this.recursos = new Dictionary<TipoRecurso, int>()
@@ -47,7 +47,7 @@ namespace Library
         public string Nombre => name;
         public Civilizacion Civilizacion => civilizacion;
 
-        public void InicializarJuego()
+        public void InicializarJuego() //inicializa el juego con estructuras y unidades
         {
             var centroCivico = new CentroCivico(new Coordenada(50, 50), 100, this, 10);
             edificios.Add(centroCivico);
@@ -56,65 +56,65 @@ namespace Library
             // crear primeros 3 aldeanos 
             for (int i = 0; i < 3; i++)
             { 
-                var coordenada = new Coordenada(50 + i, 50);
+                var coordenada = new Coordenada(50 + i, 50); 
                 var aldeano = new Aldeano(i + 1, coordenada, this);
-                aldeanos.Add(aldeano);
+                aldeanos.Add(aldeano); //coloca los aldeanos en coordenadas
             }
 
-            poblacionActual += 3;
+            poblacionActual += 3; //actualiza la posición
         }
 
-        public bool Victoria()
+        public bool Victoria() //verifica si el jugador perdió la partida
         {
             // se pierde la partida cuando no hay ningun centro urbano, entre otras condiciones
             return !edificios.Any(edificio => edificio is CentroCivico);
         }
         
-        public bool PuedeCrearUnidad() 
+        public bool PuedeCrearUnidad() //verifica si se puede crear más unidades
         {
             return poblacionActual < poblacionMaxima;
         }
 
-        public void AgregarRecurso(TipoRecurso tipo, int cantidad) // recolcetar recurso uml 
+        public void AgregarRecurso(TipoRecurso tipo, int cantidad) //añade recurso al inventario
         {
-            if (recursos.ContainsKey(tipo))
+            if (recursos.ContainsKey(tipo)) //lo añade solo si existe
             {
                 recursos[tipo] += cantidad;
             }
         }
 
-        public bool TieneRecursos(Dictionary<TipoRecurso, int> costos) 
+        public bool TieneRecursos(Dictionary<TipoRecurso, int> costos) //verifica que el jugador tiene recursos para pagar costo especifico
         {
-            foreach (var costo in costos)
+            foreach (var costo in costos) //verifica el tipo de recurso requerido
             {
                 if (!recursos.ContainsKey(costo.Key) || recursos[costo.Key] < costo.Value)
                 {
-                    return false;
+                    return false; //si no tiene el recurso o la cantidad necesaria
                 }
             }
 
             return true;
         }
 
-        public void GastarRecursos(Dictionary<TipoRecurso, int> costos)
+        public void GastarRecursos(Dictionary<TipoRecurso, int> costos) //gasta recursos del inventario del jugador
         {
-            if (TieneRecursos(costos))
+            if (TieneRecursos(costos)) //verifica que tiene recursos
             {
                 foreach (var costo in costos)
                 {
-                    recursos[costo.Key] -= costo.Value;
+                    recursos[costo.Key] -= costo.Value; //si tiene recursos resta del inventario
                 }
             }
         }
 
-        public void Construir(Edificio edificio, Coordenada ubicacion)
+        public void Construir(Edificio edificio, Coordenada ubicación) //construye un edificio si se tiene los recursos necesarios
         {
-            if (TieneRecursos(edificio.obtenerCosto()))
+            if (TieneRecursos(edificio.obtenerCosto())) //verifica si puede pagar la construcción
             {
                 GastarRecursos(edificio.obtenerCosto());
                 edificios.Add(edificio);
 
-                if (edificio is Casa)
+                if (edificio is Casa) //si es casa aumenta la población 
                 {
                     poblacionMaxima += 5;
                 }
@@ -122,17 +122,17 @@ namespace Library
         }
         
 
-        public Aldeano GetAldeanoDisponible()
+        public Aldeano GetAldeanoDisponible() //busca y retorna el primer aldeano para tareas
         {
             return aldeanos.FirstOrDefault(a => a.EstaDisponible());
         }
         
-        public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion)
+        public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion) //asigna a un aldeano la tarea de recolectar un recurso en una ubicación específica
         {
-            var aldeano = GetAldeanoDisponible();
+            var aldeano = GetAldeanoDisponible(); //busca aldeano disponible
             if (aldeano != null)
             {
-                aldeano.IniciarRecoleccion(tipo, ubicacion);
+                aldeano.IniciarRecoleccion(tipo, ubicacion); //le asigna tarea de recolectar
             
             }
         }
