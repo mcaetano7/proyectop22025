@@ -1,5 +1,7 @@
 namespace Library;
 
+/* esta clase le da nombre a cada tipo de recurso */
+
 public class TipoRecurso
 {
     public string Nombre { get; }
