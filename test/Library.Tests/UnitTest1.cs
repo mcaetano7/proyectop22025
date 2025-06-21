@@ -52,9 +52,9 @@ public class Tests
 
         jugador.InicializarJuego();
 
-        var centroCivicoExiste = jugador//terminar
+        var centroCivicoExiste = jugador; //terminar
 
-        var cantidadAldeanos = jugador//terminar
+        var cantidadAldeanos = jugador; //terminar
 
         Assert.IsTrue(centroCivicoExiste, "El jugador no comenzó con un Centro Cívico.");
         Assert.That(cantidadAldeanos, Is.EqualTo(3), "El jugador no comenzó con 3 aldeanos.");
