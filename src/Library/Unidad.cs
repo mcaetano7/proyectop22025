@@ -17,7 +17,7 @@ public abstract class Unidad
         Owner = owner;
     }
     
-    public bool EstaMuerto() => Vida <= 0;
+    public bool EstaMuerto() => Vida <= 0; // si la vida es menor a cero devuelve que el jugador esta muerto para interrumpir la partida
     public virtual int RecibirDefensa() => 0;
     private int cantidad;
     public virtual void RecibirDamage(int damage)
