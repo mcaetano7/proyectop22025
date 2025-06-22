@@ -43,7 +43,7 @@ public class Tests
         //Assert.AreEqual(ventajas, civilizacionDelJugador./NO SE QUE VA ACA/, "Las ventajas estratégicas no se asignaron correctamente.");
     }
     
-    //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolecci{on de recursos.
+    //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recoleccion de recursos.
     [Test]
     public void EdificiosIniciales()
     {

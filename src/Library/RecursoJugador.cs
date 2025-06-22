@@ -1,8 +1,6 @@
 namespace Library
 
-/* esta clase define el tipo y la
-cantidad de un recurso que tiene
-cada jugador, e.g: madera, 100 *\
+
 
 {
     public class RecursoJugador
@@ -18,6 +16,12 @@ cada jugador, e.g: madera, 100 *\
             Cantidad = cantidad;
         }
         
-        
-    }
+///esta clase define el tipo y la
+///cantidad de un recurso que tiene
+///cada jugador, e.g: madera, 100 
+
+}
+
+
+
 }
