@@ -136,5 +136,9 @@ namespace Library
             
             }
         }
+        public int GetRecurso(TipoRecurso tipo) //obtiene la cantidad de un tipo de recurso
+        {
+            return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
+        }
     }
 }

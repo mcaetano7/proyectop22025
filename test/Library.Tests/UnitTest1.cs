@@ -64,7 +64,30 @@ public class Tests
     [Test]
     public void RecoleccionDeDistintosRecursos()
     {
+        var player = new Player("TestPlayer", new Civilizacion());
+        player.InicializarJuego();
+
+        var recursosIniciales = new Dictionary<TipoRecurso, int>();
+        {
+            { TipoRecurso.Alimento, 100 },
+            { TipoRecurso.Madera, 100 },
+            { TipoRecurso.Oro, 0 },
+            { TipoRecurso.Piedra, 0 }
+        };
+        var ubicacionAlimento = new Coordenada(45, 45);
+        var ubicacionMadera = new Coordenada(55, 55);
+        var ubicacionOro = new Coordenada(60, 40);
         
+        player.RecolectarRecurso(TipoRecurso.Alimento, ubicacionAlimento);
+        player.RecolectarRecurso(TipoRecurso.Madera,ubicacionMadera);
+        player.RecolectarRecurso(TipoRecurso.Oro,ubicacionOro);
+
+        var aldeanoDisponible = player.GetAldeanoDisponible();
+        Assert.IsNotNull(aldeanoDisponible, "Tienen que haber aldeanos disponibles ");
+        //no se cual poner
+        Assert.That(player.GetRecurso, Is.EqualTo(110), "El alimento se debe incrementar de 100 a 110") ;
+        Assert.AreEqual(110, player.GetRecurso(TipoRecurso.Madera), "La madera se debe incrementar de 100 a 110");
+        Assert.AreEqual(10, player.GetRecurso(TipoRecurso.Oro), "El oro debe incrementar de 0 a 10");
     }
     
     //5. construir edificios para almacenar recursos.
