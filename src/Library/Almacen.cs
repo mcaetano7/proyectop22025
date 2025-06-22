@@ -1,5 +1,5 @@
 namespace Library;
-
+//clase que representa un edificio almacén
 public class Almacen : Edificio
 {
     public string Tipo { get; set; }
@@ -12,9 +12,9 @@ public class Almacen : Edificio
         Capacidad = capacidad;
     }
 
-    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    public override Dictionary<TipoRecurso, int> obtenerCosto() //método que retorna cuanto cuesta construir un almacen (cuanto de recursos)
     {
-        return new Dictionary<TipoRecurso, int>()
+        return new Dictionary<TipoRecurso, int>() //usamos diccionario porque as{i podemos buscar directamente por tipo de recurso y asociar m{as facil el tipo de recurso con la cantidad necesaria
         {
             { TipoRecurso.Madera, 500 }
         };
