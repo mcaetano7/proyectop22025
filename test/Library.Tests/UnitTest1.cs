@@ -143,7 +143,7 @@ public class Tests
         Assert.AreEqual(0, player.GetRecurso(TipoRecurso.Piedra));
     }
     
-    // 7. construir edificios en ubis específicas para expandir la base.
+    // 7. construir edificios en ubicaciones específicas para expandir la base.
     [Test]
     public void UbicacionEspecifica()
     {
@@ -171,7 +171,7 @@ public class Tests
         
     }
     
-    //9. entrrenar unidades militares para defender la base y atacar oponentes.
+    //9. entrenar unidades militares para defender la base y atacar oponentes.
     [Test]
     public void EntrenarUnidades()
     {
@@ -185,14 +185,14 @@ public class Tests
         
     }
     
-    //11. ordenar a las unidades atacar edeficios o unidades enemigas. 
+    //11. ordenar a las unidades atacar edificios o unidades enemigas. 
     [Test]
     public void AtacarEnemigos()
     {
         
     }
     
-    //12. entrenar aldeanos parta mejorar la econom{ia y tener suficientes casas para mantener la población.
+    //12. entrenar aldeanos parta mejorar la economía y tener suficientes casas para mantener la población.
     [Test]
     public void EntrenarAldeanos()
     {
@@ -213,14 +213,14 @@ public class Tests
         
     }
     
-    //15. quiero ver un mapa simplificado del juego en ASCII para visualizar la dispo del terreno y unidades. 
+    //15. quiero ver un mapa simplificado del juego en ASCII para visualizar la disponibilidad del terreno y unidades. 
     [Test]
     public void MapaEnAscii()
     {
         
     }
 
-    //16. como jugador quiero gardar la partida y continuarla más tarde. 
+    //16. como jugador quiero guardar la partida y continuarla más tarde. 
     [Test]
     public void GuardarPartidaTest()
     {
