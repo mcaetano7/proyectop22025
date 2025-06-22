@@ -100,7 +100,7 @@ public class Tests
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
-        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen);
+        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen); //despues sigo esto
     }
     
     // 6. quiero visualizar la cantidad de recursos disponibles.
