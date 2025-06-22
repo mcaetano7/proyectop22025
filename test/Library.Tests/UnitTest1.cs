@@ -100,7 +100,35 @@ public class Tests
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
-        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen); //despues sigo esto
+        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen); 
+        
+        Assert.IsNotNull(almacen);
+        Assert.AreEqual(coordenada, almacen.Ubicacion);
+        Assert.AreEqual(vidaInicial, almacen.Vida);
+        Assert.AreEqual(player, almacen.Owner);
+        
+        Assert.AreEqual(TipoAlmacen, almacen.Tipo);
+        Assert.AreEqual(capacidadAlmacen, almacen.Capacidad);
+        Assert.IsTrue(almacen.Capacidad > 0, "El almacén debe poder tener capacidad");
+        
+        var costo = almacen.obtenerCosto();
+        Assert.IsNotNull(costo);
+        Assert.AreEqual(1, costo.Count, "El almacén debe tener un tipo de recurso como costo");
+        Assert.IsTrue(costo.ContainsKey(TipoRecurso.Madera));
+        Assert.AreEqual(500, costo[TipoRecurso.Madera], "El costo de madera deberia ser 500");
+        
+        var recursoMadera = new RecursoJugador(TipoRecurso.Madera.Nombre, 100);
+        var recursoOro = new RecursoJugador(TipoRecurso.Oro.Nombre, 50);
+        var recursoAlimento = new RecursoJugador(TipoRecurso.Alimento.Nombre, 200);
+        var recursoPiedra = new RecursoJugador(TipoRecurso.Piedra.Nombre, 75);
+        
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoMadera));
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoOro));
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoAlimento));
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoPiedra));
+        
+        Assert.AreEqual(capacidadAlmacen, almacen.Capacidad, "La capacidad no debería cambiar al almacenar");
+        Assert.AreEqual(vidaInicial, almacen.Vida, "La vida no debería cambiar al almacenar");
     }
     
     // 6. quiero visualizar la cantidad de recursos disponibles.
