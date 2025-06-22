@@ -147,7 +147,21 @@ public class Tests
     [Test]
     public void UbicacionEspecifica()
     {
+        var bonificaciones = new List<string> { "Test bonificacion" };
+        var civilizacion = new Civilizacion("TestCiv", bonificaciones);
+        var player = new Player("TestPlayer", civilizacion);
+        var ubicacionEspecifica = new Coordenada(100, 100);
+
+        int maderaInicial = player.GetRecurso(TipoRecurso.Madera);
+        var casa = new Casa(ubicacionEspecifica, 100, player, "Residencial", 5);
         
+        player. Construir(casa, ubicacionEspecifica);
+
+        Assert.AreEqual(maderaInicial - 25, player.GetRecurso(TipoRecurso.Madera));
+        Assert.AreEqual(100, casa.Ubicacion.X);
+        Assert.AreEqual(100, casa.Ubicacion.Y);
+        Assert.IsTrue(ubicacionEspecifica.EsValida());
+        Assert.AreEqual(player, casa.Owner);
     }
     
     //8. crear diferentes tipos de edificios con funciones específicas para desarrollar la civilización.
