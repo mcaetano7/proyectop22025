@@ -40,10 +40,10 @@ public class Tests
         var civilizacionDelJugador = jugador.Civilizacion;
         
         Assert.That(civilizacionDelJugador.Name, Is.EqualTo("Chinos"), "La civilización asignada no es la esperada.");
-        //Assert.AreEqual(ventajas, civilizacionDelJugador./NO SE QUE VA ACA/, "Las ventajas estratégicas no se asignaron correctamente.");
+        //Assert.AreEqual(ventajas, civilizaciónDelJugador./NO SE QUE VA ACA/, "Las ventajas estratégicas no se asignaron correctamente.");
     }
     
-    //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recoleccion de recursos.
+    //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolección de recursos.
     [Test]
     public void EdificiosIniciales()
     {
@@ -100,21 +100,68 @@ public class Tests
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
-        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen); //despues sigo esto
+        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen); 
+        
+        Assert.IsNotNull(almacen);
+        Assert.AreEqual(coordenada, almacen.Ubicacion);
+        Assert.AreEqual(vidaInicial, almacen.Vida);
+        Assert.AreEqual(player, almacen.Owner);
+        
+        Assert.AreEqual(TipoAlmacen, almacen.Tipo);
+        Assert.AreEqual(capacidadAlmacen, almacen.Capacidad);
+        Assert.IsTrue(almacen.Capacidad > 0, "El almacén debe poder tener capacidad");
+        
+        var costo = almacen.obtenerCosto();
+        Assert.IsNotNull(costo);
+        Assert.AreEqual(1, costo.Count, "El almacén debe tener un tipo de recurso como costo");
+        Assert.IsTrue(costo.ContainsKey(TipoRecurso.Madera));
+        Assert.AreEqual(500, costo[TipoRecurso.Madera], "El costo de madera deberia ser 500");
+        
+        var recursoMadera = new RecursoJugador(TipoRecurso.Madera.Nombre, 100);
+        var recursoOro = new RecursoJugador(TipoRecurso.Oro.Nombre, 50);
+        var recursoAlimento = new RecursoJugador(TipoRecurso.Alimento.Nombre, 200);
+        var recursoPiedra = new RecursoJugador(TipoRecurso.Piedra.Nombre, 75);
+        
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoMadera));
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoOro));
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoAlimento));
+        Assert.DoesNotThrow(() => almacen.Almacenar(recursoPiedra));
+        
+        Assert.AreEqual(capacidadAlmacen, almacen.Capacidad, "La capacidad no debería cambiar al almacenar");
+        Assert.AreEqual(vidaInicial, almacen.Vida, "La vida no debería cambiar al almacenar");
     }
     
     // 6. quiero visualizar la cantidad de recursos disponibles.
     [Test]
     public void CantidadRecursos()
     {
+        var player = new Player("TestPlayer", new Civilizacion("TestCiv"));
         
+        Assert.AreEqual(100, player.GetRecurso(TipoRecurso.Alimento));
+        Assert.AreEqual(100, player.GetRecurso(TipoRecurso.Madera));
+        Assert.AreEqual(0, player.GetRecurso(TipoRecurso.Oro));
+        Assert.AreEqual(0, player.GetRecurso(TipoRecurso.Piedra));
     }
     
-    // 7. construir edificios en ubis específicas para expandir la base.
+    // 7. construir edificios en ubicaciones específicas para expandir la base.
     [Test]
     public void UbicacionEspecifica()
     {
+        var bonificaciones = new List<string> { "Test bonificacion" };
+        var civilizacion = new Civilizacion("TestCiv", bonificaciones);
+        var player = new Player("TestPlayer", civilizacion);
+        var ubicacionEspecifica = new Coordenada(100, 100);
+
+        int maderaInicial = player.GetRecurso(TipoRecurso.Madera);
+        var casa = new Casa(ubicacionEspecifica, 100, player, "Residencial", 5);
         
+        player. Construir(casa, ubicacionEspecifica);
+
+        Assert.AreEqual(maderaInicial - 25, player.GetRecurso(TipoRecurso.Madera));
+        Assert.AreEqual(100, casa.Ubicacion.X);
+        Assert.AreEqual(100, casa.Ubicacion.Y);
+        Assert.IsTrue(ubicacionEspecifica.EsValida());
+        Assert.AreEqual(player, casa.Owner);
     }
     
     //8. crear diferentes tipos de edificios con funciones específicas para desarrollar la civilización.
@@ -124,7 +171,7 @@ public class Tests
         
     }
     
-    //9. entrrenar unidades militares para defender la base y atacar oponentes.
+    //9. entrenar unidades militares para defender la base y atacar oponentes.
     [Test]
     public void EntrenarUnidades()
     {
@@ -138,14 +185,14 @@ public class Tests
         
     }
     
-    //11. ordenar a las unidades atacar edeficios o unidades enemigas. 
+    //11. ordenar a las unidades atacar edificios o unidades enemigas. 
     [Test]
     public void AtacarEnemigos()
     {
         
     }
     
-    //12. entrenar aldeanos parta mejorar la econom{ia y tener suficientes casas para mantener la población.
+    //12. entrenar aldeanos parta mejorar la economía y tener suficientes casas para mantener la población.
     [Test]
     public void EntrenarAldeanos()
     {
@@ -166,14 +213,14 @@ public class Tests
         
     }
     
-    //15. quiero ver un mapa simplificado del juego en ASCII para visualizar la dispo del terreno y unidades. 
+    //15. quiero ver un mapa simplificado del juego en ASCII para visualizar la disponibilidad del terreno y unidades. 
     [Test]
     public void MapaEnAscii()
     {
         
     }
 
-    //16. como jugador quiero gardar la partida y continuarla más tarde. 
+    //16. como jugador quiero guardar la partida y continuarla más tarde. 
     [Test]
     public void GuardarPartidaTest()
     {
