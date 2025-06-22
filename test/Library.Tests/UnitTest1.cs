@@ -135,7 +135,12 @@ public class Tests
     [Test]
     public void CantidadRecursos()
     {
+        var player = new Player("TestPlayer", new Civilizacion("TestCiv"));
         
+        Assert.AreEqual(100, player.GetRecurso(TipoRecurso.Alimento));
+        Assert.AreEqual(100, player.GetRecurso(TipoRecurso.Madera));
+        Assert.AreEqual(0, player.GetRecurso(TipoRecurso.Oro));
+        Assert.AreEqual(0, player.GetRecurso(TipoRecurso.Piedra));
     }
     
     // 7. construir edificios en ubis específicas para expandir la base.
