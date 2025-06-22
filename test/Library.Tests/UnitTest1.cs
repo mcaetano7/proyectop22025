@@ -40,10 +40,10 @@ public class Tests
         var civilizacionDelJugador = jugador.Civilizacion;
         
         Assert.That(civilizacionDelJugador.Name, Is.EqualTo("Chinos"), "La civilización asignada no es la esperada.");
-        //Assert.AreEqual(ventajas, civilizacionDelJugador./NO SE QUE VA ACA/, "Las ventajas estratégicas no se asignaron correctamente.");
+        //Assert.AreEqual(ventajas, civilizaciónDelJugador./NO SE QUE VA ACA/, "Las ventajas estratégicas no se asignaron correctamente.");
     }
     
-    //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolecci{on de recursos.
+    //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolección de recursos.
     [Test]
     public void EdificiosIniciales()
     {
