@@ -94,7 +94,13 @@ public class Tests
     [Test]
     public void ConstruccionEdificios()
     {
-        
+        var coordenada = new Coordenada(5, 10);
+        var player = new Player();
+        string TipoAlmacen = "General";
+        int capacidadAlmacen = 1000;
+        int vidaInicial = 100;
+
+        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen);
     }
     
     // 6. quiero visualizar la cantidad de recursos disponibles.
