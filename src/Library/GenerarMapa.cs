@@ -5,17 +5,25 @@ namespace Library
 {
     
 }
-public class GenerarMapa //genera el mapa dependiendo del terreno y unidades
+/// <summary>
+/// Esta clase genera un mapa con terreno y unidades 
+/// </summary>
+public class GenerarMapa 
 {
-    private char[,] mapa; //matriz que genera el mapa
-    private Dictionary<(int x, int y), char> unidades; //diccionario que contiene unidades y posiciones 
-    private Dictionary<char, string> terrenos; //diccionario que contiene los terrenos
-    private Dictionary<char, string> simbolosUnidades; //diccionario que contiene los simbolos de unidades con sus tipos
+    private char[,] mapa;
+    private Dictionary<(int x, int y), char> unidades; 
+    private Dictionary<char, string> terrenos; 
+    private Dictionary<char, string> simbolosUnidades; 
     
-    public int Ancho { get; private set; } //ancho del mapa
-    public int Alto { get; private set; } //alto del mapa
+    public int Ancho { get; private set; } 
+    public int Alto { get; private set; } 
 
-    public GenerarMapa(int ancho = 20, int alto = 15) //constructor inicializando un mapa especifico
+    /// <summary>
+    /// Constructor que inicializa el mapa con medidas específicas
+    /// </summary>
+    /// <param name="ancho"></param>
+    /// <param name="alto"></param>
+    public GenerarMapa(int ancho = 20, int alto = 15) 
     {
         Ancho = ancho;
         Alto = alto;
@@ -26,7 +34,10 @@ public class GenerarMapa //genera el mapa dependiendo del terreno y unidades
         InicializarMapa();
     }
 
-    private void InicializarDiccionarios() //iniciliza diccionarios con terrenos y unidades
+    /// <summary>
+    /// Inicializa diccionarios con terrenos y unidades
+    /// </summary>
+    private void InicializarDiccionarios() 
     {
         terrenos = new Dictionary<char, string>
         {
@@ -47,7 +58,10 @@ public class GenerarMapa //genera el mapa dependiendo del terreno y unidades
         };
     }
     
-    private void InicializarMapa() //inicia el mapa con terrenos
+    /// <summary>
+    /// Inicia el mapa con terrenos
+    /// </summary>
+    private void InicializarMapa() 
     {
         for (int y = 0; y < Alto; y++)
         {
