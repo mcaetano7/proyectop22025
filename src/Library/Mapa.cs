@@ -1,13 +1,16 @@
 namespace Library;
 
 /// <summary>
-/// Clase que representa 
+/// Clase que representa un mapa con celdas 
 /// </summary>
 public class Mapa
 {
     public const int Size = 100; 
     public List<Celda> Celdas { get; private set; } 
 
+    /// <summary>
+    /// Constructor que inicializa un mapa con celdas
+    /// </summary>
     public Mapa() 
     {
         Celdas = new List<Celda>(); 
@@ -23,6 +26,11 @@ public class Mapa
         }
     }
     
+    /// <summary>
+    /// Obtiene celdas dependiendo de sus coordenadas
+    /// </summary>
+    /// <param name="coordenada">Coordenada de las celdas que se obtienen</param>
+    /// <returns>Celda en la coordenada pedida</returns>
     public Celda ObtenerCelda(Coordenada coordenada) 
     {
         return Celdas.First(c =>
