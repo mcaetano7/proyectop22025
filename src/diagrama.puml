@@ -44,8 +44,7 @@ package "age" {
     }
 
     class Celda {
-        - coordenada: Coordenada
-        - contenido: List<ElementoMapa>
+        + coordenada: Coordenada
     }
 
     class Coordenada {
@@ -53,9 +52,6 @@ package "age" {
         + y: int
         + Coordenada(X, Y)
         + EsValida(): boolean
-    }
-
-    interface ElementoMapa {
     }
 
     class TipoRecurso {
@@ -66,7 +62,7 @@ package "age" {
         - TipoRecurso(nombre)
     }
 
-    class RecursoPlayer implements ElementoMapa {
+    class RecursoPlayer {
         - alimento: int
         - madera: int
         - oro: int
@@ -84,7 +80,7 @@ package "age" {
         + CivDisponibles: List<String>
     }
 
-    abstract class Edificio implements ElementoMapa {
+    abstract class Edificio {
         + ubicacion: Coordenada
         + vida: int
         + owner: Player
@@ -121,13 +117,13 @@ package "age" {
         + ObtenerCosto 
     }
 
-    abstract class Unidad implements ElementoMapa {
+    abstract class Unidad { 
         + id: int
         + ubicacion: Coordenada
         + vida: int
         + velocidad: int
         + owner: Player
-        + EstaMuerto: boolean
+        + EstaMuerto(): boolean
         + RecibirDefensa()
         + RecibirDamage()
         + Mover(NuevaUbicacion)
@@ -167,11 +163,16 @@ package "age" {
         + defensa: int 
     }
     
+    RecursoPlayer --> TipoRecurso
+    Almacen --> TipoRecurso
+    Player --> Coordenada
+    Celda --> Coordenada
+    Unidad --> Coordenada
+    Edificio --> Coordenada
     Juego "1" --> "*" Player
     Player "1" --> "1" Civilizacion
     Player "1" --> "1" RecursoPlayer
     Mapa "1" --> "*" Celda
-    Celda "1" --> "*" ElementoMapa
 
 }
 
