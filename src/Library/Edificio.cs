@@ -21,5 +21,17 @@ public abstract class Edificio
     }
 
     public abstract Dictionary<TipoRecurso, int> obtenerCosto();
-
+    
+    public virtual void RecibirDamage(int damage)
+    {
+        Vida = Math.Max(0, Vida - damage);
     }
+
+    // Método para saber si el edificio está destruido
+    public bool EstaMuerto()
+    {
+        return Vida <= 0;
+    }
+
+}
+    

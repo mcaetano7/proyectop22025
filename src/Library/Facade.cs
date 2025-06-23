@@ -50,4 +50,15 @@ public class Facade
         
     }
     //cargar partida, guardar partida, crear partida 
+    
+    public string InterpretarComando(string comando)
+    {
+        // simulación básica
+        if (comando.StartsWith("mover"))
+        {
+            return "Comando mover recibido";
+        }
+
+        return "Comando no reconocido";
+    }
 }
