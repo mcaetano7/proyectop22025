@@ -1,1 +1,1 @@
-![diagrama UML](DiagramaUMLP2.png)
+![diagrama UML actualizado](DiagramaUMLP2.png)
