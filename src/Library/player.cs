@@ -87,7 +87,7 @@ namespace Library
         /// <returns>retorna True si perdió, False si no</returns>
         public bool Victoria() 
         {
-            // se pierde la partida cuando no hay ningun centro urbano, entre otras condiciones
+            // se pierde la partida cuando no hay ningún centro urbano, entre otras condiciones
             return !edificios.Any(edificio => edificio is CentroCivico);
         }
         
