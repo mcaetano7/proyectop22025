@@ -1,0 +1,141 @@
+\doxysection{Library.\+Unidad Class Reference}
+\hypertarget{class_library_1_1_unidad}{}\label{class_library_1_1_unidad}\index{Library.Unidad@{Library.Unidad}}
+
+
+representa una unidad del juego con ubicación, vida, velocidad y dueño(jugador 1 o 2)  
+
+
+Inheritance diagram for Library.\+Unidad\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_library_1_1_unidad}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_library_1_1_unidad_a32e346ea6d27cfd95a4cc178931291d1}{Unidad}} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, int vida, int velocidad, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner)
+\begin{DoxyCompactList}\small\item\em constructor de la clase \doxylink{class_library_1_1_unidad}{Unidad} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_library_1_1_unidad_a04113001a72681de53602ce42986620e}{Esta\+Muerto}} ()
+\begin{DoxyCompactList}\small\item\em devuelve si la unidad está muerta (vida menor o igual a cero) \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_library_1_1_unidad_a07e599387a4c425261ec384b53555010}{Recibir\+Defensa}} ()
+\begin{DoxyCompactList}\small\item\em devuelve el valor de defensa de la unidad (por defecto 0) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_library_1_1_unidad_af29c382a49a9a17c9912e2f71081d6bc}{Recibir\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em resta puntos de vida a la unidad al recibir daño \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_library_1_1_unidad_ae1612eb0045669cc5f4f2b909946a792}{Mover}} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\begin{DoxyCompactList}\small\item\em mueve la unidad a una nueva ubicación \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_library_1_1_unidad_a180586246a5aeae24aaa37e1cd76728e}\label{class_library_1_1_unidad_a180586246a5aeae24aaa37e1cd76728e} 
+int {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em identificador único de la unidad \end{DoxyCompactList}\item 
+\Hypertarget{class_library_1_1_unidad_a28acebb04356a0d3c75edbc83ff03fdb}\label{class_library_1_1_unidad_a28acebb04356a0d3c75edbc83ff03fdb} 
+\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} {\bfseries Ubicacion}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em coordenada actual de la unidad \end{DoxyCompactList}\item 
+\Hypertarget{class_library_1_1_unidad_a80466cc838546183c2d154698316271b}\label{class_library_1_1_unidad_a80466cc838546183c2d154698316271b} 
+int {\bfseries Vida}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em puntos de vida de la unidad \end{DoxyCompactList}\item 
+\Hypertarget{class_library_1_1_unidad_a7d866ca95645ab3524f9e6503b61368a}\label{class_library_1_1_unidad_a7d866ca95645ab3524f9e6503b61368a} 
+int {\bfseries Velocidad}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em velocidad de movimiento de la unidad \end{DoxyCompactList}\item 
+\Hypertarget{class_library_1_1_unidad_aa886e3bb730e898df449e04c9b9d4272}\label{class_library_1_1_unidad_aa886e3bb730e898df449e04c9b9d4272} 
+\mbox{\hyperlink{class_library_1_1_player}{Player}} {\bfseries Owner}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em jugador que posee esta unidad \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+representa una unidad del juego con ubicación, vida, velocidad y dueño(jugador 1 o 2) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_library_1_1_unidad_a32e346ea6d27cfd95a4cc178931291d1}\index{Library.Unidad@{Library.Unidad}!Unidad@{Unidad}}
+\index{Unidad@{Unidad}!Library.Unidad@{Library.Unidad}}
+\doxysubsubsection{\texorpdfstring{Unidad()}{Unidad()}}
+{\footnotesize\ttfamily \label{class_library_1_1_unidad_a32e346ea6d27cfd95a4cc178931291d1} 
+Library.\+Unidad.\+Unidad (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}}}]{ubicacion}{, }\item[{int}]{vida}{, }\item[{int}]{velocidad}{, }\item[{\mbox{\hyperlink{class_library_1_1_player}{Player}}}]{owner}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor de la clase \doxylink{class_library_1_1_unidad}{Unidad} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador de la unidad\\
+\hline
+{\em ubicacion} & ubicación inicial de la unidad\\
+\hline
+{\em vida} & puntos de vida iniciales\\
+\hline
+{\em velocidad} & velocidad de la unidad\\
+\hline
+{\em owner} & jugador dueño de la unidad\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_library_1_1_unidad_a04113001a72681de53602ce42986620e}\index{Library.Unidad@{Library.Unidad}!EstaMuerto@{EstaMuerto}}
+\index{EstaMuerto@{EstaMuerto}!Library.Unidad@{Library.Unidad}}
+\doxysubsubsection{\texorpdfstring{EstaMuerto()}{EstaMuerto()}}
+{\footnotesize\ttfamily \label{class_library_1_1_unidad_a04113001a72681de53602ce42986620e} 
+bool Library.\+Unidad.\+Esta\+Muerto (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+devuelve si la unidad está muerta (vida menor o igual a cero) 
+
+\begin{DoxyReturn}{Returns}
+true si la unidad está muerta
+\end{DoxyReturn}
+\Hypertarget{class_library_1_1_unidad_ae1612eb0045669cc5f4f2b909946a792}\index{Library.Unidad@{Library.Unidad}!Mover@{Mover}}
+\index{Mover@{Mover}!Library.Unidad@{Library.Unidad}}
+\doxysubsubsection{\texorpdfstring{Mover()}{Mover()}}
+{\footnotesize\ttfamily \label{class_library_1_1_unidad_ae1612eb0045669cc5f4f2b909946a792} 
+void Library.\+Unidad.\+Mover (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}}}]{nueva\+Ubicacion}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+
+
+mueve la unidad a una nueva ubicación 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nueva\+Ubicacion} & coordenada de destino\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_library_1_1_unidad_af29c382a49a9a17c9912e2f71081d6bc}\index{Library.Unidad@{Library.Unidad}!RecibirDamage@{RecibirDamage}}
+\index{RecibirDamage@{RecibirDamage}!Library.Unidad@{Library.Unidad}}
+\doxysubsubsection{\texorpdfstring{RecibirDamage()}{RecibirDamage()}}
+{\footnotesize\ttfamily \label{class_library_1_1_unidad_af29c382a49a9a17c9912e2f71081d6bc} 
+virtual void Library.\+Unidad.\+Recibir\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+resta puntos de vida a la unidad al recibir daño 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & cantidad de daño recibido\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_library_1_1_unidad_militar_a08c0542faec30a1920f7b4c3126eb6f1}{Library.\+Unidad\+Militar}}.
+
+\Hypertarget{class_library_1_1_unidad_a07e599387a4c425261ec384b53555010}\index{Library.Unidad@{Library.Unidad}!RecibirDefensa@{RecibirDefensa}}
+\index{RecibirDefensa@{RecibirDefensa}!Library.Unidad@{Library.Unidad}}
+\doxysubsubsection{\texorpdfstring{RecibirDefensa()}{RecibirDefensa()}}
+{\footnotesize\ttfamily \label{class_library_1_1_unidad_a07e599387a4c425261ec384b53555010} 
+virtual int Library.\+Unidad.\+Recibir\+Defensa (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+devuelve el valor de defensa de la unidad (por defecto 0) 
+
+\begin{DoxyReturn}{Returns}
+valor de defensa
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Estudiante UCU/\+Repositorios/proyectop22025/src/\+Library/Unidad.\+cs\end{DoxyCompactItemize}

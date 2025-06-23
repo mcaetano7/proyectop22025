@@ -1,0 +1,129 @@
+\doxysection{Library.\+Aldeano Class Reference}
+\hypertarget{class_library_1_1_aldeano}{}\label{class_library_1_1_aldeano}\index{Library.Aldeano@{Library.Aldeano}}
+
+
+esta clase representa a los aldeanos, quienes pueden recolectar recursos  
+
+
+Inheritance diagram for Library.\+Aldeano\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_library_1_1_aldeano}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_library_1_1_aldeano_aac667981c7e6ac373d2975aca0e74534}{Aldeano}} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner)
+\begin{DoxyCompactList}\small\item\em construye al aldeano \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_library_1_1_aldeano_ae1a189949428b378973c169f073c881b}{Mover}} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\begin{DoxyCompactList}\small\item\em //m\{etodo que cambia la ubi del aldeano por una nueva (mueve al aldeano) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_library_1_1_aldeano_a762a567bef58d4e73d74bbe0cb36df3c}{Esta\+Disponible}} ()
+\begin{DoxyCompactList}\small\item\em método para saber el estado de un aldeano \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_library_1_1_aldeano_a4164597c3daf23185e24b8d419040064}{Iniciar\+Recoleccion}} (\mbox{\hyperlink{class_library_1_1_tipo_recurso}{Tipo\+Recurso}} tipo, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion)
+\begin{DoxyCompactList}\small\item\em //método para que el aldeano recolecte recursos y los acumule con agregar.\+recurso \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_library_1_1_unidad}{Library.\+Unidad}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_library_1_1_unidad_a32e346ea6d27cfd95a4cc178931291d1}{Unidad}} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, int vida, int velocidad, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner)
+\begin{DoxyCompactList}\small\item\em constructor de la clase \doxylink{class_library_1_1_unidad}{Unidad} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_library_1_1_unidad_a04113001a72681de53602ce42986620e}{Esta\+Muerto}} ()
+\begin{DoxyCompactList}\small\item\em devuelve si la unidad está muerta (vida menor o igual a cero) \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_library_1_1_unidad_a07e599387a4c425261ec384b53555010}{Recibir\+Defensa}} ()
+\begin{DoxyCompactList}\small\item\em devuelve el valor de defensa de la unidad (por defecto 0) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_library_1_1_unidad_af29c382a49a9a17c9912e2f71081d6bc}{Recibir\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em resta puntos de vida a la unidad al recibir daño \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_library_1_1_unidad_ae1612eb0045669cc5f4f2b909946a792}{Mover}} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\begin{DoxyCompactList}\small\item\em mueve la unidad a una nueva ubicación \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_library_1_1_unidad}{Library.\+Unidad}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em identificador único de la unidad \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} {\bfseries Ubicacion}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em coordenada actual de la unidad \end{DoxyCompactList}\item 
+int {\bfseries Vida}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em puntos de vida de la unidad \end{DoxyCompactList}\item 
+int {\bfseries Velocidad}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em velocidad de movimiento de la unidad \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_library_1_1_player}{Player}} {\bfseries Owner}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em jugador que posee esta unidad \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+esta clase representa a los aldeanos, quienes pueden recolectar recursos 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_library_1_1_aldeano_aac667981c7e6ac373d2975aca0e74534}\index{Library.Aldeano@{Library.Aldeano}!Aldeano@{Aldeano}}
+\index{Aldeano@{Aldeano}!Library.Aldeano@{Library.Aldeano}}
+\doxysubsubsection{\texorpdfstring{Aldeano()}{Aldeano()}}
+{\footnotesize\ttfamily \label{class_library_1_1_aldeano_aac667981c7e6ac373d2975aca0e74534} 
+Library.\+Aldeano.\+Aldeano (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}}}]{ubicacion}{, }\item[{\mbox{\hyperlink{class_library_1_1_player}{Player}}}]{owner}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+construye al aldeano 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identifica al aldeano \\
+\hline
+{\em ubicacion} & donde se encuentra inicialmente en el mapa\\
+\hline
+{\em owner} & a que jugador le pertenece \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_library_1_1_aldeano_a762a567bef58d4e73d74bbe0cb36df3c}\index{Library.Aldeano@{Library.Aldeano}!EstaDisponible@{EstaDisponible}}
+\index{EstaDisponible@{EstaDisponible}!Library.Aldeano@{Library.Aldeano}}
+\doxysubsubsection{\texorpdfstring{EstaDisponible()}{EstaDisponible()}}
+{\footnotesize\ttfamily \label{class_library_1_1_aldeano_a762a567bef58d4e73d74bbe0cb36df3c} 
+bool Library.\+Aldeano.\+Esta\+Disponible (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+método para saber el estado de un aldeano 
+
+\begin{DoxyReturn}{Returns}
+devuelve true si el aldeano no está ocuado (si no está recolectando recursos) 
+\end{DoxyReturn}
+\Hypertarget{class_library_1_1_aldeano_a4164597c3daf23185e24b8d419040064}\index{Library.Aldeano@{Library.Aldeano}!IniciarRecoleccion@{IniciarRecoleccion}}
+\index{IniciarRecoleccion@{IniciarRecoleccion}!Library.Aldeano@{Library.Aldeano}}
+\doxysubsubsection{\texorpdfstring{IniciarRecoleccion()}{IniciarRecoleccion()}}
+{\footnotesize\ttfamily \label{class_library_1_1_aldeano_a4164597c3daf23185e24b8d419040064} 
+void Library.\+Aldeano.\+Iniciar\+Recoleccion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_library_1_1_tipo_recurso}{Tipo\+Recurso}}}]{tipo}{, }\item[{\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}}}]{ubicacion}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+//método para que el aldeano recolecte recursos y los acumule con agregar.\+recurso 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tipo} & indica de que recurso se trata\\
+\hline
+{\em ubicacion} & indica la ubicación de la recolección \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_library_1_1_aldeano_ae1a189949428b378973c169f073c881b}\index{Library.Aldeano@{Library.Aldeano}!Mover@{Mover}}
+\index{Mover@{Mover}!Library.Aldeano@{Library.Aldeano}}
+\doxysubsubsection{\texorpdfstring{Mover()}{Mover()}}
+{\footnotesize\ttfamily \label{class_library_1_1_aldeano_ae1a189949428b378973c169f073c881b} 
+override void Library.\+Aldeano.\+Mover (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}}}]{nueva\+Ubicacion}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+//m\{etodo que cambia la ubi del aldeano por una nueva (mueve al aldeano) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nueva\+Ubicacion} & ubicación a la que el aldeano es movido\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Estudiante UCU/\+Repositorios/proyectop22025/src/\+Library/Aldeano.\+cs\end{DoxyCompactItemize}

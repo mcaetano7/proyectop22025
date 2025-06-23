@@ -1,0 +1,85 @@
+\doxysection{Library.\+Unidad\+Militar Class Reference}
+\hypertarget{class_library_1_1_unidad_militar}{}\label{class_library_1_1_unidad_militar}\index{Library.UnidadMilitar@{Library.UnidadMilitar}}
+Inheritance diagram for Library.\+Unidad\+Militar\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_library_1_1_unidad_militar}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_library_1_1_unidad_militar_aeb908f4cc3ef7e9412373bcf7aebb5be}\label{class_library_1_1_unidad_militar_aeb908f4cc3ef7e9412373bcf7aebb5be} 
+{\bfseries Unidad\+Militar} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, int vida, int velocidad, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner, int ataque, int defensa)
+\item 
+override void \mbox{\hyperlink{class_library_1_1_unidad_militar_a08c0542faec30a1920f7b4c3126eb6f1}{Recibir\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em resta puntos de vida a la unidad al recibir daño \end{DoxyCompactList}\item 
+\Hypertarget{class_library_1_1_unidad_militar_a33673044aa2bcae836ae48556712e612}\label{class_library_1_1_unidad_militar_a33673044aa2bcae836ae48556712e612} 
+override void {\bfseries Mover} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\item 
+\Hypertarget{class_library_1_1_unidad_militar_a8d06c8db770b2a5835422b528ab70f11}\label{class_library_1_1_unidad_militar_a8d06c8db770b2a5835422b528ab70f11} 
+void {\bfseries Atacar} (\mbox{\hyperlink{class_library_1_1_unidad}{Unidad}} objetivo)
+\item 
+\Hypertarget{class_library_1_1_unidad_militar_a5bc5dfc24ea46c5c9f1c3d236ece2075}\label{class_library_1_1_unidad_militar_a5bc5dfc24ea46c5c9f1c3d236ece2075} 
+void {\bfseries Defender} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_library_1_1_unidad}{Library.\+Unidad}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_library_1_1_unidad_a32e346ea6d27cfd95a4cc178931291d1}{Unidad}} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, int vida, int velocidad, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner)
+\begin{DoxyCompactList}\small\item\em constructor de la clase \doxylink{class_library_1_1_unidad}{Unidad} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_library_1_1_unidad_a04113001a72681de53602ce42986620e}{Esta\+Muerto}} ()
+\begin{DoxyCompactList}\small\item\em devuelve si la unidad está muerta (vida menor o igual a cero) \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_library_1_1_unidad_a07e599387a4c425261ec384b53555010}{Recibir\+Defensa}} ()
+\begin{DoxyCompactList}\small\item\em devuelve el valor de defensa de la unidad (por defecto 0) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_library_1_1_unidad_ae1612eb0045669cc5f4f2b909946a792}{Mover}} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\begin{DoxyCompactList}\small\item\em mueve la unidad a una nueva ubicación \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_library_1_1_unidad_militar_a5bb14dd3b9c77b7977ae4318feb93e9f}\label{class_library_1_1_unidad_militar_a5bb14dd3b9c77b7977ae4318feb93e9f} 
+int {\bfseries Ataque}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\Hypertarget{class_library_1_1_unidad_militar_a267f7c74d469fe6a1f3c2f509562aff6}\label{class_library_1_1_unidad_militar_a267f7c74d469fe6a1f3c2f509562aff6} 
+int {\bfseries Defensa}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_library_1_1_unidad}{Library.\+Unidad}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em identificador único de la unidad \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} {\bfseries Ubicacion}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em coordenada actual de la unidad \end{DoxyCompactList}\item 
+int {\bfseries Vida}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em puntos de vida de la unidad \end{DoxyCompactList}\item 
+int {\bfseries Velocidad}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em velocidad de movimiento de la unidad \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_library_1_1_player}{Player}} {\bfseries Owner}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em jugador que posee esta unidad \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_library_1_1_unidad_militar_a08c0542faec30a1920f7b4c3126eb6f1}\index{Library.UnidadMilitar@{Library.UnidadMilitar}!RecibirDamage@{RecibirDamage}}
+\index{RecibirDamage@{RecibirDamage}!Library.UnidadMilitar@{Library.UnidadMilitar}}
+\doxysubsubsection{\texorpdfstring{RecibirDamage()}{RecibirDamage()}}
+{\footnotesize\ttfamily \label{class_library_1_1_unidad_militar_a08c0542faec30a1920f7b4c3126eb6f1} 
+override void Library.\+Unidad\+Militar.\+Recibir\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+resta puntos de vida a la unidad al recibir daño 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & cantidad de daño recibido\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_library_1_1_unidad_af29c382a49a9a17c9912e2f71081d6bc}{Library.\+Unidad}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Estudiante UCU/\+Repositorios/proyectop22025/src/\+Library/Unidad\+Militar.\+cs\end{DoxyCompactItemize}
