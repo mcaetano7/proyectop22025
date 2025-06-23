@@ -1,0 +1,64 @@
+\doxysection{Library.\+Infanteria Class Reference}
+\hypertarget{class_library_1_1_infanteria}{}\label{class_library_1_1_infanteria}\index{Library.Infanteria@{Library.Infanteria}}
+Inheritance diagram for Library.\+Infanteria\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_library_1_1_infanteria}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_library_1_1_infanteria_a718a557a4b1c0f49320f61fb241d85ad}\label{class_library_1_1_infanteria_a718a557a4b1c0f49320f61fb241d85ad} 
+{\bfseries Infanteria} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_library_1_1_unidad_militar}{Library.\+Unidad\+Militar}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Unidad\+Militar} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, int vida, int velocidad, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner, int ataque, int defensa)
+\item 
+override void \mbox{\hyperlink{class_library_1_1_unidad_militar_a08c0542faec30a1920f7b4c3126eb6f1}{Recibir\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em resta puntos de vida a la unidad al recibir daño \end{DoxyCompactList}\item 
+override void {\bfseries Mover} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\item 
+void {\bfseries Atacar} (\mbox{\hyperlink{class_library_1_1_unidad}{Unidad}} objetivo)
+\item 
+void {\bfseries Defender} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_library_1_1_unidad}{Library.\+Unidad}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_library_1_1_unidad_a32e346ea6d27cfd95a4cc178931291d1}{Unidad}} (int id, \mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} ubicacion, int vida, int velocidad, \mbox{\hyperlink{class_library_1_1_player}{Player}} owner)
+\begin{DoxyCompactList}\small\item\em constructor de la clase \doxylink{class_library_1_1_unidad}{Unidad} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_library_1_1_unidad_a04113001a72681de53602ce42986620e}{Esta\+Muerto}} ()
+\begin{DoxyCompactList}\small\item\em devuelve si la unidad está muerta (vida menor o igual a cero) \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_library_1_1_unidad_a07e599387a4c425261ec384b53555010}{Recibir\+Defensa}} ()
+\begin{DoxyCompactList}\small\item\em devuelve el valor de defensa de la unidad (por defecto 0) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_library_1_1_unidad_ae1612eb0045669cc5f4f2b909946a792}{Mover}} (\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} nueva\+Ubicacion)
+\begin{DoxyCompactList}\small\item\em mueve la unidad a una nueva ubicación \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_library_1_1_unidad_militar}{Library.\+Unidad\+Militar}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries Ataque}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int {\bfseries Defensa}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_library_1_1_unidad}{Library.\+Unidad}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em identificador único de la unidad \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_library_1_1_coordenada}{Coordenada}} {\bfseries Ubicacion}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em coordenada actual de la unidad \end{DoxyCompactList}\item 
+int {\bfseries Vida}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em puntos de vida de la unidad \end{DoxyCompactList}\item 
+int {\bfseries Velocidad}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em velocidad de movimiento de la unidad \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_library_1_1_player}{Player}} {\bfseries Owner}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em jugador que posee esta unidad \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Estudiante UCU/\+Repositorios/proyectop22025/src/\+Library/Infanteria.\+cs\end{DoxyCompactItemize}
