@@ -64,8 +64,8 @@ public class Tests
     [Test]
     public void RecoleccionDeDistintosRecursos()
     {
-        var civilizacion = new Civilizacion("TestCivilizacion", new List<string> { "Bonificación de prueba" });
-        var player = new Player("TestPlayer",  civilizacion);
+        var civilizacion = new Civilizacion("Bizantinos", new List<string> { "Bonificación de prueba" });
+        var player = new Player("Juan",  civilizacion);
         player.InicializarJuego();
 
         var recursosIniciales = new Dictionary<TipoRecurso, int>()
@@ -96,8 +96,8 @@ public class Tests
     public void ConstruccionEdificios()
     {
         var coordenada = new Coordenada(5, 10);
-        var civilizacion = new Civilizacion("TestCiv", new List<string>());
-        var player = new Player("TestPlayer", civilizacion);
+        var civilizacion = new Civilizacion("Bizantinos", new List<string>());
+        var player = new Player("Juan", civilizacion);
         string TipoAlmacen = "General";
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
@@ -136,8 +136,8 @@ public class Tests
     [Test]
     public void CantidadRecursos()
     {
-        var civilizacion = new Civilizacion("TestCiv", new List<string>());
-        var player = new Player("TestPlayer", civilizacion);
+        var civilizacion = new Civilizacion("Bizantinos", new List<string>());
+        var player = new Player("Juan", civilizacion);
         
         Assert.That(player.GetRecurso(TipoRecurso.Alimento), Is.EqualTo(100));
         Assert.That(player.GetRecurso(TipoRecurso.Madera), Is.EqualTo(100));
@@ -149,9 +149,9 @@ public class Tests
     [Test]
     public void UbicacionEspecifica()
     {
-        var bonificaciones = new List<string> { "TestBonificación" };
-        var civilizacion = new Civilizacion("TestCiv", bonificaciones);
-        var player = new Player("TestPlayer", civilizacion);
+        var bonificaciones = new List<string>();
+        var civilizacion = new Civilizacion("Bizantinos", bonificaciones);
+        var player = new Player("Juan", civilizacion);
         var ubicacionEspecifica = new Coordenada(100, 100);
 
         int maderaInicial = player.GetRecurso(TipoRecurso.Madera);
