@@ -34,7 +34,7 @@ public class Tests
     public void ElegirCivilizacion()
     {
         var ventajas = new List<string> { "Recolectan madera más rápido", "Unidades más baratas" };
-        var civ = new Civilizacion("Mortífagos", ventajas);
+        var civ = new Civilizacion("Chinos", ventajas);
         var jugador = new Player("Lucius Malfoy", civ);
         
         var civilizacionDelJugador = jugador.Civilizacion;
@@ -170,7 +170,31 @@ public class Tests
     [Test]
     public void DesarrollarCivilizacionEdificios()
     {
+        var jugador = new Player("Maria", new Civilizacion("Bizantinos", new List<string>()));
+        var ubicacionCasa = new Coordenada(0, 0);
+        var ubicacionAlmacen = new Coordenada(2, 1);
+
+        var casa = new Casa(ubicacionCasa, 100, jugador, "Casa", 5);
+        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, "Madera", 10);
         
+        // simulamos que en la casa se alojan personas (incrementamos población actual)
+        casa.CapacidadPoblacion = 3;
+
+        // verificamos que el edificio fue creado 
+        var costoCasa = casa.obtenerCosto();
+        var costoAlmacen = almacen.obtenerCosto();
+        
+        Assert.IsNotNull(casa, "La casa debería haberse creado correctamente");
+        Assert.IsNotNull(almacen, "El almacén debería haberse creado correctamente");
+
+        Assert.AreEqual(3, casa.CapacidadPoblacion, "La casa debería tener capacidad de población usada");
+        Assert.AreEqual(5, casa.CapacidadMaxima, "La casa debería tener una capacidad máxima de 5");
+
+        Assert.AreEqual("Madera", almacen.Tipo, "El almacén debería almacenar madera");
+        Assert.AreEqual(10, almacen.Capacidad, "El almacén debería tener capacidad 10");
+
+        Assert.IsTrue(costoCasa.ContainsKey(TipoRecurso.Madera), "La casa debería costar madera");
+        Assert.IsTrue(costoAlmacen.ContainsKey(TipoRecurso.Madera), "El almacén debería costar madera"); 
     }
     
     //9. entrenar unidades militares para defender la base y atacar oponentes.
@@ -187,11 +211,24 @@ public class Tests
         
     }
     
-    //11. ordenar a las unidades atacar edificios o unidades enemigas. 
+    //11. una unidad puede atacar a otra y se reduce su vida 
     [Test]
     public void AtacarEnemigos()
     {
+        var jugador1 = new Player("Pepe", new Civilizacion("Bizantinos", new List<string>()));
+        var jugador2 = new Player("Lucia", new Civilizacion("Japoneses", new List<string>()));
+
+        var ubicacionAtacante = new Coordenada(0, 0);
+        var ubicacionObjetivo = new Coordenada(1, 0);
+
+        var atacante = new Caballeria(1, ubicacionAtacante, jugador1);
+        var objetivo = new Caballeria(2, ubicacionObjetivo, jugador2); // enemigo
+
+        int vidaInicial = objetivo.Vida;
         
+        atacante.Atacar(objetivo);
+        
+        Assert.Less(objetivo.Vida, vidaInicial, "La vida del objetivo debería disminuir después de ser atacado");
     }
     
     //12. entrenar aldeanos parta mejorar la economía y tener suficientes casas para mantener la población.
