@@ -98,17 +98,17 @@ public class Tests
         var coordenada = new Coordenada(5, 10);
         var civilizacion = new Civilizacion("Bizantinos", new List<string>());
         var player = new Player("Juan", civilizacion);
-        string TipoAlmacen = "General";
+        const string tipoAlmacen = "General";
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
-        var almacen = new Almacen(coordenada, vidaInicial, player, TipoAlmacen, capacidadAlmacen); 
+        var almacen = new Almacen(coordenada, vidaInicial, player, tipoAlmacen, capacidadAlmacen); 
         
         Assert.IsNotNull(almacen);
         Assert.That(almacen.Ubicacion, Is.EqualTo(coordenada));
         Assert.That(almacen.Vida, Is.EqualTo(vidaInicial));
         Assert.That(almacen.Owner, Is.EqualTo(player));
-        Assert.That(almacen.Tipo, Is.EqualTo(TipoAlmacen));
+        Assert.That(almacen.Tipo, Is.EqualTo(tipoAlmacen));
         Assert.That(almacen.Capacidad, Is.EqualTo(capacidadAlmacen));
         Assert.IsTrue(almacen.Capacidad > 0, "El almacén debe poder tener capacidad");
         
@@ -128,7 +128,7 @@ public class Tests
         Assert.DoesNotThrow(() => almacen.Almacenar(recursoAlimento));
         Assert.DoesNotThrow(() => almacen.Almacenar(recursoPiedra));
         
-        Assert.That(almacen.Capacidad, Is.EqualTo(capacidadAlmacen), "La capacidad no debería cambiar al almacenar");;
+        Assert.That(almacen.Capacidad, Is.EqualTo(capacidadAlmacen), "La capacidad no debería cambiar al almacenar");
         Assert.That(almacen.Vida, Is.EqualTo(vidaInicial), "La vida no debería cambiar al almacenar");
     }
     
@@ -187,26 +187,26 @@ public class Tests
         Assert.IsNotNull(casa, "La casa debería haberse creado correctamente");
         Assert.IsNotNull(almacen, "El almacén debería haberse creado correctamente");
 
-        Assert.AreEqual(3, casa.CapacidadPoblacion, "La casa debería tener capacidad de población usada");
-        Assert.AreEqual(5, casa.CapacidadMaxima, "La casa debería tener una capacidad máxima de 5");
+        Assert.That(casa.CapacidadPoblacion, Is.EqualTo(3), "La casa debería tener capacidad de población usada");
+        Assert.That(casa.CapacidadMaxima, Is.EqualTo(5), "La casa debería tener una capacidad máxima de 5");
 
-        Assert.AreEqual("Madera", almacen.Tipo, "El almacén debería almacenar madera");
-        Assert.AreEqual(10, almacen.Capacidad, "El almacén debería tener capacidad 10");
+        Assert.That(almacen.Tipo, Is.EqualTo("Madera"), "El almacén debería almacenar madera");
+        Assert.That(almacen.Capacidad, Is.EqualTo(10), "El almacén debería tener capacidad 10");
 
         Assert.IsTrue(costoCasa.ContainsKey(TipoRecurso.Madera), "La casa debería costar madera");
         Assert.IsTrue(costoAlmacen.ContainsKey(TipoRecurso.Madera), "El almacén debería costar madera"); 
     }
     
     //9. entrenar unidades militares para defender la base y atacar oponentes.
-   /* [Test]
+   [Test]
     public void EntrenarUnidades()
     {
         var jugador = new Player("Mika", new Civilizacion("Bizantinos", new List<string>()));
-        var cuartel = new Cuartel(new Coordenada(5, 5), 200, jugador);
+        var cuartel = new Cuartel(new Coordenada(5, 5), jugador);
 
-        var infante = cuartel.EntrenarInfanteria();
-        var arquero = cuartel.EntrenarArquero();
-        var caballeria = cuartel.EntrenarCaballeria();
+        var infante = cuartel.EntrenarInfanteria(1);
+        var arquero = cuartel.EntrenarArquero(2);
+        var caballeria = cuartel.EntrenarCaballeria(3);
 
         Assert.IsNotNull(infante);
         Assert.IsNotNull(arquero);
@@ -215,7 +215,7 @@ public class Tests
         Assert.That(infante.Owner, Is.EqualTo(jugador));
         Assert.That(arquero.Owner, Is.EqualTo(jugador));
         Assert.That(caballeria.Owner, Is.EqualTo(jugador));
-    }*/
+    }
 
     
     //10. mover las unidades por el mapa usando comandos simples.
@@ -254,7 +254,7 @@ public class Tests
     }
     
     //12. entrenar aldeanos parta mejorar la economía y tener suficientes casas para mantener la población.
-    /*[Test]
+    [Test]
     public void EntrenarAldeanos()
     {
         var jugador = new Player("Vicky", new Civilizacion("Chinos", new List<string>()));
@@ -264,7 +264,7 @@ public class Tests
 
         Assert.IsNotNull(aldeano);
         Assert.That(aldeano.Owner, Is.EqualTo(jugador));
-    }*/
+    }
     
     //13. destruir los centros cívicos para ganar la partida por dominación militar.
     [Test]
@@ -316,24 +316,32 @@ public class Tests
             mapa.Celdas
                 .Where(c => c.Coordenada.X < 5 && c.Coordenada.Y < 5)
                 .GroupBy(c => c.Coordenada.Y)
-                .Select(grupo => string.Join(" ", grupo.Select(c => "."))));
+                .Select(grupo => string.Join(" ", grupo.Select(_ => "."))));
 
         Assert.IsTrue(vistaParcial.Contains("."), "La vista simplificada debería contener caracteres de representación");
     }
 
 
     //16. como jugador quiero guardar la partida y continuarla más tarde. 
-    /*[Test]
-    public void GuardarPartidaTest()
+    [Test]
+    public void GuardarPartida()
     {
-        var juego = new Facade();
-        var civ1 = new Civilizacion("Bizantinos", new List<string>());
-        var civ2 = new Civilizacion("Japoneses", new List<string>());
-        juego.CrearPartida(civ1, civ2);
+        [Test]
+        void GuardarPartidaTest()
+        {
+            var juego = new Facade();
+            string ruta = "partida_test.txt";
 
-        bool exito = juego.GuardarPartida("partida_guardada.json");
-
-        Assert.IsTrue(exito, "La partida debería haberse guardado correctamente");
-    }*/
+            if (File.Exists(ruta))
+                File.Delete(ruta);
+            
+            juego.GuardarPartida(ruta);
+            
+            Assert.IsTrue(File.Exists(ruta), "El archivo no fue creado al guardar la partida.");
+            string contenido = File.ReadAllText(ruta);
+            Assert.That(contenido, Is.EqualTo("simulando partida guardada..."), "El contenido del archivo guardado no es el esperado.");
+            File.Delete(ruta);
+        }
+    }
 
 }

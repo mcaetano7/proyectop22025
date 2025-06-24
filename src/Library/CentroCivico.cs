@@ -68,4 +68,17 @@ public class CentroCivico : Edificio
             { TipoRecurso.Madera, 200 }
         };
     }
+    
+    public Aldeano EntrenarAldeano()
+    {
+        if (aldeanos.Count >= CapacidadAldeanos)
+            throw new InvalidOperationException("No hay capacidad para entrenar más aldeanos");
+        
+        int nuevoId = aldeanos.Count + 1;
+        Aldeano nuevoAldeano = new Aldeano(nuevoId, this.Ubicacion, this.Owner);
+        aldeanos.Add(nuevoAldeano);
+    
+        return nuevoAldeano;
+    }
+
 }
