@@ -44,7 +44,7 @@ public class Tests
     }
     
     //3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolección de recursos.
-   /* [Test]
+    [Test]
     public void EdificiosIniciales()
     {
         var civ = new Civilizacion("Bizantinos", new List<string>());
@@ -52,14 +52,17 @@ public class Tests
 
         jugador.InicializarJuego();
 
-        var centroCivicoExiste = jugador; //terminar
+        bool centroCivicoExiste = !jugador.Victoria();
 
-        var cantidadAldeanos = jugador; //terminar
+        var aldeanosField = typeof(Player).GetField("aldeanos", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        var listaAldeanos = (List<Aldeano>)aldeanosField.GetValue(jugador);
+        int cantidadAldeanos = listaAldeanos.Count;
 
-        Assert.IsTrue(centroCivicoExiste, "El jugador no comenzó con un Centro Cívico.");
-        Assert.That(cantidadAldeanos, Is.EqualTo(3), "El jugador no comenzó con 3 aldeanos.");
-    }*/
+        Assert.IsTrue(centroCivicoExiste);
+        Assert.That(cantidadAldeanos, Is.EqualTo(3));
+    }
     
+
     //4. ordenar a los aldeanos recolectar diferentes tipos de recursos.
     [Test]
     public void RecoleccionDeDistintosRecursos()
