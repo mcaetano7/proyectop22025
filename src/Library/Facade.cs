@@ -1,64 +1,101 @@
-using System.Runtime.InteropServices.ComTypes;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
-namespace Library;
-
-/* COSAS CON QUE CUMPLIR EN LA FACHADA:
- 
- 1. poder crear una nueva partida especificando el tamaño del mapa y cantidad de jugadores.
- 2. elegir civilización (aprovechar sus ventajas estratégicas)
- 3. comenzar con un centro cívico y algunos aldeanos para iniciar la recolecci{on de recursos.
- 4. ordenar a los aldeanos recolectar diferentes tipos de recursos.
- 5. construir edificios para almacenar recursos.
- 6. quiero visualizar la cantidad de recursos disponibles.
- 7. construir edificios en ubis específicas para expandir la base.
- 8. crear diferentes tipos de edificios con funciones específicas para desarrollar la civilización.
- 9. entrrenar unidades militares para defender la base y atacar oponentes.
- 10. mover las unidades ppor el mapa usando comandos simples.
- 11. ordenar a las unidades atacar edeficios o unidades enemigas. 
- 12. entrenar aldeanos parta mejorar la econom{ia y tener suficientes casas para mantener la población.
- 13. destruir los centros cívicos para ganar la partida por dominación militar.
- 14. usar comandos intuitivos para interactuar con el juego 
- 15. quiero ver un mapa simplificado del juego en ASCII para visualizar la dispo del terreno y unidades. 
- 16. como jugador quiero gardar la partida y continuarla más tarde. 
- */
-
-public class Facade
+namespace Library
 {
-    
-    public Mapa Mapa { get; private set; }
-    public Player Jugador1 { get; private set; }
-    public Player Jugador2 { get; private set; }
-    public void CrearArchivo(string ruta, string contenido)
+    /// <summary>
+    /// fachada principal del juego para simplificar la interacción con el sistema
+    /// </summary>
+    public class Facade
     {
-        File.WriteAllText(ruta, contenido);
-    }
-    public void CrearPartida(Civilizacion civ1, Civilizacion civ2) //el user elige la civ desde program
-    {
-        Mapa = new Mapa(); 
-        Jugador1 = new Player("Jugador 1", civ1); 
-        Jugador2 = new Player("Jugador 2", civ2);
-        
-    }
+        /// <summary>
+        /// mapa del juego
+        /// </summary>
+        public Mapa Mapa { get; private set; }
 
-    public void GuardarPartida()
-    {
-        
-    }
+        /// <summary>
+        /// primer jugador
+        /// </summary>
+        public Player Jugador1 { get; private set; }
 
-    public void CargarPartida()
-    {
-        
-    }
-    //cargar partida, guardar partida, crear partida 
-    
-    public string InterpretarComando(string comando)
-    {
-        // simulación básica
-        if (comando.StartsWith("mover"))
+        /// <summary>
+        /// segundo jugador
+        /// </summary>
+        public Player Jugador2 { get; private set; }
+
+        /// <summary>
+        /// crea una nueva partida con dos civilizaciones
+        /// </summary>
+        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
         {
-            return "Comando mover recibido";
+            Mapa = new Mapa();
+            Jugador1 = new Player("jugador1", civ1);
+            Jugador2 = new Player("jugador2", civ2);
         }
 
-        return "Comando no reconocido";
+        /// <summary>
+        /// inicializa el juego para ambos jugadores
+        /// </summary>
+        public void InicializarJugadores()
+        {
+            Jugador1.InicializarJuego();
+            Jugador2.InicializarJuego();
+        }
+
+        /// <summary>
+        /// ordena a un jugador recolectar un recurso en una coordenada
+        /// </summary>
+        public void Recolectar(Player jugador, TipoRecurso tipo, Coordenada ubicacion)
+        {
+            jugador.RecolectarRecurso(tipo, ubicacion);
+        }
+
+        /// <summary>
+        /// construye un edificio en una coordenada
+        /// </summary>
+        public void Construir(Player jugador, Edificio edificio, Coordenada ubicacion)
+        {
+            jugador.Construir(edificio, ubicacion);
+        }
+
+        /// <summary>
+        /// mueve una unidad a una nueva coordenada
+        /// </summary>
+        public void MoverUnidad(Unidad unidad, Coordenada destino)
+        {
+            unidad.Mover(destino);
+        }
+        
+
+        /// <summary>
+        /// devuelve una representación en texto del mapa
+        /// </summary>
+        public string VerMapaAscii()
+        {
+            var generador = new GenerarMapa(20, 15);
+            return generador.ToString();
+        }
+
+        /// <summary>
+        /// guarda la partida en un archivo
+        /// </summary>
+        public void GuardarPartida(string ruta = "partida.txt")
+        {
+            File.WriteAllText(ruta, "simulando partida guardada...");
+        }
+
+        /// <summary>
+        /// carga una partida desde un archivo
+        /// </summary>
+        public void CargarPartida(string ruta = "partida.txt")
+        {
+            if (File.Exists(ruta))
+            {
+                string contenido = File.ReadAllText(ruta);
+                // simulación de carga
+            }
+        }
     }
 }
