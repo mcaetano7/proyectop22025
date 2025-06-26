@@ -21,7 +21,7 @@ public abstract class Unidad
     public int Vida { get; set; }
 
     /// <summary>
-    /// velocidad de movimiento de la unidad
+    /// tiempo de creación de la unidad
     /// </summary>
     public int Velocidad { get; set; }
 

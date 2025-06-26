@@ -19,7 +19,10 @@ namespace Library
         /// <summary>
         /// constructor vacío
         /// </summary>
-        public RecursoJugador() { }
+        public RecursoJugador()
+        {
+            
+        }
 
         /// <summary>
         /// constructor con tipo y cantidad
