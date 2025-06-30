@@ -41,13 +41,11 @@ public class BattleCommand : ModuleBase<SocketCommandContext>
         {
             result = Facade.Instance.StartBattle(displayName, opponentUser.DisplayName);
             await Context.Message.Channel.SendMessageAsync(result);
-            await opponentUser.SendMessageAsync(result);
         }
         else
         {
             result = $"No hay un usuario {opponentDisplayName}";
+            await ReplyAsync(result);
         }
-
-        await ReplyAsync(result);
     }
 }

@@ -124,7 +124,7 @@ public class Facade
         this.WaitingList.RemoveTrainer(opponentDisplayName);
         
         BattlesList.AddBattle(playerDisplayName, opponentDisplayName);
-        return $":QaComienza {playerDisplayName} vs {opponentDisplayName}";
+        return $"Comienza {playerDisplayName} vs {opponentDisplayName}";
     }
 
     /// <summary>
