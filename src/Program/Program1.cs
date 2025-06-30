@@ -5,7 +5,7 @@
     /// <summary>
     /// clase principal que arranca la aplicación
     /// </summary>
-    class Program
+    class Program1
     {
         /// <summary>
         /// método main que crea la partida y los jugadores
