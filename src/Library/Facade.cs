@@ -23,7 +23,7 @@ namespace Library
         /// <summary>
         /// segundo jugador
         /// </summary>
-        public Player Jugador2 { get; private set; }
+        public Player Jugador2 { get; private set; }    
 
         /// <summary>
         /// crea una nueva partida con dos civilizaciones
