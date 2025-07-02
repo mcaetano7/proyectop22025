@@ -61,7 +61,7 @@ public class CentroCivico : Edificio
     /// <summary>
     /// devuelve el costo del centro civico con respecto a los recursos
     /// </summary>
-    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    public override Dictionary<TipoRecurso, int> ObtenerCosto()
     {
         return new Dictionary<TipoRecurso, int>()
         {

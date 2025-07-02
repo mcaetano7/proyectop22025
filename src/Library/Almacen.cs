@@ -33,7 +33,7 @@ public class Almacen : Edificio
     /// método que retorna cuanto cuesta construir un almacen (cuanto de recursos)
     /// </summary>
     /// <returns> un diccionario con los tipos de recuros y sus cantidades (usamos diccionario porque asi podemos buscar directamente por tipo de recurso y asociar más facil el tipo de recurso con la cantidad necesaria)</returns>
-    public override Dictionary<TipoRecurso, int> obtenerCosto() 
+    public override Dictionary<TipoRecurso, int> ObtenerCosto() 
     {
         return new Dictionary<TipoRecurso, int>() 
         {

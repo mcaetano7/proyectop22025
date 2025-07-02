@@ -153,9 +153,9 @@ namespace Library
         /// <param name="ubicación">Ubicación en donde se va a construir</param>
         public void Construir(Edificio edificio, Coordenada ubicación) 
         {
-            if (TieneRecursos(edificio.obtenerCosto())) //verifica si puede pagar la construcción
+            if (TieneRecursos(edificio.ObtenerCosto())) //verifica si puede pagar la construcción
             {
-                GastarRecursos(edificio.obtenerCosto());
+                GastarRecursos(edificio.ObtenerCosto());
                 edificios.Add(edificio);
 
                 if (edificio is Casa) //si es casa aumenta la población 
