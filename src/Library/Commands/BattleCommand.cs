@@ -41,6 +41,14 @@ public class BattleCommand : ModuleBase<SocketCommandContext>
         {
             result = Facade.Instance.StartBattle(displayName, opponentUser.DisplayName);
             await Context.Message.Channel.SendMessageAsync(result);
+            
+            // Mostrar quién empieza la partida
+            var partida = Facade.Instance.GetPartidaActiva(displayName);
+            if (partida != null)
+            {
+                string primerTurno = partida.ObtenerJugadorTurno();
+                await Context.Message.Channel.SendMessageAsync($"🎲 Empieza la partida! {primerTurno} empieza primero.");
+            }
         }
         else
         {

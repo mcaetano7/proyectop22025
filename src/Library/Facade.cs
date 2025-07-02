@@ -23,16 +23,60 @@ namespace Library
         /// <summary>
         /// segundo jugador
         /// </summary>
-        public Player Jugador2 { get; private set; }    
+        public Player Jugador2 { get; private set; }
+
+        /// <summary>
+        /// jugador que tiene el turno actual
+        /// </summary>
+        public Player TurnoActual { get; private set; }
 
         /// <summary>
         /// crea una nueva partida con dos civilizaciones
         /// </summary>
-        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
+        public void CrearPartida(Civilizacion civ1, Civilizacion civ2, string nombreJugador1, string nombreJugador2)
         {
             Mapa = new Mapa();
-            Jugador1 = new Player("jugador1", civ1);
-            Jugador2 = new Player("jugador2", civ2);
+            Jugador1 = new Player(nombreJugador1, civ1);
+            Jugador2 = new Player(nombreJugador2, civ2);
+            
+            // Determinar aleatoriamente quién empieza
+            DeterminarPrimerTurno();
+        }
+
+        /// <summary>
+        /// Determina aleatoriamente qué jugador empieza la partida
+        /// </summary>
+        private void DeterminarPrimerTurno()
+        {
+            var random = new Random();
+            TurnoActual = random.Next(2) == 0 ? Jugador1 : Jugador2;
+        }
+
+        /// <summary>
+        /// Pasa el turno al siguiente jugador
+        /// </summary>
+        public void SiguienteTurno()
+        {
+            TurnoActual = TurnoActual == Jugador1 ? Jugador2 : Jugador1;
+        }
+
+        /// <summary>
+        /// Obtiene el nombre del jugador que tiene el turno actual
+        /// </summary>
+        /// <returns>Nombre del jugador con el turno</returns>
+        public string ObtenerJugadorTurno()
+        {
+            return TurnoActual.Nombre;
+        }
+
+        /// <summary>
+        /// Verifica si un jugador específico tiene el turno
+        /// </summary>
+        /// <param name="nombreJugador">Nombre del jugador a verificar</param>
+        /// <returns>True si tiene el turno, False en caso contrario</returns>
+        public bool TieneTurno(string nombreJugador)
+        {
+            return TurnoActual.Nombre == nombreJugador;
         }
 
         /// <summary>

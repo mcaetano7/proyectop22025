@@ -50,7 +50,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
                    $"Piedra={player.GetRecurso(Library.TipoRecurso.Piedra)}\n";
 
         // Estado: esperando, en batalla, etc. (puedes mejorar esto según tu lógica)
-        string estado = Facade.Instance.TrainerIsWaiting(userName).Contains("esperando") ? "Esperando" : "No esperando";
+        string estado = Facade.Instance.PlayerIsWaiting(userName).Contains("esperando") ? "Esperando" : "No esperando";
         info += $"Estado: {estado}";
 
         await ReplyAsync(info);
@@ -59,7 +59,12 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
     // Este método es un placeholder. Debes implementarlo según tu lógica de dominio.
     private Library.Player? ObtenerPlayerPorNombre(string nombre)
     {
-        // TODO: Implementar la búsqueda real del jugador en tu sistema
+        var partida = Facade.Instance.GetPartidaActiva(nombre);
+        if (partida != null)
+        {
+            // Determinar si es el jugador 1 o 2
+            return partida.Jugador1.Nombre == nombre ? partida.Jugador1 : partida.Jugador2;
+        }
         return null;
     }
 }

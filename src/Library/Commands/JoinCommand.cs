@@ -20,7 +20,7 @@ public class JoinCommand : ModuleBase<SocketCommandContext>
     public async Task ExecuteAsync()
     {
         string displayName = CommandHelper.GetDisplayName(Context);
-        string result = Facade.Instance.AddTrainerToWaitingList(displayName);
+        string result = Facade.Instance.AddPlayerToWaitingList(displayName);
         await ReplyAsync(result);
     }
 }
