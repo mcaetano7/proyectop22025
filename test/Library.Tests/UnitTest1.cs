@@ -112,7 +112,7 @@ public class Tests
         Assert.That(almacen.Capacidad, Is.EqualTo(capacidadAlmacen));
         Assert.IsTrue(almacen.Capacidad > 0, "El almacén debe poder tener capacidad");
         
-        var costo = almacen.obtenerCosto();
+        var costo = almacen.ObtenerCosto();
         Assert.IsNotNull(costo);
         Assert.That(costo.Count, Is.EqualTo(1), "El almacén debe tener un tipo de recurso como costo");
         Assert.IsTrue(costo.ContainsKey(TipoRecurso.Madera));
@@ -181,8 +181,8 @@ public class Tests
         casa.CapacidadPoblacion = 3;
 
         // verificamos que el edificio fue creado 
-        var costoCasa = casa.obtenerCosto();
-        var costoAlmacen = almacen.obtenerCosto();
+        var costoCasa = casa.ObtenerCosto();
+        var costoAlmacen = almacen.ObtenerCosto();
         
         Assert.IsNotNull(casa, "La casa debería haberse creado correctamente");
         Assert.IsNotNull(almacen, "El almacén debería haberse creado correctamente");

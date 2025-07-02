@@ -21,6 +21,22 @@ namespace Library
         /// </summary>
         public RecursoJugador() { }
 
+        private Dictionary<TipoRecurso, int> recursos = new();
+
+        public void Almacenar(TipoRecurso tipo, int cantidad)
+        {
+            if (!recursos.ContainsKey(tipo))
+            {
+                recursos[tipo] = 0;
+            }
+            recursos[tipo] += cantidad;
+        }
+
+        public int Obtener(TipoRecurso tipo)
+        {
+            return recursos.TryGetValue(tipo, out int cantidad) ? cantidad : 0;
+        }
+        
         /// <summary>
         /// constructor con tipo y cantidad
         /// </summary>
