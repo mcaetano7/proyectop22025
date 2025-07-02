@@ -34,21 +34,27 @@ public abstract class Edificio
     public Edificio(Coordenada ubicacion, int vida, Player owner)
     {
         Ubicacion = ubicacion;
-        Vida = vida;
+        Vida = vida;  
         Owner = owner;
     }
     
+    /// <summary>
+    /// almacena recursos dentro del edificio
+    /// </summary>
+    /// <param name="recursosJugador"></param>
     public void Almacenar(RecursoJugador recursosJugador)
     {
-        
+        TipoRecurso tipo = null!;
+        int cantidad = 0;
+        recursosJugador.Almacenar(tipo, cantidad);
     }
 
     /// <summary>
-    /// retorna el costo de construcción del edificio con respectoa los recursos
+    /// retorna el costo de construcción del edificio con respecto a los recursos
     /// Debe ser implementado por cada subclase
     /// </summary>
     /// <returns>un diccionario que asocia tipo de recurso y cantidad necesaria</returns>
-    public abstract Dictionary<TipoRecurso, int> obtenerCosto();
+    public abstract Dictionary<TipoRecurso, int> ObtenerCosto();
     
     /// <summary>
     /// daña al edificio reduciendo su vida
