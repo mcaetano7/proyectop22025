@@ -29,6 +29,11 @@ public class Almacen : Edificio
         Capacidad = capacidad;
     }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// método que retorna cuanto cuesta construir un almacen (cuanto de recursos)
     /// </summary>

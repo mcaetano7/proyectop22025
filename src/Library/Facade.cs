@@ -116,7 +116,7 @@ namespace Library
         /// <summary>
         /// devuelve una representación en texto del mapa
         /// </summary>
-        public string VerMapaAscii()
+        public string? VerMapaAscii()
         {
             var generador = new GenerarMapa(20, 15);
             return generador.ToString();
@@ -140,6 +140,11 @@ namespace Library
                 string contenido = File.ReadAllText(ruta);
                 // simulación de carga
             }
+        }
+
+        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -47,6 +47,11 @@ public class Cuartel : Edificio
         return new Arquero(id, this.Ubicacion, this.Owner);
     }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// obtiene el costo del cuartel con respecto a los recursos
     /// </summary>

@@ -27,6 +27,11 @@ public class Aldeano : Unidad
         Ubicacion = nuevaUbicacion; 
     }
     
+    public Celda ObtenerCeldaActual(Mapa mapa)
+    {
+        return mapa.ObtenerCelda(Ubicacion);
+    }
+
     /// <summary>
     /// método para saber el estado de un aldeano
     /// </summary>

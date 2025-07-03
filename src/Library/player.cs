@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using Library;
@@ -23,10 +24,11 @@ namespace Library
         /// </summary>
         /// <param name="name">Nombre del jugador</param>
         /// <param name="civilizacion">Civilización del jugador</param>
-        public Player(string name, Civilizacion civilizacion) 
+        public Player(string name, Civilizacion civilizacion, IEnumerable unidades) 
         {
             this.name = name;
             this.civilizacion = civilizacion;
+            Unidades = unidades;
             this.accesible = true; 
 
             // valores de inicio de juego
@@ -50,7 +52,12 @@ namespace Library
             // crear unidades y edificios al comienzo de la partida
             
         }
-        
+
+        public Player(string nombreJugador1, Civilizacion civ1)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Nombre del jugador
         /// </summary>
@@ -85,7 +92,7 @@ namespace Library
         /// Verifica si el jugador perdió
         /// </summary>
         /// <returns>retorna True si perdió, False si no</returns>
-        public bool Victoria() 
+        public bool Victoria() //el nombre de este metodo???? JAJAJAJ
         {
             // se pierde la partida cuando no hay ningún centro urbano, entre otras condiciones
             return !edificios.Any(edificio => edificio is CentroCivico);
@@ -95,7 +102,7 @@ namespace Library
         /// Determina si puede o no crear más unidades
         /// </summary>
         /// <returns>True si puede, False si no</returns>
-        public bool PuedeCrearUnidad() 
+        public bool PuedeCrearUnidad() //IMPLEMENTAR este metodo
         {
             return poblacionActual < poblacionMaxima;
         }
@@ -198,5 +205,7 @@ namespace Library
         {
             return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
         }
+
+        public IEnumerable Unidades { get; set; }
     }
 }

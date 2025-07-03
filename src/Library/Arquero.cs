@@ -11,4 +11,10 @@ public class Arquero : UnidadMilitar
         : base(id, ubicacion, vida: 100, velocidad: 60, owner, ataque: 90, defensa : 10) //creamos arquero heredado de UNidadMIlitar (llamamos al contrusctor y le pasamos los parámetros )
     {
     } 
+    
+    public Celda ObtenerCeldaActual(Mapa mapa)
+    {
+        return mapa.ObtenerCelda(Ubicacion);
+    }
+
 }

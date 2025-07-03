@@ -30,6 +30,11 @@ public class Casa : Edificio
       Resistencia = 500;
   }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// devuelve el costo de contruir una casa (materiales)
     /// </summary>
