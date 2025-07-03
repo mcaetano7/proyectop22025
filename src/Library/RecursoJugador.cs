@@ -16,14 +16,6 @@ namespace Library
         /// </summary>
         public int Cantidad { get; set; }
 
-        /// <summary>
-        /// constructor vacío
-        /// </summary>
-        public RecursoJugador()
-        {
-            
-        }
-
         private Dictionary<TipoRecurso, int> recursos = new();
 
         public void Almacenar(TipoRecurso tipo, int cantidad)
@@ -33,6 +25,11 @@ namespace Library
                 recursos[tipo] = 0;
             }
             recursos[tipo] += cantidad;
+        }
+        
+        public bool ContieneRecurso(TipoRecurso tipo)
+        {
+            return recursos.ContainsKey(tipo) && recursos[tipo] > 0;
         }
 
         public int Obtener(TipoRecurso tipo)
@@ -49,6 +46,27 @@ namespace Library
         {
             Tipo = tipo;
             Cantidad = cantidad;
+        }
+
+        public int ObtenerCantidad(TipoRecurso tipo)
+        {
+            return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
+        }
+        
+        public void Descontar(TipoRecurso tipo, int cantidad)
+        {
+            if (recursos.ContainsKey(tipo))
+            {
+                recursos[tipo] = Math.Max(0, recursos[tipo] - cantidad);
+            }
+        }
+        
+        public void Agregar(TipoRecurso tipo, int cantidad)
+        {
+            if (!recursos.ContainsKey(tipo))
+                recursos[tipo] = 0;
+
+            recursos[tipo] += cantidad;
         }
     }
 }

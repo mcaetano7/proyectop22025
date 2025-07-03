@@ -7,7 +7,7 @@ public class Almacen : Edificio
     /// <summary>
     /// tipo de recurso que almacena
     /// </summary>
-    public string Tipo { get; set; }
+    public TipoRecurso Tipo { get; set; }
     
     /// <summary>
     /// capacidad máxima que almacena
@@ -22,7 +22,7 @@ public class Almacen : Edificio
     /// <param name="owner"> a que jugador pertenece</param>
     /// <param name="tipo"> el tipo de recurso que almacena</param>
     /// <param name="capacidad"> capacidad del almacén </param>
-    public Almacen(Coordenada ubicacion, int vida, Player owner, string tipo, int capacidad)
+    public Almacen(Coordenada ubicacion, int vida, Player owner, TipoRecurso tipo, int capacidad)
         : base(ubicacion, vida, owner)
     {
         Tipo = tipo;
@@ -31,7 +31,14 @@ public class Almacen : Edificio
 
     public override void Almacenar(RecursoJugador recursosJugador)
     {
-        throw new NotImplementedException();
+        if (!recursosJugador.ContieneRecurso(Tipo))
+            return;
+
+        int cantidadDisponible = recursosJugador.ObtenerCantidad(Tipo);
+        int cantidadAlmacenar = Math.Min(Capacidad, cantidadDisponible);
+        
+        recursosJugador.Descontar(Tipo, cantidadAlmacenar);
+        Capacidad -= cantidadAlmacenar;
     }
 
     /// <summary>
