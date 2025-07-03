@@ -42,12 +42,7 @@ public abstract class Edificio
     /// almacena recursos dentro del edificio
     /// </summary>
     /// <param name="recursosJugador"></param>
-    public void Almacenar(RecursoJugador recursosJugador)
-    {
-        TipoRecurso tipo = null!;
-        int cantidad = 0;
-        recursosJugador.Almacenar(tipo, cantidad);
-    }
+    public abstract void Almacenar(RecursoJugador recursosJugador);
 
     /// <summary>
     /// retorna el costo de construcción del edificio con respecto a los recursos

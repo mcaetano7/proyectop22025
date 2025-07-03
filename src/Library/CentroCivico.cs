@@ -58,6 +58,11 @@ public class CentroCivico : Edificio
         return CapacidadAldeanos - aldeanos.Count;
     }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        
+    }
+
     /// <summary>
     /// devuelve el costo del centro civico con respecto a los recursos
     /// </summary>
