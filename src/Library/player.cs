@@ -55,7 +55,7 @@ namespace Library
 
         public Player(string nombreJugador1, Civilizacion civ1)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); //esta vacio
         }
 
         /// <summary>

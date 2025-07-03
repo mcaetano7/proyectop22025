@@ -76,7 +76,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo"></param>
         /// <param name="cantidad"></param>
-        public void Agregar(TipoRecurso tipo, int cantidad)
+        public void Agregar(TipoRecurso tipo, int cantidad) //falta implementar este metodo
         {
             if (!recursos.ContainsKey(tipo))
                 recursos[tipo] = 0;

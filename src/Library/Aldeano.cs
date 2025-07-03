@@ -27,6 +27,11 @@ public class Aldeano : Unidad
         Ubicacion = nuevaUbicacion; 
     }
     
+    /// <summary>
+    /// obtiene la celda del mapa donde esta el aldeano
+    /// </summary>
+    /// <param name="mapa">instancia</param>
+    /// <returns>devuelve la celda correspondiente al aledano</returns>
     public Celda ObtenerCeldaActual(Mapa mapa)
     {
         return mapa.ObtenerCelda(Ubicacion);

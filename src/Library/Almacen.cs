@@ -29,6 +29,10 @@ public class Almacen : Edificio
         Capacidad = capacidad;
     }
 
+    /// <summary>
+    /// almacena recursos del edificio
+    /// </summary>
+    /// <param name="recursosJugador">contiene los recursos disponibles del jugador</param>
     public override void Almacenar(RecursoJugador recursosJugador)
     {
         if (!recursosJugador.ContieneRecurso(Tipo))

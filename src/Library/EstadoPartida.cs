@@ -3,7 +3,7 @@ namespace Library;
 /// <summary>
 /// Define el estado de una partida del juego
 /// </summary>
-public interface EstadoPartida
+public interface IEstadoPartida
 {
     
     /// <summary>
@@ -29,6 +29,14 @@ public interface EstadoPartida
     /// <summary>
     /// Lista de objetos que se encuentran en el inventario
     /// </summary>
-    public List<string> Inventario { get; set; } 
+    public List<string> Inventario { get; set; }
+
+    /// <summary>
+    /// Constructor de la clase, inicializa el inventario
+    /// </summary>
+    public void EstadoPartida()
+    {
+        Inventario = new List<string>();
+    }
     
 }

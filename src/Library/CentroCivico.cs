@@ -59,7 +59,7 @@ public class CentroCivico : Edificio
 
     public override void Almacenar(RecursoJugador recursosJugador)
     {
-        
+        //esta vacio
     }
 
     /// <summary>
