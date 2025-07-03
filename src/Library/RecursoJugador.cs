@@ -47,12 +47,22 @@ namespace Library
             Tipo = tipo;
             Cantidad = cantidad;
         }
-
+        
+        /// <summary>
+        /// obtiene la cantidad de recursos
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
         public int ObtenerCantidad(TipoRecurso tipo)
         {
             return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
         }
         
+        /// <summary>
+        /// elimina
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="cantidad"></param>
         public void Descontar(TipoRecurso tipo, int cantidad)
         {
             if (recursos.ContainsKey(tipo))
@@ -61,6 +71,11 @@ namespace Library
             }
         }
         
+        /// <summary>
+        /// agrega
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="cantidad"></param>
         public void Agregar(TipoRecurso tipo, int cantidad)
         {
             if (!recursos.ContainsKey(tipo))

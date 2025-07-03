@@ -18,7 +18,6 @@ public class CentroCivico : Edificio
     /// <param name="vida">puntos de vida del edificio</param>
     /// <param name="owner">jugador propietario del centro civico</param>
     /// <param name="capacidadAldeanos">cantidad max de aldeanos que se pueden tener</param>
-
     public CentroCivico(Coordenada ubicacion, int vida, Player owner, int capacidadAldeanos)
         : base(ubicacion, vida, owner)
     {
