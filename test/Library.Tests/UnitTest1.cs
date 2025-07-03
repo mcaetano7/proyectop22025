@@ -101,11 +101,11 @@ public class Tests
         var coordenada = new Coordenada(5, 10);
         var civilizacion = new Civilizacion("Bizantinos", new List<string>());
         var player = new Player("Juan", civilizacion);
-        const string tipoAlmacen = "General";
+        TipoRecurso tipoAlmacen = TipoRecurso.Madera;
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
-        var almacen = new Almacen(coordenada, vidaInicial, player, TODO, capacidadAlmacen); 
+        var almacen = new Almacen(coordenada, vidaInicial, player, tipoAlmacen, capacidadAlmacen); 
         
         Assert.IsNotNull(almacen);
         Assert.That(almacen.Ubicacion, Is.EqualTo(coordenada));
@@ -178,7 +178,8 @@ public class Tests
         var ubicacionAlmacen = new Coordenada(2, 1);
 
         var casa = new Casa(ubicacionCasa, 100, jugador, "Casa", 5);
-        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, TODO, 10);
+        var tipoAlmacen = TipoRecurso.Madera;
+        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, tipoAlmacen, 10);
         
         // simulamos que en la casa se alojan personas (incrementamos población actual)
         casa.CapacidadPoblacion = 3;
@@ -193,7 +194,7 @@ public class Tests
         Assert.That(casa.CapacidadPoblacion, Is.EqualTo(3), "La casa debería tener capacidad de población usada");
         Assert.That(casa.CapacidadMaxima, Is.EqualTo(5), "La casa debería tener una capacidad máxima de 5");
 
-        Assert.That(almacen.Tipo, Is.EqualTo("Madera"), "El almacén debería almacenar madera");
+        Assert.That(almacen.Tipo, Is.EqualTo(tipoAlmacen), "El almacén debería almacenar madera");
         Assert.That(almacen.Capacidad, Is.EqualTo(10), "El almacén debería tener capacidad 10");
 
         Assert.IsTrue(costoCasa.ContainsKey(TipoRecurso.Madera), "La casa debería costar madera");
