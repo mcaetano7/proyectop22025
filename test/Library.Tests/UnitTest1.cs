@@ -105,7 +105,7 @@ public class Tests
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
-        var almacen = new Almacen(coordenada, vidaInicial, player, tipoAlmacen, capacidadAlmacen); 
+        var almacen = new Almacen(coordenada, vidaInicial, player, TODO, capacidadAlmacen); 
         
         Assert.IsNotNull(almacen);
         Assert.That(almacen.Ubicacion, Is.EqualTo(coordenada));
@@ -178,7 +178,7 @@ public class Tests
         var ubicacionAlmacen = new Coordenada(2, 1);
 
         var casa = new Casa(ubicacionCasa, 100, jugador, "Casa", 5);
-        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, "Madera", 10);
+        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, TODO, 10);
         
         // simulamos que en la casa se alojan personas (incrementamos población actual)
         casa.CapacidadPoblacion = 3;

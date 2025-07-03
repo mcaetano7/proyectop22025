@@ -20,9 +20,9 @@ public class Almacen : Edificio
     /// <param name="ubicacion"> ubi en el mapa</param>
     /// <param name="vida">puntos de vida</param>
     /// <param name="owner"> a que jugador pertenece</param>
-    /// <param name="tipo"> el tipo de recurso que almacena</param>
+    /// <param name="tipo"></param>
     /// <param name="capacidad"> capacidad del almacén </param>
-    public Almacen(Coordenada ubicacion, int vida, Player owner, TipoRecurso tipo, int capacidad)
+    public Almacen(Coordenada ubicacion, int vida, Player owner,TipoRecurso tipo, int capacidad)
         : base(ubicacion, vida, owner)
     {
         Tipo = tipo;
