@@ -11,8 +11,12 @@ internal static class Program
     /// <summary>
     /// Punto de entrada al programa.
     /// </summary>
+<<<<<<< HEAD:src/Program/Program.cs
    
     private static void Main()
+=======
+    class Program1
+>>>>>>> cefd40a909befe5ef240c37fbb68d281da25074f:src/Program/Program1.cs
     {
         //DemoFacade();
         DemoBot();
