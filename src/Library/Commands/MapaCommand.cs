@@ -8,10 +8,13 @@ namespace Library;
 /// </summary>
 public class MapaCommand : ModuleBase<SocketCommandContext>
 {
-    public string Name => "mapa";
-
-    public string Execute(string[] args, string user)
+    [Command("mapa")]
+    public async Task MostrarMapaAscii()
     {
-        return Facade.Instance.VerMapaAscii();
+        // Obtener el mapa en texto desde la fachada
+        string mapa = Facade.Instance.VerMapaAscii();
+
+        // Enviar el mapa como respuesta en Discord
+        await ReplyAsync(mapa);
     }
 }
