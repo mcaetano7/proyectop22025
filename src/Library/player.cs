@@ -12,7 +12,7 @@ namespace Library
     {
         private string name; 
         private Civilizacion civilizacion; 
-        private Dictionary<TipoRecurso, int> recursos; 
+        private Dictionary<TipoRecurso?, int> recursos; 
         private List<Aldeano> aldeanos; 
         private List<Edificio> edificios;
         // private bool accesible; // Campo no utilizado, comentado para evitar warning
@@ -32,7 +32,7 @@ namespace Library
             // this.accesible = true; 
 
             // valores de inicio de juego
-            this.recursos = new Dictionary<TipoRecurso, int>()
+            this.recursos = new Dictionary<TipoRecurso?, int>()
             {
                 { TipoRecurso.Alimento, 100 },
                 { TipoRecurso.Madera, 100 },
@@ -60,7 +60,7 @@ namespace Library
             // this.accesible = true;
 
             // valores de inicio de juego
-            this.recursos = new Dictionary<TipoRecurso, int>()
+            this.recursos = new Dictionary<TipoRecurso?, int>()
             {
                 { TipoRecurso.Alimento, 100 },
                 { TipoRecurso.Madera, 100 },
@@ -143,7 +143,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo">El tipo de recurso a agregar</param>
         /// <param name="cantidad">La cantidad que se agrega</param>
-        public void AgregarRecurso(TipoRecurso tipo, int cantidad) 
+        public void AgregarRecurso(TipoRecurso? tipo, int cantidad) 
         {
             if (recursos.ContainsKey(tipo)) //lo añade solo si existe
             {
@@ -156,7 +156,7 @@ namespace Library
         /// </summary>
         /// <param name="costos">Diccionario con los costos</param>
         /// <returns>True si tiene los recursos, False si no</returns>
-        public bool TieneRecursos(Dictionary<TipoRecurso, int> costos) 
+        public bool TieneRecursos(Dictionary<TipoRecurso?, int> costos) 
         {
             foreach (var costo in costos) //verifica el tipo de recurso requerido
             {
@@ -173,7 +173,7 @@ namespace Library
         /// Gasta recursos del inventario
         /// </summary>
         /// <param name="costos">Diccionario con los costos</param>
-        public void GastarRecursos(Dictionary<TipoRecurso, int> costos) 
+        public void GastarRecursos(Dictionary<TipoRecurso?, int> costos) 
         {
             if (TieneRecursos(costos)) //verifica que tiene recursos
             {
@@ -217,7 +217,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo">Tipo de recurso</param>
         /// <param name="ubicacion">Ubicación para recolectarlo</param>
-        public void RecolectarRecurso(TipoRecurso tipo, Coordenada ubicacion) 
+        public void RecolectarRecurso(TipoRecurso? tipo, Coordenada ubicacion) 
         {
             var aldeano = GetAldeanoDisponible(); //busca aldeano disponible
             if (aldeano != null)
@@ -232,7 +232,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo">Tipo de recurso que se va a obtener la cantidad</param>
         /// <returns>Cantidad del recurso</returns>
-        public int GetRecurso(TipoRecurso tipo) 
+        public int GetRecurso(TipoRecurso? tipo) 
         {
             return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
         }
