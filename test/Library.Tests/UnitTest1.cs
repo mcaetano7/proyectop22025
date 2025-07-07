@@ -399,4 +399,13 @@ public class Tests
 
         Assert.That(aliado.Vida, Is.EqualTo(vidaInicial), "No se debería dañar a unidades aliadas.");
     }
+    
+    [Test]
+    public void Constructor_CreaMapaConDimensionesCorrectas()
+    {
+        var mapa = new GenerarMapa(10, 5);
+        Assert.AreEqual(10, mapa.Ancho);
+        Assert.AreEqual(5, mapa.Alto);
+    }
+    
 }
