@@ -348,4 +348,58 @@ public class Tests
         }
     }
 
+    //17. si el edificio recibe la misma cantidad de daño que tiene de vida debería destruirse
+    [Test]
+    public void DestruirEdificio()
+    {
+        var jugador = new Player("Carlos V", new Civilizacion("España", new List<string>()));
+        var edificio = new Casa(new Coordenada(10, 10), 100, jugador, "Residencial", 5);
+
+        edificio.RecibirDamage(100);
+    
+        Assert.IsTrue(edificio.EstaMuerto(), "El edificio debería estar destruido si recibe una cantidad de daño igual a su vida.");
+    }
+    
+    //18. si no hay suficientes recursos no se construye el edificio
+    [Test]
+    public void NoConstruyeSinRecursos()
+    {
+        var jugador = new Player("Pizarro", new Civilizacion("Incas", new List<string>()));
+        var coordenada = new Coordenada(0, 0);
+        var casa = new Casa(coordenada, 100, jugador, "Casa", 5);
+
+        jugador.GastarRecursos(new Dictionary<TipoRecurso, int> {
+            { TipoRecurso.Madera, 100 } // deja al jugador sin madera
+        });
+
+        jugador.Construir(casa, coordenada);
+
+        Assert.That(jugador.PoblacionMaxima, Is.EqualTo(15), "No debería haber aumentado la población máxima al no construirse la casa.");
+    }
+
+    //19. si las coordenadas son invalidas no se puede mover para ahi
+    [Test]
+    public void CoordenadasInvalidas()
+    {
+        var jugador = new Player("Moctezuma", new Civilizacion("Mayas", new List<string>()));
+        var unidad = new Infanteria(1, new Coordenada(1, 1), jugador);
+        var nuevaUbicacion = new Coordenada(-5, 200);
+        unidad.Mover(nuevaUbicacion);
+
+        Assert.That(nuevaUbicacion, Is.Not.EqualTo(unidad.Ubicacion), "No debería moverse a coordenadas que no son validas.");
+    }
+    
+    //20. no se debe atacar a unidades aliadas
+    [Test]
+    public void NoAtacarAliados()
+    {
+        var jugador = new Player("Hernán Cortés", new Civilizacion("Aztecas", new List<string>()));
+        var atacante = new Infanteria(1, new Coordenada(0, 0), jugador);
+        var aliado = new Infanteria(2, new Coordenada(1, 0), jugador);
+
+        int vidaInicial = aliado.Vida;
+        atacante.Atacar(aliado);
+
+        Assert.That(aliado.Vida, Is.EqualTo(vidaInicial), "No se debería dañar a unidades aliadas.");
+    }
 }
