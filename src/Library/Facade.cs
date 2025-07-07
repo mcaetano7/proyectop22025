@@ -149,7 +149,7 @@ namespace Library
         /// <summary>
         /// devuelve una representación en texto del mapa
         /// </summary>
-        public string? VerMapaAscii()
+        public string VerMapaAscii()
         {
             var generador = new GenerarMapa(20, 15);
             return generador.ToString();
