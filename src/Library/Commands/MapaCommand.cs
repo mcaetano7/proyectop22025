@@ -20,14 +20,13 @@ public class MapaCommand : ModuleBase<SocketCommandContext>
         }
         else
         {
-            // Discord limita los mensajes a 2000 caracteres.
             if (mapa.Length > 1990)
             {
                 await ReplyAsync("El mapa es demasiado grande para mostrar.");
             }
             else
             {
-                await ReplyAsync("```" + mapa + "```"); // Lo muestra en bloque de código
+                await ReplyAsync("```" + mapa + "```"); 
             }
         }
     }
