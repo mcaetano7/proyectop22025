@@ -71,7 +71,7 @@ public class Tests
         var player = new Player("Juan",  civilizacion);
         player.InicializarJuego();
 
-        var recursosIniciales = new Dictionary<TipoRecurso, int>()
+        var recursosIniciales = new Dictionary<TipoRecurso?, int>()
         {
             { TipoRecurso.Alimento, 100 },
             { TipoRecurso.Madera, 100 },
@@ -101,7 +101,7 @@ public class Tests
         var coordenada = new Coordenada(5, 10);
         var civilizacion = new Civilizacion("Bizantinos", new List<string>());
         var player = new Player("Juan", civilizacion);
-        TipoRecurso tipoAlmacen = TipoRecurso.Madera;
+        TipoRecurso? tipoAlmacen = TipoRecurso.Madera;
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
@@ -364,7 +364,8 @@ public class Tests
         var coordenada = new Coordenada(0, 0);
         var casa = new Casa(coordenada, 100, jugador, "Casa", 5);
 
-        jugador.GastarRecursos(new Dictionary<TipoRecurso, int> {
+        jugador.GastarRecursos(new Dictionary<TipoRecurso?, int>
+        {
             { TipoRecurso.Madera, 100 } // deja al jugador sin madera
         });
 
