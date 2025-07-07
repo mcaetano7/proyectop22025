@@ -152,7 +152,7 @@ namespace Library
         public string VerMapaAscii()
         {
             var generador = new GenerarMapa(20, 15);
-            return generador.ToString();
+            return generador.MostrarMapa();
         }
 
         /// <summary>

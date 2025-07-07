@@ -8,27 +8,10 @@ namespace Library;
 /// </summary>
 public class MapaCommand : ModuleBase<SocketCommandContext>
 {
-    [Command("mapa")]
-    [Summary("Muestra el mapa ASCII.")]
-    public async Task MapaAsync()
-    {
-        string? mapa = Facade.Instance.VerMapaAscii();
+    public string Name => "mapa";
 
-        if (string.IsNullOrEmpty(mapa))
-        {
-            await ReplyAsync("No se pudo generar el mapa.");
-        }
-        else
-        {
-            // Discord limita los mensajes a 2000 caracteres.
-            if (mapa.Length > 1990)
-            {
-                await ReplyAsync("El mapa es demasiado grande para mostrar.");
-            }
-            else
-            {
-                await ReplyAsync("```" + mapa + "```"); // Lo muestra en bloque de código
-            }
-        }
+    public string Execute(string[] args, string user)
+    {
+        return Facade.Instance.VerMapaAscii();
     }
 }
