@@ -1,5 +1,6 @@
 namespace Ucu.Poo.DiscordBot.Domain;
 
+
 /// <summary>
 /// Esta clase recibe las acciones y devuelve los resultados que permiten
 /// implementar las historias de usuario. Otras clases que implementan el bot

@@ -19,7 +19,7 @@ namespace Library
         /// <summary>
         ///  constructor privado para evitar instanciación externa
         /// </summary>
-        private Facade()
+        public Facade()
         {
             // el metodo es el constructor privado del patron singleton y aunquew está vacío sirve para impedir crear la clase desde afuera
         }
