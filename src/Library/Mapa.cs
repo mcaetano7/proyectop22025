@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace Library;
 
 /// <summary>
@@ -5,7 +7,8 @@ namespace Library;
 /// </summary>
 public class Mapa
 {
-    public const int Size = 100; 
+    public const int Size = 100;
+    public const int TileSize = 32;
     public List<Celda> Celdas { get; private set; } 
 
     /// <summary>
@@ -36,5 +39,18 @@ public class Mapa
         return Celdas.First(c =>
             c.Coordenada.X == coordenada.X &&
             c.Coordenada.Y == coordenada.Y); 
+    }
+
+    public void DibujarMapa(Graphics g)
+    {
+        for (int x = 0; x < Size; x++)
+        {
+            for (int y = 0; x < Size; y++)
+            {
+                int posX = x * TileSize;
+                int posY = y * TileSize;
+                
+            }
+        }
     }
 }
