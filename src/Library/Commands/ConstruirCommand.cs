@@ -1,7 +1,8 @@
 using Discord.Commands;
 using Ucu.Poo.DiscordBot.Domain;
 using Library;
-namespace Ucu.Poo.DiscordBot.Commands
+
+namespace Ucu.Poo.DiscordBot.Commands;
 
 //TENEMOS FACADE EN EL BOT Y EN EL JUEGO POR ESO MARCA ERROR
 
@@ -17,7 +18,7 @@ public class ConstruirCommand : ModuleBase<SocketCommandContext>
     /// <returns>el jugador si lo encuentra, si no null.</returns>
     private Player GetJugadorPorNombre(string nombre)
     {
-        return Facade.Instance.GetJugadorPorNombre(nombre);
+        return Ucu.Poo.DiscordBot.Domain.Facade.Instance.GetJugadorPorNombre(nombre);
     }
 
     /// <summary>
@@ -69,7 +70,7 @@ public class ConstruirCommand : ModuleBase<SocketCommandContext>
         }
 
         // mandamos a construir el edificio (se encarga el Facade)
-        Facade.Instance.Construir(jugador, edificio, ubicacion);
+        Ucu.Poo.DiscordBot.Domain.Facade.Instance.Construir(jugador, edificio, ubicacion);
 
         // confirmamos que se construyó y mostramos los recursos que quedan
         await ReplyAsync($"¡{tipoEdificio} construido en ({x},{y})! Recursos restantes: Madera = {jugador.GetRecurso(TipoRecurso.Madera)}");

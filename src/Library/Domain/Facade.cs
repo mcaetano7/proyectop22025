@@ -129,6 +129,36 @@ public class Facade
             p.Jugador1.Nombre == playerDisplayName || p.Jugador2.Nombre == playerDisplayName);
     }
 
+    /// <summary>
+    /// Obtiene un jugador por su nombre desde la partida activa
+    /// </summary>
+    /// <param name="nombre">Nombre del jugador</param>
+    /// <returns>El jugador si existe, null en caso contrario</returns>
+    public Library.Player? GetJugadorPorNombre(string nombre)
+    {
+        var partida = GetPartidaActiva(nombre);
+        if (partida != null)
+        {
+            return partida.GetJugadorPorNombre(nombre);
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Construye un edificio para un jugador en una ubicación específica
+    /// </summary>
+    /// <param name="jugador">El jugador que construye</param>
+    /// <param name="edificio">El edificio a construir</param>
+    /// <param name="ubicacion">La ubicación donde construir</param>
+    public void Construir(Library.Player jugador, Library.Edificio edificio, Library.Coordenada ubicacion)
+    {
+        var partida = GetPartidaActiva(jugador.Nombre);
+        if (partida != null)
+        {
+            partida.Construir(jugador, edificio, ubicacion);
+        }
+    }
+
     private string CreateGame(string playerDisplayName, string opponentDisplayName)
     {
         // Remover jugadores de la lista de espera

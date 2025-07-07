@@ -55,7 +55,29 @@ namespace Library
 
         public Player(string nombreJugador1, Civilizacion civ1)
         {
-            throw new NotImplementedException(); //esta vacio
+            this.name = nombreJugador1;
+            this.civilizacion = civ1;
+            this.accesible = true;
+
+            // valores de inicio de juego
+            this.recursos = new Dictionary<TipoRecurso, int>()
+            {
+                { TipoRecurso.Alimento, 100 },
+                { TipoRecurso.Madera, 100 },
+                { TipoRecurso.Oro, 0 },
+                { TipoRecurso.Piedra, 0 }
+            };
+            
+            // inicializar listas
+            this.aldeanos = new List<Aldeano>();
+            this.edificios = new List<Edificio>();
+            
+            // setup de población inicial
+            this.poblacionActual = 4;
+            this.poblacionMaxima = 15;
+            
+            // inicializar unidades vacías
+            this.Unidades = new List<Unidad>();
         }
 
         /// <summary>
@@ -92,7 +114,7 @@ namespace Library
         /// Verifica si el jugador perdió
         /// </summary>
         /// <returns>retorna True si perdió, False si no</returns>
-        public bool Victoria() //el nombre de este metodo???? JAJAJAJ
+        public bool Derrota() //corregido el nombre del método
         {
             // se pierde la partida cuando no hay ningún centro urbano, entre otras condiciones
             return !edificios.Any(edificio => edificio is CentroCivico);
@@ -102,7 +124,7 @@ namespace Library
         /// Determina si puede o no crear más unidades
         /// </summary>
         /// <returns>True si puede, False si no</returns>
-        public bool PuedeCrearUnidad() //IMPLEMENTAR este metodo
+        public bool PuedeCrearUnidad() //IMPLEMENTADO
         {
             return poblacionActual < poblacionMaxima;
         }
