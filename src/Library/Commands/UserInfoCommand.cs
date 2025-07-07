@@ -81,8 +81,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         var info = $"**Diagnóstico de nombres:**\n" +
                    $"• Username: {Context.User.Username}\n" +
                    $"• DisplayName: {displayName}\n" +
-                   $"• GlobalName: {Context.User.GlobalName}\n" +
-                   $"• Nickname: {Context.User.Nickname}\n";
+                   $"• GlobalName: {Context.User.GlobalName}\n";
         
         // Verificar si está en una partida
         var partida = Facade.Instance.GetPartidaActiva(displayName);
