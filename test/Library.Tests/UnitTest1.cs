@@ -401,11 +401,46 @@ public class Tests
     }
     
     [Test]
+    /// <summary>
+    /// prueba que el constructor de GenerarMapa cree un mapa con el ancho y alto especificados.
+    /// </summary>
     public void Constructor_CreaMapaConDimensionesCorrectas()
     {
         var mapa = new GenerarMapa(10, 5);
         Assert.AreEqual(10, mapa.Ancho);
         Assert.AreEqual(5, mapa.Alto);
     }
+    
+    /// <summary>
+    /// Prueba que el método MostrarMapa devuelva una cadena no vacía,
+    /// lo cual indica que el mapa fue generado correctamente.
+    /// </summary>
+    [Test]
+    public void MostrarMapa_NoDevuelveCadenaVacia()
+    {
+        var mapa = new GenerarMapa(5, 5);
+        string resultado = mapa.MostrarMapa();
+        Assert.IsFalse(string.IsNullOrWhiteSpace(resultado));
+    }
+    
+    
+    /// <summary>
+    /// prueba que los bordes del mapa estén correctamente rodeados de muros ('#').
+    /// </summary>
+    [Test]
+    public void InicializarMapa_TieneMurosEnLosBordes()
+    {
+        var mapa = new GenerarMapa(5, 5);
+        string resultado = mapa.MostrarMapa();
+        string[] filas = resultado.Split('\n');
+
+        Assert.That(filas[0][0], Is.EqualTo('#'));
+        Assert.That(filas[0][4], Is.EqualTo('#'));
+        Assert.That(filas[4][0], Is.EqualTo('#'));
+        Assert.That(filas[4][4], Is.EqualTo('#'));
+    }
+
+    
+    
     
 }
