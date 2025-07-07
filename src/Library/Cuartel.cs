@@ -47,12 +47,17 @@ public class Cuartel : Edificio
         return new Arquero(id, this.Ubicacion, this.Owner);
     }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// obtiene el costo del cuartel con respecto a los recursos
     /// </summary>
     /// <returns>un diccionario con el tipo de recurso y la cantidad necesaria</returns>
 
-    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    public override Dictionary<TipoRecurso, int> ObtenerCosto()
     {
         return new Dictionary<TipoRecurso, int>()
         {

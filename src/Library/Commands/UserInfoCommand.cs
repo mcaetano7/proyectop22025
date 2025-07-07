@@ -50,7 +50,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
                    $"Piedra={player.GetRecurso(Library.TipoRecurso.Piedra)}\n";
 
         // Estado: esperando, en batalla, etc. (puedes mejorar esto según tu lógica)
-        string estado = Facade.Instance.TrainerIsWaiting(userName).Contains("esperando") ? "Esperando" : "No esperando";
+        string estado = Facade.Instance.PlayerIsWaiting(userName).Contains("esperando") ? "Esperando" : "No esperando";
         info += $"Estado: {estado}";
 
         await ReplyAsync(info);
@@ -59,7 +59,92 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
     // Este método es un placeholder. Debes implementarlo según tu lógica de dominio.
     private Library.Player? ObtenerPlayerPorNombre(string nombre)
     {
-        // TODO: Implementar la búsqueda real del jugador en tu sistema
+        var partida = Facade.Instance.GetPartidaActiva(nombre);
+        if (partida != null)
+        {
+            // Determinar si es el jugador 1 o 2
+            return partida.Jugador1.Nombre == nombre ? partida.Jugador1 : partida.Jugador2;
+        }
         return null;
+    }
+
+    /// <summary>
+    /// Comando para verificar el estado del jugador (útil para diagnóstico)
+    /// </summary>
+    [Command("estado")]
+    [Summary("Muestra el estado actual del jugador para diagnóstico")]
+    public async Task EstadoAsync()
+    {
+        string displayName = CommandHelper.GetDisplayName(Context);
+        
+        // Mostrar información de diagnóstico
+        var info = $"**Diagnóstico de nombres:**\n" +
+                   $"• Username: {Context.User.Username}\n" +
+                   $"• DisplayName: {displayName}\n" +
+                   $"• GlobalName: {Context.User.GlobalName}\n";
+        
+        // Verificar si está en una partida
+        var partida = Facade.Instance.GetPartidaActiva(displayName);
+        if (partida == null)
+        {
+            info += "**No estás en una partida activa.**\n" +
+                   "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.";
+            await ReplyAsync(info);
+            return;
+        }
+
+        // Obtener el jugador
+        var jugador = ObtenerPlayerPorNombre(displayName);
+        if (jugador == null)
+        {
+            info += "**Error:** No se pudo encontrar tu jugador en la partida.";
+            await ReplyAsync(info);
+            return;
+        }
+
+        // Verificar si es tu turno
+        bool esMiTurno = partida.TieneTurno(displayName);
+        string jugadorTurno = partida.ObtenerJugadorTurno();
+
+        // Mostrar información detallada
+        info += $"**Estado del Jugador:** {displayName}\n" +
+                $"**Civilización:** {jugador.Civilizacion.Name}\n" +
+                $"**Turno actual:** {jugadorTurno}\n" +
+                $"**¿Es mi turno?:** {(esMiTurno ? " Sí" : " No")}\n" +
+                $"**Recursos:**\n" +
+                $"🍖 Alimento: {jugador.GetRecurso(Library.TipoRecurso.Alimento)}\n" +
+                $"🪵 Madera: {jugador.GetRecurso(Library.TipoRecurso.Madera)}\n" +
+                $"💰 Oro: {jugador.GetRecurso(Library.TipoRecurso.Oro)}\n" +
+                $"🪨 Piedra: {jugador.GetRecurso(Library.TipoRecurso.Piedra)}\n" +
+                $"**Población:** {jugador.PoblacionActual}/{jugador.PoblacionMaxima}";
+
+        await ReplyAsync(info);
+    }
+
+    /// <summary>
+    /// Comando para listar todas las partidas activas (solo para administradores)
+    /// </summary>
+    [Command("partidas")]
+    [Summary("Lista todas las partidas activas (solo para diagnóstico)")]
+    public async Task ListarPartidasAsync()
+    {
+        string displayName = CommandHelper.GetDisplayName(Context);
+        
+        // Obtener todas las partidas activas
+        var partidas = Ucu.Poo.DiscordBot.Domain.Facade.Instance.GetTodasLasPartidas();
+        
+        if (partidas.Count == 0)
+        {
+            await ReplyAsync("**No hay partidas activas.**");
+            return;
+        }
+
+        var info = "**Partidas Activas:**\n";
+        foreach (var partida in partidas)
+        {
+            info += $"• **{partida.Jugador1.Nombre}** vs **{partida.Jugador2.Nombre}**\n";
+        }
+
+        await ReplyAsync(info);
     }
 }

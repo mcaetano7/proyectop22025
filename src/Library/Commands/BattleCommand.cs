@@ -41,11 +41,51 @@ public class BattleCommand : ModuleBase<SocketCommandContext>
         {
             result = Facade.Instance.StartBattle(displayName, opponentUser.DisplayName);
             await Context.Message.Channel.SendMessageAsync(result);
+            
+            // Mostrar quién empieza la partida
+            var partida = Facade.Instance.GetPartidaActiva(displayName);
+            if (partida != null)
+            {
+                string primerTurno = partida.ObtenerJugadorTurno();
+                await Context.Message.Channel.SendMessageAsync($"🎲 **Empieza la partida!** {primerTurno} empieza primero.");
+            }
         }
         else
         {
             result = $"No hay un usuario {opponentDisplayName}";
             await ReplyAsync(result);
         }
+    }
+
+    /// <summary>
+    /// Comando para pasar el turno al siguiente jugador
+    /// </summary>
+    [Command("pasar")]
+    [Summary("Pasa el turno al siguiente jugador")]
+    public async Task PasarTurnoAsync()
+    {
+        string displayName = CommandHelper.GetDisplayName(Context);
+        
+        // Obtener la partida activa
+        var partida = Facade.Instance.GetPartidaActiva(displayName);
+        if (partida == null)
+        {
+            await ReplyAsync("**No estás en una partida activa.**");
+            return;
+        }
+
+        // Verificar que es tu turno
+        if (!partida.TieneTurno(displayName))
+        {
+            string jugadorTurno = partida.ObtenerJugadorTurno();
+            await ReplyAsync($"**No es tu turno.** Juega {jugadorTurno}");
+            return;
+        }
+
+        // Pasar el turno
+        partida.SiguienteTurno();
+        string nuevoJugador = partida.ObtenerJugadorTurno();
+        
+        await ReplyAsync($"🔄 **Turno pasado.** Ahora juega {nuevoJugador}");
     }
 }

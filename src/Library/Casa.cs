@@ -30,11 +30,16 @@ public class Casa : Edificio
       Resistencia = 500;
   }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// devuelve el costo de contruir una casa (materiales)
     /// </summary>
     /// <returns> diccionario con  el tipo de recurso y la cantidad necesaria</returns>
-  public override Dictionary<TipoRecurso, int> obtenerCosto() 
+  public override Dictionary<TipoRecurso, int> ObtenerCosto() 
   {
       return new Dictionary<TipoRecurso, int>
       {

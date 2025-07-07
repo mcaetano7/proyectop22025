@@ -18,7 +18,6 @@ public class CentroCivico : Edificio
     /// <param name="vida">puntos de vida del edificio</param>
     /// <param name="owner">jugador propietario del centro civico</param>
     /// <param name="capacidadAldeanos">cantidad max de aldeanos que se pueden tener</param>
-
     public CentroCivico(Coordenada ubicacion, int vida, Player owner, int capacidadAldeanos)
         : base(ubicacion, vida, owner)
     {
@@ -58,10 +57,15 @@ public class CentroCivico : Edificio
         return CapacidadAldeanos - aldeanos.Count;
     }
 
+    public override void Almacenar(RecursoJugador recursosJugador)
+    {
+        //esta vacio
+    }
+
     /// <summary>
     /// devuelve el costo del centro civico con respecto a los recursos
     /// </summary>
-    public override Dictionary<TipoRecurso, int> obtenerCosto()
+    public override Dictionary<TipoRecurso, int> ObtenerCosto()
     {
         return new Dictionary<TipoRecurso, int>()
         {

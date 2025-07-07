@@ -16,14 +16,27 @@ namespace Library
         /// </summary>
         public int Cantidad { get; set; }
 
-        /// <summary>
-        /// constructor vacío
-        /// </summary>
-        public RecursoJugador()
+        private Dictionary<TipoRecurso, int> recursos = new();
+
+        public void Almacenar(TipoRecurso tipo, int cantidad)
         {
-            
+            if (!recursos.ContainsKey(tipo))
+            {
+                recursos[tipo] = 0;
+            }
+            recursos[tipo] += cantidad;
+        }
+        
+        public bool ContieneRecurso(TipoRecurso tipo)
+        {
+            return recursos.ContainsKey(tipo) && recursos[tipo] > 0;
         }
 
+        public int Obtener(TipoRecurso tipo)
+        {
+            return recursos.TryGetValue(tipo, out int cantidad) ? cantidad : 0;
+        }
+        
         /// <summary>
         /// constructor con tipo y cantidad
         /// </summary>
@@ -33,6 +46,42 @@ namespace Library
         {
             Tipo = tipo;
             Cantidad = cantidad;
+        }
+        
+        /// <summary>
+        /// obtiene la cantidad de recursos
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
+        public int ObtenerCantidad(TipoRecurso tipo)
+        {
+            return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
+        }
+        
+        /// <summary>
+        /// elimina
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="cantidad"></param>
+        public void Descontar(TipoRecurso tipo, int cantidad)
+        {
+            if (recursos.ContainsKey(tipo))
+            {
+                recursos[tipo] = Math.Max(0, recursos[tipo] - cantidad);
+            }
+        }
+        
+        /// <summary>
+        /// agrega
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="cantidad"></param>
+        public void Agregar(TipoRecurso tipo, int cantidad) //falta implementar este metodo
+        {
+            if (!recursos.ContainsKey(tipo))
+                recursos[tipo] = 0;
+
+            recursos[tipo] += cantidad;
         }
     }
 }

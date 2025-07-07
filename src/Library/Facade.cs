@@ -11,6 +11,20 @@ namespace Library
     public class Facade
     {
         /// <summary>
+        /// implementacion singleton (esto es para que ...)
+        /// </summary>
+        private static Facade? _instance;
+        public static Facade Instance => _instance ??= new Facade();
+
+        /// <summary>
+        ///  constructor privado para evitar instanciación externa
+        /// </summary>
+        public Facade()
+        {
+            // el metodo es el constructor privado del patron singleton y aunquew está vacío sirve para impedir crear la clase desde afuera
+        }
+        
+        /// <summary>
         /// mapa del juego
         /// </summary>
         public Mapa Mapa { get; private set; }
@@ -23,16 +37,79 @@ namespace Library
         /// <summary>
         /// segundo jugador
         /// </summary>
-        public Player Jugador2 { get; private set; }    
+        public Player Jugador2 { get; private set; }
+        
+        /// <summary>
+        /// obtiene una instancia del jugador correspondiente al nombre ingresado
+        /// </summary>
+        /// <param name="nombre">Nombre del jugador que se desea buscar</param>
+        /// <returns>
+        /// retorna el jugador cuyo nombre coincida con el parámetro ingresado 
+        /// si no se encuentra un jugador con ese nombre, retorna null
+        /// </returns>
+        public Player GetJugadorPorNombre(string nombre)
+        {
+            if (Jugador1.Nombre == nombre)
+                return Jugador1;
+            else if (Jugador2.Nombre == nombre)
+                return Jugador2;
+            else
+                return null;
+        }
+
+
+        /// <summary>
+        /// jugador que tiene el turno actual
+        /// </summary>
+        public Player TurnoActual { get; private set; }
 
         /// <summary>
         /// crea una nueva partida con dos civilizaciones
         /// </summary>
-        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
+        public void CrearPartida(Civilizacion civ1, Civilizacion civ2, string nombreJugador1, string nombreJugador2)
         {
             Mapa = new Mapa();
-            Jugador1 = new Player("jugador1", civ1);
-            Jugador2 = new Player("jugador2", civ2);
+            Jugador1 = new Player(nombreJugador1, civ1);
+            Jugador2 = new Player(nombreJugador2, civ2);
+            
+            // Determinar aleatoriamente quién empieza
+            DeterminarPrimerTurno();
+        }
+
+        /// <summary>
+        /// Determina aleatoriamente qué jugador empieza la partida
+        /// </summary>
+        private void DeterminarPrimerTurno()
+        {
+            var random = new Random();
+            TurnoActual = random.Next(2) == 0 ? Jugador1 : Jugador2;
+        }
+
+        /// <summary>
+        /// Pasa el turno al siguiente jugador
+        /// </summary>
+        public void SiguienteTurno()
+        {
+            TurnoActual = TurnoActual == Jugador1 ? Jugador2 : Jugador1;
+        }
+
+        /// <summary>
+        /// Obtiene el nombre del jugador que tiene el turno actual
+        /// </summary>
+        /// <returns>Nombre del jugador con el turno</returns>
+        public string ObtenerJugadorTurno()
+        {
+            return TurnoActual.Nombre;
+        }
+
+        /// <summary>
+        /// Verifica si un jugador específico tiene el turno
+        /// </summary>
+        /// <param name="nombreJugador">Nombre del jugador a verificar</param>
+        /// <returns>True si tiene el turno, False en caso contrario</returns>
+        public bool TieneTurno(string nombreJugador)
+        {
+            return TurnoActual.Nombre == nombreJugador;
         }
 
         /// <summary>
@@ -72,7 +149,7 @@ namespace Library
         /// <summary>
         /// devuelve una representación en texto del mapa
         /// </summary>
-        public string VerMapaAscii()
+        public string? VerMapaAscii()
         {
             var generador = new GenerarMapa(20, 15);
             return generador.ToString();
@@ -97,5 +174,12 @@ namespace Library
                 // simulación de carga
             }
         }
+
+        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
+        {
+            throw new NotImplementedException();
+        }
     }
+    
+    
 }

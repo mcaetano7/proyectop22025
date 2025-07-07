@@ -84,6 +84,24 @@ Para probar el bot:
     }
     ```
 
+## Comandos disponibles
+
+El bot responde a los siguientes comandos:
+
+- `!join`: Une el jugador que envía el mensaje a la lista de jugadores esperando para jugar.
+- `!leave`: Remueve el jugador de la lista de jugadores esperando para jugar.
+- `!waitinglist`: Muestra la lista de jugadores esperando para jugar.
+- `!battle {username}`: Inicia una batalla contra `username`; `username` debe estar esperando para jugar.
+- `!playerinfo [username]`: Devuelve información sobre el jugador que envía el mensaje o sobre otro jugador si se incluye como parámetro.
+- `!recursos`: Muestra los recursos actuales del jugador en su partida activa.
+- `!construir {tipo} {x} {y}`: Construye un edificio del tipo especificado en las coordenadas indicadas.
+
+> [!IMPORTANT]
+> **Nota**: Para que el bot funcione correctamente, asegúrate de:
+> 1. Tener un token válido de Discord configurado
+> 2. Que el bot tenga los permisos necesarios en el servidor
+> 3. Que el bot esté en línea y conectado al servidor
+
 > 🤔 ¿Porqué la complicamos?
 >
 > De esta forma vas a poder subir el código de tu bot a repositorios de

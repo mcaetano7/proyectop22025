@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Ucu.Poo.DiscordBot.Domain;
 
@@ -7,16 +8,16 @@ namespace Ucu.Poo.DiscordBot.Domain;
 /// </summary>
 public class WaitingList
 {
-    private readonly List<Trainer> trainers = new List<Trainer>();
+    private readonly List<Player> Players = new List<Player>();
 
     public int Count
     {
-        get { return this.trainers.Count; }
+        get { return this.Players.Count; }
     }
 
-    public ReadOnlyCollection<Trainer> GetAllWaiting()
+    public ReadOnlyCollection<Player> GetAllWaiting()
     {
-        return this.trainers.AsReadOnly();
+        return this.Players.AsReadOnly();
     }
     
     /// <summary>
@@ -27,15 +28,15 @@ public class WaitingList
     /// </param>
     /// <returns><c>true</c> si se agrega el usuario; <c>false</c> en caso
     /// contrario.</returns>
-    public bool AddTrainer(string displayName)
+    public bool AddPlayer(string displayName)
     {
         if (string.IsNullOrEmpty(displayName))
         {
             throw new ArgumentException(nameof(displayName));
         }
         
-        if (this.FindTrainerByDisplayName(displayName) != null) return false;
-        trainers.Add(new Trainer(displayName));
+        if (this.FindPlayerByDisplayName(displayName) != null) return false;
+        Players.Add(new Player(displayName));
         return true;
 
     }
@@ -48,11 +49,11 @@ public class WaitingList
     /// </param>
     /// <returns><c>true</c> si se remueve el usuario; <c>false</c> en caso
     /// contrario.</returns>
-    public bool RemoveTrainer(string displayName)
+    public bool RemovePlayer(string displayName)
     {
-        Trainer? trainer = this.FindTrainerByDisplayName(displayName);
-        if (trainer == null) return false;
-        trainers.Remove(trainer);
+        Player? Player = this.FindPlayerByDisplayName(displayName);
+        if (Player == null) return false;
+        Players.Remove(Player);
         return true;
 
     }
@@ -66,13 +67,13 @@ public class WaitingList
     /// </param>
     /// <returns>El jugador encontrado o <c>null</c> en caso contrario.
     /// </returns>
-    public Trainer? FindTrainerByDisplayName(string displayName)
+    public Player? FindPlayerByDisplayName(string displayName)
     {
-        foreach (Trainer trainer in this.trainers)
+        foreach (Player Player in this.Players)
         {
-            if (trainer.DisplayName == displayName)
+            if (Player.DisplayName == displayName)
             {
-                return trainer;
+                return Player;
             }
         }
 
@@ -86,13 +87,13 @@ public class WaitingList
     /// 
     /// </summary>
     /// <returns></returns>
-    public Trainer? GetAnyoneWaiting()
+    public Player? GetAnyoneWaiting()
     {
-        if (this.trainers.Count == 0)
+        if (this.Players.Count == 0)
         {
             return null;
         }
 
-        return this.trainers[0];
+        return this.Players[0];
     }
 }

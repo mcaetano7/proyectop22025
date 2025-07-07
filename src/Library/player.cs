@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using Library;
@@ -14,7 +15,7 @@ namespace Library
         private Dictionary<TipoRecurso, int> recursos; 
         private List<Aldeano> aldeanos; 
         private List<Edificio> edificios;
-        private bool accesible;
+        // private bool accesible; // Campo no utilizado, comentado para evitar warning
         private int poblacionActual; 
         private int poblacionMaxima; 
         
@@ -23,11 +24,12 @@ namespace Library
         /// </summary>
         /// <param name="name">Nombre del jugador</param>
         /// <param name="civilizacion">Civilización del jugador</param>
-        public Player(string name, Civilizacion civilizacion) 
+        public Player(string name, Civilizacion civilizacion, IEnumerable unidades) 
         {
             this.name = name;
             this.civilizacion = civilizacion;
-            this.accesible = true; 
+            Unidades = unidades;
+            // this.accesible = true; 
 
             // valores de inicio de juego
             this.recursos = new Dictionary<TipoRecurso, int>()
@@ -50,7 +52,34 @@ namespace Library
             // crear unidades y edificios al comienzo de la partida
             
         }
-        
+
+        public Player(string nombreJugador1, Civilizacion civ1)
+        {
+            this.name = nombreJugador1;
+            this.civilizacion = civ1;
+            // this.accesible = true;
+
+            // valores de inicio de juego
+            this.recursos = new Dictionary<TipoRecurso, int>()
+            {
+                { TipoRecurso.Alimento, 100 },
+                { TipoRecurso.Madera, 100 },
+                { TipoRecurso.Oro, 0 },
+                { TipoRecurso.Piedra, 0 }
+            };
+            
+            // inicializar listas
+            this.aldeanos = new List<Aldeano>();
+            this.edificios = new List<Edificio>();
+            
+            // setup de población inicial
+            this.poblacionActual = 4;
+            this.poblacionMaxima = 15;
+            
+            // inicializar unidades vacías
+            this.Unidades = new List<Unidad>();
+        }
+
         /// <summary>
         /// Nombre del jugador
         /// </summary>
@@ -60,6 +89,16 @@ namespace Library
         /// Civilización del jugador
         /// </summary>
         public Civilizacion Civilizacion => civilizacion;
+
+        /// <summary>
+        /// Población actual del jugador
+        /// </summary>
+        public int PoblacionActual => poblacionActual;
+
+        /// <summary>
+        /// Población máxima del jugador
+        /// </summary>
+        public int PoblacionMaxima => poblacionMaxima;
 
         /// <summary>
         /// Inicializa el juego siguiendo especificaciones
@@ -82,20 +121,19 @@ namespace Library
         }
 
         /// <summary>
-        /// Verifica si el jugador perdió
+        /// Verifica si el jugador ganó
         /// </summary>
-        /// <returns>retorna True si perdió, False si no</returns>
-        public bool Victoria() 
+        /// <returns>Retorna true si ganó, false si no</returns>
+        public bool Victoria()
         {
-            // se pierde la partida cuando no hay ningún centro urbano, entre otras condiciones
-            return !edificios.Any(edificio => edificio is CentroCivico);
+            return edificios.Any(edificio => edificio is CentroCivico);
         }
         
         /// <summary>
         /// Determina si puede o no crear más unidades
         /// </summary>
         /// <returns>True si puede, False si no</returns>
-        public bool PuedeCrearUnidad() 
+        public bool PuedeCrearUnidad() //IMPLEMENTADO
         {
             return poblacionActual < poblacionMaxima;
         }
@@ -153,9 +191,9 @@ namespace Library
         /// <param name="ubicación">Ubicación en donde se va a construir</param>
         public void Construir(Edificio edificio, Coordenada ubicación) 
         {
-            if (TieneRecursos(edificio.obtenerCosto())) //verifica si puede pagar la construcción
+            if (TieneRecursos(edificio.ObtenerCosto())) //verifica si puede pagar la construcción
             {
-                GastarRecursos(edificio.obtenerCosto());
+                GastarRecursos(edificio.ObtenerCosto());
                 edificios.Add(edificio);
 
                 if (edificio is Casa) //si es casa aumenta la población 
@@ -198,5 +236,7 @@ namespace Library
         {
             return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
         }
+
+        public IEnumerable Unidades { get; set; }
     }
 }
