@@ -23,8 +23,8 @@ public class Tests
         List<Player> jugadores = new List<Player> { jugador1, jugador2 };
         Assert.That(jugadores.Count, Is.EqualTo(2), "La cantidad de jugadores creados no es la esperada.");
 
-        Assert.That(jugadores[0].Nombre, Is.EqualTo("Jugador1"));
-        Assert.That(jugadores[1].Nombre, Is.EqualTo("Jugador2"));
+        Assert.That(jugadores[0].Nombre, Is.EqualTo("Emperador Bizantino"));
+        Assert.That(jugadores[1].Nombre, Is.EqualTo("Constantino I"));
         Assert.That(jugadores[0].Civilizacion.Name, Is.EqualTo("bizantinos"));
         Assert.That(jugadores[1].Civilizacion.Name, Is.EqualTo("constantinopolitanos"));
     }
