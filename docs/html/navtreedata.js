@@ -25,7 +25,17 @@
 var NAVTREE =
 [
   [ "My Project", "index.html", [
-    [ "README", "md__r_e_a_d_m_e.html", null ]
+    [ "README", "md__r_e_a_d_m_e.html", [
+      [ "Universidad Católica del Uruguay", "md__r_e_a_d_m_e.html#autotoc_md0", [
+        [ "Facultad de Ingeniería y Tecnologías", "md__r_e_a_d_m_e.html#autotoc_md1", [
+          [ "Programación II", "md__r_e_a_d_m_e.html#autotoc_md2", null ]
+        ] ]
+      ] ],
+      [ "Façade", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
+      [ "Demo de bots de Discord", "md__r_e_a_d_m_e.html#autotoc_md4", [
+        [ "Comandos disponibles", "md__r_e_a_d_m_e.html#autotoc_md5", null ]
+      ] ]
+    ] ]
   ] ]
 ];
 

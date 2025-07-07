@@ -1,3 +1,133 @@
 \chapter{README}
 \hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{README@{README}}
- 
+\hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysection{\texorpdfstring{Universidad Católica del Uruguay}{Universidad Católica del Uruguay}}\label{md__r_e_a_d_m_e_autotoc_md0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysubsection{\texorpdfstring{Facultad de Ingeniería y Tecnologías}{Facultad de Ingeniería y Tecnologías}}\label{md__r_e_a_d_m_e_autotoc_md1}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{Programación II}{Programación II}}\label{md__r_e_a_d_m_e_autotoc_md2}
+Pequeña demo de un bot de Discord en C\# usando un \href{https://refactoring.guru/design-patterns/facade}{\texttt{ {\itshape façade}}} o fachada.
+
+\begin{DoxyImportant}{Important}
+Pueden ver que es posible programar toda la funcionalidad pedida en la {\itshape façade} sin preocuparse por el bot de Discord y agregar al final la funcionalidad del bot sin modificaciones a la {\itshape façade} en la ultima entrega.
+\end{DoxyImportant}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{Façade}{Façade}}\label{md__r_e_a_d_m_e_autotoc_md3}
+Para que vean cómo es posible implementar las historias de usuario usando un {\itshape façade}, les damos un ejemplo en \href{/src/Program/Program.cs}{\texttt{ {\ttfamily Program}}} en el que los jugadores {\ttfamily player} y {\ttfamily opponent} se unen a la lista de espera para jugar para jugar, luego se muestra que ambos están en la lista, luego se inicia una batlla entre ellos, y finalmente se muestra que ningún jugador espera para jugar.
+
+La carpeta \href{/src/Library/Domain/}{\texttt{ {\ttfamily Domain}}} tienen todas las clases utilizadas por la {\itshape façade}.
+
+Esta {\itshape façade} implementa las historias de usuario\+:
+
+
+\begin{DoxyEnumerate}
+\item Como entrenador, quiero unirme a la lista de jugadores esperando por un oponente.
+\begin{DoxyItemize}
+\item Criterios de aceptación\+:
+\begin{DoxyItemize}
+\item El jugador recibe un mensaje confirmando que fue agregado a la lista de espera.
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+Es el método {\ttfamily Add\+Trainer\+To\+Waiting\+List} de la clase \href{/src/Library/Domain/Facade.cs}{\texttt{ {\ttfamily Facade}}}. \end{quote}
+
+
+
+\begin{DoxyEnumerate}
+\item Como entrenador, quiero ver la lista de jugadores esperando por un oponente.
+\begin{DoxyItemize}
+\item Criterios de aceptación\+:
+\begin{DoxyItemize}
+\item En la pantalla se ve la lista de jugadores que se unieron a la lista de espera.
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+Es el método {\ttfamily Get\+All\+Trainers\+Waiting} de la clase \href{/src/Library/Domain/Facade.cs}{\texttt{ {\ttfamily Facade}}}. \end{quote}
+
+
+
+\begin{DoxyEnumerate}
+\item Como entrenador, quiero iniciar una ballata con un jugador que está esperando por un oponente.
+\begin{DoxyItemize}
+\item Criterios de aceptación\+:
+\begin{DoxyItemize}
+\item Ambos jugadores son notificados del inicio de la batalla
+\item El jugador que tiene el primer turno se determina aleatoriamente.
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\begin{quote}
+Es el método {\ttfamily Create\+Battle} de la clase \href{/src/Library/Domain/Facade.cs}{\texttt{ {\ttfamily Facade}}}. \end{quote}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{Demo de bots de Discord}{Demo de bots de Discord}}\label{md__r_e_a_d_m_e_autotoc_md4}
+Para probar el bot\+:
+
+
+\begin{DoxyEnumerate}
+\item Comenta en \href{/src/Program/Program.cs}{\texttt{ {\ttfamily Program}}} la línea que dice {\ttfamily Demo\+Facade();} y quita el comentario a la que dice {\ttfamily Demo\+Bot();}.
+\item Crea un nuevo bot en Discord siguiendo \href{https://docs.discordnet.dev/guides/getting_started/first-bot.html}{\texttt{ estas instrucciones}}; anota el token que te muestra la página. Cuando sigas el procedimiento y tengas las opciones {\ttfamily Install to user account} o {\ttfamily Install to server}, elije {\ttfamily Install to server}; vas a tener que crear un server para probar tu bot.
+\item Crea un archivo {\ttfamily secrets.\+json} en las siguientes ubicaciones dependiendo de tu sistema operativo; si no existe alguna de las carpetas en la ruta deberás crearla;{\ttfamily APPDATA\%} en Windows siempre existe, así como {\ttfamily \texorpdfstring{$\sim$}{\string~}} siempre existe en Linux/mac\+OS-\/\+:
+\begin{DoxyItemize}
+\item {\bfseries{Windows}}\+: {\ttfamily APPDATA\%\textbackslash{}\textbackslash{}Microsoft\textbackslash{}\textbackslash{}User\+Secrets\textbackslash{}\textbackslash{}PII\+\_\+\+Discord\+Bot\+\_\+\+Demo\textbackslash{}\textbackslash{}secrets.\+json}
+\item {\bfseries{Linux/mac\+Os}}\+: \`{}\texorpdfstring{$\sim$}{\string~}/.microsoft/usersecrets/\+PII\+\_\+\+Discord\+Bot\+\_\+\+Demo/secrets.\+json
+\end{DoxyItemize}
+\item Edita el archivo {\ttfamily secrets.\+json} para que contenga la configuración que aparece a continuación, donde reemplazas {\ttfamily \texorpdfstring{$<$}{<}token\texorpdfstring{$>$}{>}} por el que te dio el Discord\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{"{}DiscordToken"{}:\ "{}<token>"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{Comandos disponibles}{Comandos disponibles}}\label{md__r_e_a_d_m_e_autotoc_md5}
+El bot responde a los siguientes comandos\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily !join}\+: Une el jugador que envía el mensaje a la lista de jugadores esperando para jugar.
+\item {\ttfamily !leave}\+: Remueve el jugador de la lista de jugadores esperando para jugar.
+\item {\ttfamily !waitinglist}\+: Muestra la lista de jugadores esperando para jugar.
+\item {\ttfamily !battle \{username\}}\+: Inicia una batalla contra {\ttfamily username}; {\ttfamily username} debe estar esperando para jugar.
+\item {\ttfamily !playerinfo \mbox{[}username\mbox{]}}\+: Devuelve información sobre el jugador que envía el mensaje o sobre otro jugador si se incluye como parámetro.
+\item {\ttfamily !recursos}\+: Muestra los recursos actuales del jugador en su partida activa.
+\item {\ttfamily !construir \{tipo\} \{x\} \{y\}}\+: Construye un edificio del tipo especificado en las coordenadas indicadas.
+\end{DoxyItemize}
+
+\begin{DoxyImportant}{Important}
+{\bfseries{Nota}}\+: Para que el bot funcione correctamente, asegúrate de\+:
+\begin{DoxyEnumerate}
+\item Tener un token válido de Discord configurado
+\item Que el bot tenga los permisos necesarios en el servidor
+\item Que el bot esté en línea y conectado al servidor
+\end{DoxyEnumerate}
+\end{DoxyImportant}
+\begin{quote}
+🤔 ¿\+Porqué la complicamos?
+
+De esta forma vas a poder subir el código de tu bot a repositorios de Git\+Hub sin compartir el token de tu bot. No vas a tener que hacerlo ahora, pero si en algún momento quieres ejecutar tu bot en otro ambiente como un servidor de producción o en Azure, podrás configurar el token secreto en forma segura. \end{quote}
+
+
+En la demo de un bot de telegram en C\#, el bot responde a los siguientes mensajes\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily !who\mbox{[}\{username\}\mbox{]}}\+: {\ttfamily username} es opcional. Devuelve información sobre el usuario que envía el mensaje o sobre el usuario {\ttfamily username}.
+\item {\ttfamily !join}\+: Une el jugador que envía el mensaje a la lista de jugadores esperando para jugar. Es la historia de usuario \#9.
+\item {\ttfamily !leave}\+: Remueve el jugador de la lista de jugadores esperando para jugar.
+\item {\ttfamily !waiting}\+: Muestra la lista de juegadores esperando para jugar. Es la historia de usuario \#10.
+\item {\ttfamily !battle \{username\}}\+: Inicia una batalla contra {\ttfamily username}; {\ttfamily username} debe estar esperando para jugar.
+\item 🎁 {\ttfamily !name \{id\}}\+: Devuelve el nombre del Pokémon con ese id.
+\end{DoxyItemize}
+
+\begin{quote}
+\{!\+TIP\} El comando {\ttfamily !name} muestra cómo obtener información de pokémons usando una API REST. En este comando podrás ver cómo atrapar excepciones. \end{quote}
+
+
+La carpeta \href{/src/Library/Commands/}{\texttt{ {\ttfamily Commands}}} tienen todas las clases utilizadas por los comandos del bot.
+
+\begin{DoxyWarning}{Warning}
+{\bfseries{Esto es una demo}}. No tomen ese ejemplo como la solución correcta de ninguna de las historias de usuario.
+\end{DoxyWarning}
+\begin{DoxyImportant}{Important}
+Este bot está basado en \href{https://blog.adamstirtan.net/2023/10/create-discord-bot-in-c-and-net-part-1.html}{\texttt{ este tutorial}}. 
+\end{DoxyImportant}
