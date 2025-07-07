@@ -399,11 +399,10 @@ public class Tests
 
         Assert.That(aliado.Vida, Is.EqualTo(vidaInicial), "No se debería dañar a unidades aliadas.");
     }
-    
-    [Test]
     /// <summary>
-    /// prueba que el constructor de GenerarMapa cree un mapa con el ancho y alto especificados.
+    /// prueba que el constructor de GenerarMapa cree un mapa con el ancho y alto especificados
     /// </summary>
+    [Test]
     public void Constructor_CreaMapaConDimensionesCorrectas()
     {
         var mapa = new GenerarMapa(10, 5);
