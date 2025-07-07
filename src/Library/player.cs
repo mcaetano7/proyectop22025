@@ -121,13 +121,12 @@ namespace Library
         }
 
         /// <summary>
-        /// Verifica si el jugador perdió
+        /// Verifica si el jugador ganó
         /// </summary>
-        /// <returns>retorna True si perdió, False si no</returns>
-        public bool Derrota() //corregido el nombre del método
+        /// <returns>Retorna true si ganó, false si no</returns>
+        public bool Victoria()
         {
-            // se pierde la partida cuando no hay ningún centro urbano, entre otras condiciones
-            return !edificios.Any(edificio => edificio is CentroCivico);
+            return edificios.Any(edificio => edificio is CentroCivico);
         }
         
         /// <summary>
