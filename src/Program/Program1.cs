@@ -24,11 +24,11 @@ internal static class Program
     
     private static void DemoFacade()
     {
-        Console.WriteLine(Facade.Instance.AddTrainerToWaitingList("player"));
-        Console.WriteLine(Facade.Instance.AddTrainerToWaitingList("opponent"));
-        Console.WriteLine(Facade.Instance.GetAllTrainersWaiting());
+        Console.WriteLine(Facade.Instance.AddPlayerToWaitingList("player"));
+        Console.WriteLine(Facade.Instance.AddPlayerToWaitingList("opponent"));
+        Console.WriteLine(Facade.Instance.GetAllPlayersWaiting());
         Console.WriteLine(Facade.Instance.StartBattle("player", "opponent"));
-        Console.WriteLine(Facade.Instance.GetAllTrainersWaiting());
+        Console.WriteLine(Facade.Instance.GetAllPlayersWaiting());
     }
 
     private static void DemoBot()

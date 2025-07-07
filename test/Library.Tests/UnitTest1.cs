@@ -25,8 +25,8 @@ public class Tests
 
         Assert.That(jugadores[0].Nombre, Is.EqualTo("Jugador1"));
         Assert.That(jugadores[1].Nombre, Is.EqualTo("Jugador2"));
-        Assert.That(jugadores[0].Civilizacion.Name, Is.EqualTo("vikingos"));
-        Assert.That(jugadores[1].Civilizacion.Name, Is.EqualTo("francos"));
+        Assert.That(jugadores[0].Civilizacion.Name, Is.EqualTo("bizantinos"));
+        Assert.That(jugadores[1].Civilizacion.Name, Is.EqualTo("constantinopolitanos"));
     }
     
     //2. elegir civilización (aprovechar sus ventajas estratégicas)
@@ -101,7 +101,7 @@ public class Tests
         var coordenada = new Coordenada(5, 10);
         var civilizacion = new Civilizacion("Bizantinos", new List<string>());
         var player = new Player("Juan", civilizacion);
-        const string tipoAlmacen = "General";
+        TipoRecurso tipoAlmacen = TipoRecurso.Madera;
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
@@ -115,7 +115,7 @@ public class Tests
         Assert.That(almacen.Capacidad, Is.EqualTo(capacidadAlmacen));
         Assert.IsTrue(almacen.Capacidad > 0, "El almacén debe poder tener capacidad");
         
-        var costo = almacen.obtenerCosto();
+        var costo = almacen.ObtenerCosto();
         Assert.IsNotNull(costo);
         Assert.That(costo.Count, Is.EqualTo(1), "El almacén debe tener un tipo de recurso como costo");
         Assert.IsTrue(costo.ContainsKey(TipoRecurso.Madera));
@@ -178,14 +178,15 @@ public class Tests
         var ubicacionAlmacen = new Coordenada(2, 1);
 
         var casa = new Casa(ubicacionCasa, 100, jugador, "Casa", 5);
-        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, "Madera", 10);
+        var tipoAlmacen = TipoRecurso.Madera;
+        var almacen = new Almacen(ubicacionAlmacen, 150, jugador, tipoAlmacen, 10);
         
         // simulamos que en la casa se alojan personas (incrementamos población actual)
         casa.CapacidadPoblacion = 3;
 
         // verificamos que el edificio fue creado 
-        var costoCasa = casa.obtenerCosto();
-        var costoAlmacen = almacen.obtenerCosto();
+        var costoCasa = casa.ObtenerCosto();
+        var costoAlmacen = almacen.ObtenerCosto();
         
         Assert.IsNotNull(casa, "La casa debería haberse creado correctamente");
         Assert.IsNotNull(almacen, "El almacén debería haberse creado correctamente");
@@ -193,7 +194,7 @@ public class Tests
         Assert.That(casa.CapacidadPoblacion, Is.EqualTo(3), "La casa debería tener capacidad de población usada");
         Assert.That(casa.CapacidadMaxima, Is.EqualTo(5), "La casa debería tener una capacidad máxima de 5");
 
-        Assert.That(almacen.Tipo, Is.EqualTo("Madera"), "El almacén debería almacenar madera");
+        Assert.That(almacen.Tipo, Is.EqualTo(tipoAlmacen), "El almacén debería almacenar madera");
         Assert.That(almacen.Capacidad, Is.EqualTo(10), "El almacén debería tener capacidad 10");
 
         Assert.IsTrue(costoCasa.ContainsKey(TipoRecurso.Madera), "La casa debería costar madera");
@@ -329,22 +330,72 @@ public class Tests
     [Test]
     public void GuardarPartida()
     {
-        [Test]
-        void GuardarPartidaTest()
-        {
-            var juego = new Facade();
-            string ruta = "partida_test.txt";
+        var juego = new Facade();
+        string ruta = "partida_test.txt";
 
-            if (File.Exists(ruta))
-                File.Delete(ruta);
-            
-            juego.GuardarPartida(ruta);
-            
-            Assert.IsTrue(File.Exists(ruta), "El archivo no fue creado al guardar la partida.");
-            string contenido = File.ReadAllText(ruta);
-            Assert.That(contenido, Is.EqualTo("simulando partida guardada..."), "El contenido del archivo guardado no es el esperado.");
+        if (File.Exists(ruta))
             File.Delete(ruta);
-        }
+        
+        juego.GuardarPartida(ruta);
+        
+        Assert.IsTrue(File.Exists(ruta), "El archivo no fue creado al guardar la partida.");
+        string contenido = File.ReadAllText(ruta);
+        Assert.That(contenido, Is.EqualTo("simulando partida guardada..."), "El contenido del archivo guardado no es el esperado.");
+        File.Delete(ruta);
     }
 
+    //17. si el edificio recibe la misma cantidad de daño que tiene de vida debería destruirse
+    [Test]
+    public void DestruirEdificio()
+    {
+        var jugador = new Player("Carlos V", new Civilizacion("España", new List<string>()));
+        var edificio = new Casa(new Coordenada(10, 10), 100, jugador, "Residencial", 5);
+
+        edificio.RecibirDamage(100);
+    
+        Assert.IsTrue(edificio.EstaMuerto(), "El edificio debería estar destruido si recibe una cantidad de daño igual a su vida.");
+    }
+    
+    //18. si no hay suficientes recursos no se construye el edificio
+    [Test]
+    public void NoConstruyeSinRecursos()
+    {
+        var jugador = new Player("Pizarro", new Civilizacion("Incas", new List<string>()));
+        var coordenada = new Coordenada(0, 0);
+        var casa = new Casa(coordenada, 100, jugador, "Casa", 5);
+
+        jugador.GastarRecursos(new Dictionary<TipoRecurso, int> {
+            { TipoRecurso.Madera, 100 } // deja al jugador sin madera
+        });
+
+        jugador.Construir(casa, coordenada);
+
+        Assert.That(jugador.PoblacionMaxima, Is.EqualTo(15), "No debería haber aumentado la población máxima al no construirse la casa.");
+    }
+
+    //19. si las coordenadas son invalidas no se puede mover para ahi
+    [Test]
+    public void CoordenadasInvalidas()
+    {
+        var jugador = new Player("Moctezuma", new Civilizacion("Mayas", new List<string>()));
+        var unidad = new Infanteria(1, new Coordenada(1, 1), jugador);
+        var nuevaUbicacion = new Coordenada(-5, 200);
+        unidad.Mover(nuevaUbicacion);
+
+        Assert.That(nuevaUbicacion, Is.Not.EqualTo(unidad.Ubicacion), "No debería moverse a coordenadas que no son validas.");
+    }
+    
+    //20. no se debe atacar a unidades aliadas
+    [Test]
+    public void NoAtacarAliados()
+    {
+        var jugador = new Player("Hernán Cortés", new Civilizacion("Aztecas", new List<string>()));
+        var atacante = new Infanteria(1, new Coordenada(0, 0), jugador);
+        var aliado = new Infanteria(2, new Coordenada(1, 0), jugador);
+
+        int vidaInicial = aliado.Vida;
+        atacante.Atacar(aliado);
+
+        Assert.That(aliado.Vida, Is.EqualTo(vidaInicial), "No se debería dañar a unidades aliadas.");
+    }
 }

@@ -105,7 +105,110 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">README</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><img src="DiagramaUMLP2.png" alt="diagrama UML actualizado" class="inline"/> </p>
+<div class="textblock"><p><img src="https://www.ucu.edu.uy/plantillas/images/logo_ucu.svg" alt="UCU" width="150" style="pointer-events: none;" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Universidad Católica del Uruguay</h1>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Facultad de Ingeniería y Tecnologías</h2>
+<h3><a class="anchor" id="autotoc_md2"></a>
+Programación II</h3>
+<p>Pequeña demo de un bot de Discord en C# usando un <a href="https://refactoring.guru/design-patterns/facade"><em>façade</em></a> o fachada.</p>
+<dl class="section important"><dt>Important</dt><dd>Pueden ver que es posible programar toda la funcionalidad pedida en la <em>façade</em> sin preocuparse por el bot de Discord y agregar al final la funcionalidad del bot sin modificaciones a la <em>façade</em> en la ultima entrega.</dd></dl>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Façade</h1>
+<p>Para que vean cómo es posible implementar las historias de usuario usando un <em>façade</em>, les damos un ejemplo en <a href="/src/Program/Program.cs"><code>Program</code></a> en el que los jugadores <code>player</code> y <code>opponent</code> se unen a la lista de espera para jugar para jugar, luego se muestra que ambos están en la lista, luego se inicia una batlla entre ellos, y finalmente se muestra que ningún jugador espera para jugar.</p>
+<p>La carpeta <a href="/src/Library/Domain/"><code>Domain</code></a> tienen todas las clases utilizadas por la <em>façade</em>.</p>
+<p>Esta <em>façade</em> implementa las historias de usuario:</p>
+<ol type="1">
+<li>Como entrenador, quiero unirme a la lista de jugadores esperando por un oponente.<ul>
+<li>Criterios de aceptación:<ul>
+<li>El jugador recibe un mensaje confirmando que fue agregado a la lista de espera.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote class="doxtable">
+<p>Es el método <code>AddTrainerToWaitingList</code> de la clase <a href="/src/Library/Domain/Facade.cs"><code>Facade</code></a>. </p>
+</blockquote>
+<ol type="1">
+<li>Como entrenador, quiero ver la lista de jugadores esperando por un oponente.<ul>
+<li>Criterios de aceptación:<ul>
+<li>En la pantalla se ve la lista de jugadores que se unieron a la lista de espera.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote class="doxtable">
+<p>Es el método <code>GetAllTrainersWaiting</code> de la clase <a href="/src/Library/Domain/Facade.cs"><code>Facade</code></a>. </p>
+</blockquote>
+<ol type="1">
+<li>Como entrenador, quiero iniciar una ballata con un jugador que está esperando por un oponente.<ul>
+<li>Criterios de aceptación:<ul>
+<li>Ambos jugadores son notificados del inicio de la batalla</li>
+<li>El jugador que tiene el primer turno se determina aleatoriamente.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote class="doxtable">
+<p>Es el método <code>CreateBattle</code> de la clase <a href="/src/Library/Domain/Facade.cs"><code>Facade</code></a>. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Demo de bots de Discord</h1>
+<p>Para probar el bot:</p>
+<ol type="1">
+<li>Comenta en <a href="/src/Program/Program.cs"><code>Program</code></a> la línea que dice <code>DemoFacade();</code> y quita el comentario a la que dice <code>DemoBot();</code>.</li>
+<li>Crea un nuevo bot en Discord siguiendo <a href="https://docs.discordnet.dev/guides/getting_started/first-bot.html">estas instrucciones</a>; anota el token que te muestra la página. Cuando sigas el procedimiento y tengas las opciones <code>Install to user account</code> o <code>Install to server</code>, elije <code>Install to server</code>; vas a tener que crear un server para probar tu bot.</li>
+<li>Crea un archivo <code>secrets.json</code> en las siguientes ubicaciones dependiendo de tu sistema operativo; si no existe alguna de las carpetas en la ruta deberás crearla;<code>APPDATA%</code> en Windows siempre existe, así como <code>~</code> siempre existe en Linux/macOS-:<ul>
+<li><b>Windows</b>: <code>APPDATA%\\Microsoft\\UserSecrets\\PII_DiscordBot_Demo\\secrets.json</code></li>
+<li><b>Linux/macOs</b>: `~/.microsoft/usersecrets/PII_DiscordBot_Demo/secrets.json</li>
+</ul>
+</li>
+<li>Edita el archivo <code>secrets.json</code> para que contenga la configuración que aparece a continuación, donde reemplazas <code>&lt;token&gt;</code> por el que te dio el Discord: <div class="fragment"><div class="line">{</div>
+<div class="line">&quot;DiscordToken&quot;: &quot;&lt;token&gt;&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ol>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Comandos disponibles</h2>
+<p>El bot responde a los siguientes comandos:</p>
+<ul>
+<li><code>!join</code>: Une el jugador que envía el mensaje a la lista de jugadores esperando para jugar.</li>
+<li><code>!leave</code>: Remueve el jugador de la lista de jugadores esperando para jugar.</li>
+<li><code>!waitinglist</code>: Muestra la lista de jugadores esperando para jugar.</li>
+<li><code>!battle {username}</code>: Inicia una batalla contra <code>username</code>; <code>username</code> debe estar esperando para jugar.</li>
+<li><code>!playerinfo [username]</code>: Devuelve información sobre el jugador que envía el mensaje o sobre otro jugador si se incluye como parámetro.</li>
+<li><code>!recursos</code>: Muestra los recursos actuales del jugador en su partida activa.</li>
+<li><code>!construir {tipo} {x} {y}</code>: Construye un edificio del tipo especificado en las coordenadas indicadas.</li>
+</ul>
+<dl class="section important"><dt>Important</dt><dd><b>Nota</b>: Para que el bot funcione correctamente, asegúrate de:<ol type="1">
+<li>Tener un token válido de Discord configurado</li>
+<li>Que el bot tenga los permisos necesarios en el servidor</li>
+<li>Que el bot esté en línea y conectado al servidor</li>
+</ol>
+</dd></dl>
+<blockquote class="doxtable">
+<p>🤔 ¿Porqué la complicamos?</p>
+<p>De esta forma vas a poder subir el código de tu bot a repositorios de GitHub sin compartir el token de tu bot. No vas a tener que hacerlo ahora, pero si en algún momento quieres ejecutar tu bot en otro ambiente como un servidor de producción o en Azure, podrás configurar el token secreto en forma segura. </p>
+</blockquote>
+<p>En la demo de un bot de telegram en C#, el bot responde a los siguientes mensajes:</p>
+<ul>
+<li><code>!who[{username}]</code>: <code>username</code> es opcional. Devuelve información sobre el usuario que envía el mensaje o sobre el usuario <code>username</code>.</li>
+<li><code>!join</code>: Une el jugador que envía el mensaje a la lista de jugadores esperando para jugar. Es la historia de usuario #9.</li>
+<li><code>!leave</code>: Remueve el jugador de la lista de jugadores esperando para jugar.</li>
+<li><code>!waiting</code>: Muestra la lista de juegadores esperando para jugar. Es la historia de usuario #10.</li>
+<li><code>!battle {username}</code>: Inicia una batalla contra <code>username</code>; <code>username</code> debe estar esperando para jugar.</li>
+<li>🎁 <code>!name {id}</code>: Devuelve el nombre del Pokémon con ese id.</li>
+</ul>
+<blockquote class="doxtable">
+<p>{!TIP} El comando <code>!name</code> muestra cómo obtener información de pokémons usando una API REST. En este comando podrás ver cómo atrapar excepciones. </p>
+</blockquote>
+<p>La carpeta <a href="/src/Library/Commands/"><code>Commands</code></a> tienen todas las clases utilizadas por los comandos del bot.</p>
+<dl class="section warning"><dt>Warning</dt><dd><b>Esto es una demo</b>. No tomen ese ejemplo como la solución correcta de ninguna de las historias de usuario.</dd></dl>
+<dl class="section important"><dt>Important</dt><dd>Este bot está basado en <a href="https://blog.adamstirtan.net/2023/10/create-discord-bot-in-c-and-net-part-1.html">este tutorial</a>. </dd></dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

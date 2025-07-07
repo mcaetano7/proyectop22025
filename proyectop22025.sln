@@ -7,6 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3C7B9EBE-F5B
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		src\diagrama.puml = src\diagrama.puml
+		src\Commands\BattleCommand.cs = src\Commands\BattleCommand.cs
+		src\Commands\CommandHelper.cs = src\Commands\CommandHelper.cs
+		src\Commands\JoinCommand.cs = src\Commands\JoinCommand.cs
+		src\Commands\LeaveCommand.cs = src\Commands\LeaveCommand.cs
+		src\Commands\UserInfoCommand.cs = src\Commands\UserInfoCommand.cs
+		src\Commands\WaitingCommand.cs = src\Commands\WaitingCommand.cs
+		src\Domain\Battle.cs = src\Domain\Battle.cs
+		src\Domain\BattlesList.cs = src\Domain\BattlesList.cs
+		src\Domain\Facade.cs = src\Domain\Facade.cs
+		src\Domain\Trainer.cs = src\Domain\Trainer.cs
+		src\Domain\WaitingList.cs = src\Domain\WaitingList.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "src\Library\Library.csproj", "{1016C640-7A96-4571-B6E2-A7791CD83694}"
