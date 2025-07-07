@@ -11,6 +11,20 @@ namespace Library
     public class Facade
     {
         /// <summary>
+        /// implementacion singleton (esto es para que ...)
+        /// </summary>
+        private static Facade? _instance;
+        public static Facade Instance => _instance ??= new Facade();
+
+        /// <summary>
+        ///  constructor privado para evitar instanciación externa
+        /// </summary>
+        private Facade()
+        {
+            // el metodo es el constructor privado del patron singleton y aunquew está vacío sirve para impedir crear la clase desde afuera
+        }
+        
+        /// <summary>
         /// mapa del juego
         /// </summary>
         public Mapa Mapa { get; private set; }
@@ -24,6 +38,25 @@ namespace Library
         /// segundo jugador
         /// </summary>
         public Player Jugador2 { get; private set; }
+        
+        /// <summary>
+        /// obtiene una instancia del jugador correspondiente al nombre ingresado
+        /// </summary>
+        /// <param name="nombre">Nombre del jugador que se desea buscar</param>
+        /// <returns>
+        /// retorna el jugador cuyo nombre coincida con el parámetro ingresado 
+        /// si no se encuentra un jugador con ese nombre, retorna null
+        /// </returns>
+        public Player GetJugadorPorNombre(string nombre)
+        {
+            if (Jugador1.Nombre == nombre)
+                return Jugador1;
+            else if (Jugador2.Nombre == nombre)
+                return Jugador2;
+            else
+                return null;
+        }
+
 
         /// <summary>
         /// jugador que tiene el turno actual
@@ -147,4 +180,6 @@ namespace Library
             throw new NotImplementedException();
         }
     }
+    
+    
 }
