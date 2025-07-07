@@ -94,7 +94,7 @@ public class Facade
         }
 
         string result = "Esperan: ";
-        foreach (Player Player in this.WaitingList.GetAllWaiting())
+        foreach (Ucu.Poo.DiscordBot.Domain.Player Player in this.WaitingList.GetAllWaiting())
         {
             result = result + Player.DisplayName + "; ";
         }
@@ -109,7 +109,7 @@ public class Facade
     /// <returns>Un mensaje con el resultado.</returns>
     public string PlayerIsWaiting(string displayName)
     {
-        Player? Player = this.WaitingList.FindPlayerByDisplayName(displayName);
+        Ucu.Poo.DiscordBot.Domain.Player? Player = this.WaitingList.FindPlayerByDisplayName(displayName);
         if (Player == null)
         {
             return $"{displayName} no está esperando";
@@ -207,7 +207,7 @@ public class Facade
     /// <returns>Un mensaje con el resultado.</returns>
     public string StartBattle(string playerDisplayName, string? opponentDisplayName)
     {
-        Player? opponent;
+        Ucu.Poo.DiscordBot.Domain.Player? opponent;
         
         if (!OpponentProvided() && !SomebodyIsWaiting())
         {
@@ -248,5 +248,14 @@ public class Facade
         {
             return opponent != null;
         }
+    }
+
+    /// <summary>
+    /// Obtiene todas las partidas activas (para diagnóstico)
+    /// </summary>
+    /// <returns>Lista de todas las partidas activas</returns>
+    public List<Library.Facade> GetTodasLasPartidas()
+    {
+        return PartidasActivas.Values.ToList();
     }
 }

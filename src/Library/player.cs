@@ -15,7 +15,7 @@ namespace Library
         private Dictionary<TipoRecurso, int> recursos; 
         private List<Aldeano> aldeanos; 
         private List<Edificio> edificios;
-        private bool accesible;
+        // private bool accesible; // Campo no utilizado, comentado para evitar warning
         private int poblacionActual; 
         private int poblacionMaxima; 
         
@@ -29,7 +29,7 @@ namespace Library
             this.name = name;
             this.civilizacion = civilizacion;
             Unidades = unidades;
-            this.accesible = true; 
+            // this.accesible = true; 
 
             // valores de inicio de juego
             this.recursos = new Dictionary<TipoRecurso, int>()
@@ -57,7 +57,7 @@ namespace Library
         {
             this.name = nombreJugador1;
             this.civilizacion = civ1;
-            this.accesible = true;
+            // this.accesible = true;
 
             // valores de inicio de juego
             this.recursos = new Dictionary<TipoRecurso, int>()
@@ -89,6 +89,16 @@ namespace Library
         /// Civilización del jugador
         /// </summary>
         public Civilizacion Civilizacion => civilizacion;
+
+        /// <summary>
+        /// Población actual del jugador
+        /// </summary>
+        public int PoblacionActual => poblacionActual;
+
+        /// <summary>
+        /// Población máxima del jugador
+        /// </summary>
+        public int PoblacionMaxima => poblacionMaxima;
 
         /// <summary>
         /// Inicializa el juego siguiendo especificaciones
