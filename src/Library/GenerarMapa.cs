@@ -59,6 +59,34 @@ public class GenerarMapa
     }
     
     /// <summary>
+    /// Devuelve el mapa como un string listo para mostrar.
+    /// Incluye terreno y unidades.
+    /// </summary>
+    public string MostrarMapa()
+    {
+        string resultado = "";
+
+        for (int y = 0; y < Alto; y++)
+        {
+            for (int x = 0; x < Ancho; x++)
+            {
+                if (unidades.ContainsKey((x, y)))
+                {
+                    resultado += unidades[(x, y)];
+                }
+                else
+                {
+                    resultado += mapa[y, x];
+                }
+            }
+            resultado += "\n";
+        }
+
+        return resultado;
+    }
+
+    
+    /// <summary>
     /// Inicia el mapa con terrenos
     /// </summary>
     private void InicializarMapa() 
