@@ -25,8 +25,8 @@ public class Tests
 
         Assert.That(jugadores[0].Nombre, Is.EqualTo("Jugador1"));
         Assert.That(jugadores[1].Nombre, Is.EqualTo("Jugador2"));
-        Assert.That(jugadores[0].Civilizacion.Name, Is.EqualTo("vikingos"));
-        Assert.That(jugadores[1].Civilizacion.Name, Is.EqualTo("francos"));
+        Assert.That(jugadores[0].Civilizacion.Name, Is.EqualTo("bizantinos"));
+        Assert.That(jugadores[1].Civilizacion.Name, Is.EqualTo("constantinopolitanos"));
     }
     
     //2. elegir civilización (aprovechar sus ventajas estratégicas)
@@ -330,22 +330,18 @@ public class Tests
     [Test]
     public void GuardarPartida()
     {
-        [Test]
-        void GuardarPartidaTest()
-        {
-            var juego = new Facade();
-            string ruta = "partida_test.txt";
+        var juego = new Facade();
+        string ruta = "partida_test.txt";
 
-            if (File.Exists(ruta))
-                File.Delete(ruta);
-            
-            juego.GuardarPartida(ruta);
-            
-            Assert.IsTrue(File.Exists(ruta), "El archivo no fue creado al guardar la partida.");
-            string contenido = File.ReadAllText(ruta);
-            Assert.That(contenido, Is.EqualTo("simulando partida guardada..."), "El contenido del archivo guardado no es el esperado.");
+        if (File.Exists(ruta))
             File.Delete(ruta);
-        }
+        
+        juego.GuardarPartida(ruta);
+        
+        Assert.IsTrue(File.Exists(ruta), "El archivo no fue creado al guardar la partida.");
+        string contenido = File.ReadAllText(ruta);
+        Assert.That(contenido, Is.EqualTo("simulando partida guardada..."), "El contenido del archivo guardado no es el esperado.");
+        File.Delete(ruta);
     }
 
     //17. si el edificio recibe la misma cantidad de daño que tiene de vida debería destruirse
