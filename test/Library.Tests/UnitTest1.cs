@@ -155,16 +155,16 @@ public class Tests
         var bonificaciones = new List<string>();
         var civilizacion = new Civilizacion("Bizantinos", bonificaciones);
         var player = new Player("Juan", civilizacion);
-        var ubicacionEspecifica = new Coordenada(100, 100);
+        var ubicacionEspecifica = new Coordenada(99, 99);
 
         int maderaInicial = player.GetRecurso(TipoRecurso.Madera);
         var casa = new Casa(ubicacionEspecifica, 100, player, "Residencial", 5);
         
-        player. Construir(casa, ubicacionEspecifica);
+        player.Construir(casa, ubicacionEspecifica);
 
         Assert.That(player.GetRecurso(TipoRecurso.Madera), Is.EqualTo(maderaInicial - 25));
-        Assert.That(casa.Ubicacion.X, Is.EqualTo(100));
-        Assert.That(casa.Ubicacion.Y, Is.EqualTo(100));
+        Assert.That(casa.Ubicacion.X, Is.EqualTo(99));
+        Assert.That(casa.Ubicacion.Y, Is.EqualTo(99));
         Assert.IsTrue(ubicacionEspecifica.EsValida());
         Assert.That(casa.Owner, Is.EqualTo(player));
     }
@@ -257,7 +257,7 @@ public class Tests
         Assert.Less(objetivo.Vida, vidaInicial, "La vida del objetivo debería disminuir después de ser atacado");
     }
     
-    //12. entrenar aldeanos parta mejorar la economía y tener suficientes casas para mantener la población.
+    //12. entrenar aldeanos para mejorar la economía y tener suficientes casas para mantener la población.
     [Test]
     public void EntrenarAldeanos()
     {
