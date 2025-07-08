@@ -380,10 +380,13 @@ public class Tests
     {
         var jugador = new Player("Moctezuma", new Civilizacion("Mayas", new List<string>()));
         var unidad = new Infanteria(1, new Coordenada(1, 1), jugador);
-        var nuevaUbicacion = new Coordenada(-5, 200);
+        var ubicacionOriginal = unidad.Ubicacion;
+
+        var nuevaUbicacion = new Coordenada(-5, 200); // coordenada fuera del mapa
+
         unidad.Mover(nuevaUbicacion);
 
-        Assert.That(nuevaUbicacion, Is.Not.EqualTo(unidad.Ubicacion), "No debería moverse a coordenadas que no son validas.");
+        Assert.That(unidad.Ubicacion, Is.EqualTo(ubicacionOriginal), "No es posible moverse a esa coordenada porque es inválida.");
     }
     
     //20. no se debe atacar a unidades aliadas

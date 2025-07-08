@@ -23,13 +23,13 @@ public class Coordenada
         X = x;
         Y = y;
     }
-
+    
     /// <summary>
     /// verifica si la coordenada se encuentra dentro de los limites del mapa
     /// </summary>
     /// <returns><c>true</c> si la coordenada está dentro del mapa y si no <c>false</c></returns>
-    public bool EsValida()
+    public virtual bool EsValida()
     {
-        return X >= 0 && X < Mapa.Size && Y >= 0 && Y < Mapa.Size;
+        return X >= 0 && Y >= 0 && X < 100 && Y < 100;
     }
 }

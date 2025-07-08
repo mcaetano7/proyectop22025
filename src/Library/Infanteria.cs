@@ -14,5 +14,13 @@ public class Infanteria : UnidadMilitar
     public Infanteria(int id, Coordenada ubicacion, Player owner) 
         : base(id, ubicacion, vida: 100, velocidad: 50, owner, ataque: 30, defensa: 50) 
     {
-    } 
+    }
+
+    public override void Mover(Coordenada nuevaUbicacion)
+    {
+        if (nuevaUbicacion.EsValida())
+        {
+            this.Ubicacion = nuevaUbicacion;
+        }
+    }
 }
