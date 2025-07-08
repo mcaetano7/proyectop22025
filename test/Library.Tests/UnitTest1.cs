@@ -290,19 +290,19 @@ public class Tests
     }
 
     
-    //14. usar comandos intuitivos para interactuar con el juego 
+    //14. crea una unidad en una coordenada inicial
     [Test]
-    public void InteractuarJuego()
+    public void MoverUnidadSimple()
     {
         var facade = new Facade();
-        var civ1 = new Civilizacion("Bizantinos", new List<string>());
-        var civ2 = new Civilizacion("Francos", new List<string>());
-
-        facade.CrearPartida(civ1, civ2);
-        //string respuesta = facade.InterpretarComando("mover unidad 1 a 3 4");
-
-        //Assert.IsNotNull(respuesta);
-        //Assert.IsTrue(respuesta.Contains("mover"), "El comando debería haber sido procesado");
+        var jugador = new Player("Jugador1", new Civilizacion("Bizantinos", new List<string>()));
+        var unidad = new Infanteria(1, new Coordenada(1, 1), jugador);
+        
+        var destino = new Coordenada(3, 4);
+        bool resultado = facade.MoverUnidad(unidad, destino);
+        
+        Assert.IsTrue(resultado, "La unidad debería haberse movido.");
+        Assert.That(unidad.Ubicacion, Is.EqualTo(destino), "La unidad no terminó en la ubicación correcta.");
     }
 
     
