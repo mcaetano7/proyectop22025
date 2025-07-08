@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Ucu.Poo.DiscordBot.Commands;
 
 namespace Library
 {
