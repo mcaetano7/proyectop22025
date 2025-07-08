@@ -143,27 +143,14 @@ namespace Library
         /// </summary>
         public bool MoverUnidad(Unidad unidad, Coordenada destino)
         {
-            try
-            {
-                unidad.Mover(destino);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            var comando = new MoverUnidadComando(unidad, destino);  // <-- CAMBIÉ EL NOMBRE
+            return comando.Ejecutar();
         }
-        
+
         public Unidad ObtenerUnidadPorId(int id, string nombreJugador)
         {
             var jugador = GetJugadorPorNombre(nombreJugador);
-            if (jugador == null) return null;
-    
-            if (jugador.Unidades is IEnumerable<Unidad> unidades)
-            {
-                return unidades.FirstOrDefault(u => u.Id == id);
-            }
-            return null;
+            return jugador?.Unidades?.FirstOrDefault(u => u?.Id == id);
         }
         
 
@@ -196,7 +183,10 @@ namespace Library
             }
         }
 
-
+        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
+        {
+            throw new NotImplementedException();
+        }
     }
     
     
