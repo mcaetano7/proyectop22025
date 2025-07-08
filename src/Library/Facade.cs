@@ -56,8 +56,7 @@ namespace Library
             else
                 return null;
         }
-
-
+        
         /// <summary>
         /// jugador que tiene el turno actual
         /// </summary>
