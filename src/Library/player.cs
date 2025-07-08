@@ -189,18 +189,35 @@ namespace Library
         /// </summary>
         /// <param name="edificio">Edificio que se va a construir</param>
         /// <param name="ubicación">Ubicación en donde se va a construir</param>
-        public void Construir(Edificio edificio, Coordenada ubicación) 
+        /// <returns>True si la construcción fue exitosa, False en caso contrario</returns>
+        public bool Construir(Edificio edificio, Coordenada ubicación) 
         {
             if (TieneRecursos(edificio.ObtenerCosto())) //verifica si puede pagar la construcción
             {
-                GastarRecursos(edificio.ObtenerCosto());
-                edificios.Add(edificio);
-
-                if (edificio is Casa) //si es casa aumenta la población 
+                try
                 {
-                    poblacionMaxima += 5;
+                    // Gastar recursos primero
+                    GastarRecursos(edificio.ObtenerCosto());
+                    
+                    // Agregar el edificio a la lista
+                    edificios.Add(edificio);
+
+                    // Si es casa, aumentar la población máxima
+                    if (edificio is Casa) 
+                    {
+                        poblacionMaxima += 5;
+                    }
+                    
+                    return true; // Construcción exitosa
+                }
+                catch (Exception)
+                {
+                    // Si hay algún error, no se construye
+                    return false;
                 }
             }
+            
+            return false; // No tiene recursos suficientes
         }
         
         /// <summary>

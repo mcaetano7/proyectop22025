@@ -24,7 +24,7 @@ public class Casa : Edificio
     /// <param name="tipo"></param>
     /// <param name="capacidad"> capacidad de la casa</param>
   public Casa(Coordenada ubicacion, int vida, Player owner, string tipo, int capacidad) //crea una casa
-      : base(ubicacion, 100, owner)
+      : base(ubicacion, vida, owner)
   {
       CapacidadPoblacion = 0;
       Resistencia = 500;

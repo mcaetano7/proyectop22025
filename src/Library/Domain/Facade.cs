@@ -150,13 +150,15 @@ public class Facade
     /// <param name="jugador">El jugador que construye</param>
     /// <param name="edificio">El edificio a construir</param>
     /// <param name="ubicacion">La ubicación donde construir</param>
-    public void Construir(Library.Player jugador, Library.Edificio edificio, Library.Coordenada ubicacion)
+    /// <returns>True si la construcción fue exitosa, False en caso contrario</returns>
+    public bool Construir(Library.Player jugador, Library.Edificio edificio, Library.Coordenada ubicacion)
     {
         var partida = GetPartidaActiva(jugador.Nombre);
         if (partida != null)
         {
-            partida.Construir(jugador, edificio, ubicacion);
+            return partida.Construir(jugador, edificio, ubicacion);
         }
+        return false;
     }
 
     private string CreateGame(string playerDisplayName, string opponentDisplayName)

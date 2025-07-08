@@ -1,6 +1,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Ucu.Poo.DiscordBot.Domain;
+using Library;
 
 namespace Ucu.Poo.DiscordBot.Commands;
 
@@ -36,7 +37,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         var player = ObtenerPlayerPorNombre(userName); // Implementa este método según tu lógica
         if (player == null)
         {
-            await ReplyAsync($"No se encontró información para el jugador {userName}");
+            await ReplyAsync($"No se encontró información para el jugador {userName}", false, null);
             return;
         }
 
@@ -44,28 +45,42 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         var info = $"Información del jugador: **{player.Nombre}**\n" +
                    $"Civilización: {player.Civilizacion.Name}\n" +
                    $"Bonificaciones: {string.Join(", ", player.Civilizacion.Bonificaciones)}\n" +
-                   $"Recursos: Alimento={player.GetRecurso(Library.TipoRecurso.Alimento)}, " +
-                   $"Madera={player.GetRecurso(Library.TipoRecurso.Madera)}, " +
-                   $"Oro={player.GetRecurso(Library.TipoRecurso.Oro)}, " +
-                   $"Piedra={player.GetRecurso(Library.TipoRecurso.Piedra)}\n";
+                   $"Recursos: Alimento={player.GetRecurso(TipoRecurso.Alimento)}, " +
+                   $"Madera={player.GetRecurso(TipoRecurso.Madera)}, " +
+                   $"Oro={player.GetRecurso(TipoRecurso.Oro)}, " +
+                   $"Piedra={player.GetRecurso(TipoRecurso.Piedra)}\n";
 
         // Estado: esperando, en batalla, etc. (puedes mejorar esto según tu lógica)
         string estado = Facade.Instance.PlayerIsWaiting(userName).Contains("esperando") ? "Esperando" : "No esperando";
         info += $"Estado: {estado}";
 
-        await ReplyAsync(info);
+        await ReplyAsync(info, false, null);
     }
 
-    // Este método es un placeholder. Debes implementarlo según tu lógica de dominio.
-    private Library.Player? ObtenerPlayerPorNombre(string nombre)
+    // Este método obtiene el jugador por nombre desde la partida activa
+    private Player? ObtenerPlayerPorNombre(string nombre)
     {
-        var partida = Facade.Instance.GetPartidaActiva(nombre);
-        if (partida != null)
+        try
         {
-            // Determinar si es el jugador 1 o 2
-            return partida.Jugador1.Nombre == nombre ? partida.Jugador1 : partida.Jugador2;
+            var partida = Facade.Instance.GetPartidaActiva(nombre);
+            if (partida != null)
+            {
+                // Determinar si es el jugador 1 o 2
+                if (partida.Jugador1?.Nombre == nombre)
+                {
+                    return partida.Jugador1;
+                }
+                else if (partida.Jugador2?.Nombre == nombre)
+                {
+                    return partida.Jugador2;
+                }
+            }
+            return null;
         }
-        return null;
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -89,7 +104,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         {
             info += "**No estás en una partida activa.**\n" +
                    "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.";
-            await ReplyAsync(info);
+            await ReplyAsync(info, false, null);
             return;
         }
 
@@ -98,7 +113,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         if (jugador == null)
         {
             info += "**Error:** No se pudo encontrar tu jugador en la partida.";
-            await ReplyAsync(info);
+            await ReplyAsync(info, false, null);
             return;
         }
 
@@ -112,13 +127,13 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
                 $"**Turno actual:** {jugadorTurno}\n" +
                 $"**¿Es mi turno?:** {(esMiTurno ? " Sí" : " No")}\n" +
                 $"**Recursos:**\n" +
-                $"🍖 Alimento: {jugador.GetRecurso(Library.TipoRecurso.Alimento)}\n" +
-                $"🪵 Madera: {jugador.GetRecurso(Library.TipoRecurso.Madera)}\n" +
-                $"💰 Oro: {jugador.GetRecurso(Library.TipoRecurso.Oro)}\n" +
-                $"🪨 Piedra: {jugador.GetRecurso(Library.TipoRecurso.Piedra)}\n" +
+                $"🍖 Alimento: {jugador.GetRecurso(TipoRecurso.Alimento)}\n" +
+                $"🪵 Madera: {jugador.GetRecurso(TipoRecurso.Madera)}\n" +
+                $"💰 Oro: {jugador.GetRecurso(TipoRecurso.Oro)}\n" +
+                $"🪨 Piedra: {jugador.GetRecurso(TipoRecurso.Piedra)}\n" +
                 $"**Población:** {jugador.PoblacionActual}/{jugador.PoblacionMaxima}";
 
-        await ReplyAsync(info);
+        await ReplyAsync(info, false, null);
     }
 
     /// <summary>
@@ -135,7 +150,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         
         if (partidas.Count == 0)
         {
-            await ReplyAsync("**No hay partidas activas.**");
+            await ReplyAsync("**No hay partidas activas.**", false, null);
             return;
         }
 
@@ -145,7 +160,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
             info += $"• **{partida.Jugador1.Nombre}** vs **{partida.Jugador2.Nombre}**\n";
         }
 
-        await ReplyAsync(info);
+        await ReplyAsync(info, false, null);
     }
 
     /// <summary>
@@ -162,7 +177,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
         if (partida == null)
         {
             await ReplyAsync("**No estás en una partida activa.**\n" +
-                           "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.");
+                           "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.", false, null);
             return;
         }
 
@@ -173,7 +188,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
             
             if (string.IsNullOrEmpty(mapaAscii))
             {
-                await ReplyAsync("**Error:** No se pudo generar el mapa.");
+                await ReplyAsync("**Error:** No se pudo generar el mapa.", false, null);
                 return;
             }
 
@@ -188,7 +203,7 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
                     if ((mensaje + linea + "\n").Length > 1900)
                     {
                         mensaje += "```";
-                        await ReplyAsync(mensaje);
+                        await ReplyAsync(mensaje, false, null);
                         mensaje = "```\n" + linea + "\n";
                     }
                     else
@@ -200,17 +215,161 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
                 if (mensaje.Length > 3)
                 {
                     mensaje += "```";
-                    await ReplyAsync(mensaje);
+                    await ReplyAsync(mensaje, false, null);
                 }
             }
             else
             {
-                await ReplyAsync("**Mapa del Juego:**\n```\n" + mapaAscii + "\n```");
+                await ReplyAsync("**Mapa del Juego:**\n```\n" + mapaAscii + "\n```", false, null);
             }
         }
         catch (Exception ex)
         {
-            await ReplyAsync($"**Error al mostrar el mapa:** {ex.Message}");
+            await ReplyAsync($"**Error al mostrar el mapa:** {ex.Message}", false, null);
+        }
+    }
+
+    /// <summary>
+    /// Comando para diagnosticar problemas de construcción
+    /// </summary>
+    [Command("diagnostico-construccion")]
+    [Summary("Diagnóstico específico para problemas de construcción")]
+    public async Task DiagnosticoConstruccionAsync()
+    {
+        string displayName = CommandHelper.GetDisplayName(Context);
+        
+        // Verificar si está en una partida
+        var partida = Facade.Instance.GetPartidaActiva(displayName);
+        if (partida == null)
+        {
+            await ReplyAsync("**No estás en una partida activa.**\n" +
+                           "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.", false, null);
+            return;
+        }
+
+        // Obtener el jugador
+        var jugador = ObtenerPlayerPorNombre(displayName);
+        if (jugador == null)
+        {
+            await ReplyAsync("**Error:** No se pudo encontrar tu jugador en la partida.", false, null);
+            return;
+        }
+
+        // Verificar si es tu turno
+        bool esMiTurno = partida.TieneTurno(displayName);
+        string jugadorTurno = partida.ObtenerJugadorTurno();
+
+        // Información de diagnóstico
+        var info = $"🔧 **Diagnóstico de Construcción:**\n" +
+                   $"**Jugador:** {displayName}\n" +
+                   $"**¿Es mi turno?:** {(esMiTurno ? "Sí" : "No")}\n" +
+                   $"**Turno actual:** {jugadorTurno}\n" +
+                   $"**Recursos disponibles:**\n" +
+                   $"🍖 Alimento: {jugador.GetRecurso(TipoRecurso.Alimento)}\n" +
+                   $"🪵 Madera: {jugador.GetRecurso(TipoRecurso.Madera)}\n" +
+                   $"💰 Oro: {jugador.GetRecurso(TipoRecurso.Oro)}\n" +
+                   $"🪨 Piedra: {jugador.GetRecurso(TipoRecurso.Piedra)}\n" +
+                   $"**Población:** {jugador.PoblacionActual}/{jugador.PoblacionMaxima}\n\n" +
+                   $"**Costos de construcción:**\n" +
+                   $"Casa: 25 Madera\n" +
+                   $"Centro Cívico: 200 Madera\n" +
+                   $"Almacén: 500 Madera\n\n" +
+                   $"**Comandos útiles:**\n" +
+                   $"• `!construir casa 5 5` - Construir una casa\n" +
+                   $"• `!construir centrocivico 10 10` - Construir centro cívico\n" +
+                   $"• `!construir almacen 15 15` - Construir almacén\n" +
+                   $"• `!recolectar madera 5 5` - Recolectar madera";
+
+        await ReplyAsync(info, false, null);
+    }
+
+    /// <summary>
+    /// Comando para probar la construcción de una casa (solo para diagnóstico)
+    /// </summary>
+    [Command("probar-casa")]
+    [Summary("Prueba la construcción de una casa en coordenadas específicas")]
+    public async Task ProbarCasaAsync(int x = 5, int y = 5)
+    {
+        string displayName = CommandHelper.GetDisplayName(Context);
+        
+        // Verificar si está en una partida
+        var partida = Facade.Instance.GetPartidaActiva(displayName);
+        if (partida == null)
+        {
+            await ReplyAsync("**No estás en una partida activa.**\n" +
+                           "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.", false, null);
+            return;
+        }
+
+        // Obtener el jugador
+        var jugador = ObtenerPlayerPorNombre(displayName);
+        if (jugador == null)
+        {
+            await ReplyAsync("**Error:** No se pudo encontrar tu jugador en la partida.", false, null);
+            return;
+        }
+
+        // Verificar si es tu turno
+        if (!partida.TieneTurno(displayName))
+        {
+            string jugadorTurno = partida.ObtenerJugadorTurno();
+            await ReplyAsync($"**No es tu turno.** Juega {jugadorTurno}", false, null);
+            return;
+        }
+
+        try
+        {
+            // Verificar que el jugador no sea null
+            if (jugador == null)
+            {
+                await ReplyAsync("**Error:** No se pudo obtener información del jugador.", false, null);
+                return;
+            }
+
+            // Crear una casa de prueba
+            var ubicacion = new Coordenada(x, y);
+            var casa = new Casa(ubicacion, 50, jugador, "Casa", 5);
+            
+            // Mostrar información antes de la construcción
+            var maderaAntes = jugador.GetRecurso(TipoRecurso.Madera);
+            var poblacionAntes = jugador.PoblacionMaxima;
+            var tieneRecursos = jugador.TieneRecursos(casa.ObtenerCosto());
+            
+            await ReplyAsync($"**Antes de construir:**\n" +
+                           $"• Madera: {maderaAntes}\n" +
+                           $"• Población máxima: {poblacionAntes}\n" +
+                           $"• Costo casa: 25 Madera\n" +
+                           $"• ¿Tiene recursos?: {tieneRecursos}", false, null);
+
+            // Intentar construir directamente
+            bool construccionExitosa = jugador.Construir(casa, ubicacion);
+            
+            // Mostrar información después de la construcción
+            var maderaDespues = jugador.GetRecurso(TipoRecurso.Madera);
+            var poblacionDespues = jugador.PoblacionMaxima;
+            
+            await ReplyAsync($"**Después de construir:**\n" +
+                           $"• Madera: {maderaDespues}\n" +
+                           $"• Población máxima: {poblacionDespues}\n" +
+                           $"• ¿Construcción exitosa?: {(construccionExitosa ? "Sí" : "No")}\n" +
+                           $"• Madera gastada: {maderaAntes - maderaDespues}\n" +
+                           $"• Población aumentada: {poblacionDespues - poblacionAntes}\n" +
+                           $"• ¿Tiene recursos ahora?: {jugador.TieneRecursos(casa.ObtenerCosto())}", false, null);
+
+            if (construccionExitosa)
+            {
+                await ReplyAsync($"**¡Casa construida exitosamente en ({x},{y})!**", false, null);
+            }
+            else
+            {
+                await ReplyAsync($"**No se pudo construir la casa.**\n" +
+                               $"Verifica que tengas al menos 25 madera.", false, null);
+            }
+        }
+        catch (Exception ex)
+        {
+            await ReplyAsync($"**Error en la prueba:** {ex.Message}\n" +
+                           $"Stack trace: {ex.StackTrace}", false, null);
         }
     }
 }

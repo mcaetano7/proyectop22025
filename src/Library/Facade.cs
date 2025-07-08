@@ -132,9 +132,10 @@ namespace Library
         /// <summary>
         /// construye un edificio en una coordenada
         /// </summary>
-        public void Construir(Player jugador, Edificio edificio, Coordenada ubicacion)
+        /// <returns>True si la construcción fue exitosa, False en caso contrario</returns>
+        public bool Construir(Player jugador, Edificio edificio, Coordenada ubicacion)
         {
-            jugador.Construir(edificio, ubicacion);
+            return jugador.Construir(edificio, ubicacion);
         }
 
         /// <summary>

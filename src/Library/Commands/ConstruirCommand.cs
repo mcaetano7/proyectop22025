@@ -33,86 +33,103 @@ public class ConstruirCommand : ModuleBase<SocketCommandContext>
     [Summary("Construye un edificio en la ubicación indicada. Ej: !construir almacen 5 6")]
     public async Task ConstruirAsync(string tipoEdificio, int x, int y)
     {
-        // primero buscamos al jugador que hizo el comando
-        string displayName = CommandHelper.GetDisplayName(Context);
-        var jugador = GetJugadorPorNombre(displayName);
-
-        // si no lo encontramos, le decimos que no está en el juego
-        if (jugador == null)
-        {
-            await ReplyAsync("**Error:** No se encontró tu jugador en el juego. Tenes que estar en una partida activa");
-            return;
-        }
-
-        // Verificar que es el turno del jugador
-        var partida = Ucu.Poo.DiscordBot.Domain.Facade.Instance.GetPartidaActiva(displayName);
-        if (partida != null && !partida.TieneTurno(displayName))
-        {
-            string jugadorTurno = partida.ObtenerJugadorTurno();
-            await ReplyAsync($"⏰ **No es tu turno.** Juega {jugadorTurno}");
-            return;
-        }
-
-        // armamos la coordenada con lo que puso el usuario
-        var ubicacion = new Coordenada(x, y);
-
-        // según el tipo de edificio, creamos el objeto correspondiente
-        Edificio? edificio = tipoEdificio.ToLower() switch
-        {
-            "almacen" => new Almacen(ubicacion, 100, jugador, TipoRecurso.Madera, 1000),
-            "centrocivico" => new CentroCivico(ubicacion, 150, jugador, 10),
-            "casa" => new Casa(ubicacion, 50, jugador, "Casa", 5),
-            _ => null
-        };
-
-        // si el tipo que puso no es válido, avisamos
-        if (edificio == null)
-        {
-            await ReplyAsync($"**Error:** El tipo de edificio '{tipoEdificio}' no es válido.\nTipos disponibles: `almacen`, `centrocivico`, `casa`");
-            return;
-        }
-
-        // Mostrar información de diagnóstico
-        var costo = edificio.ObtenerCosto();
-        var maderaActual = jugador.GetRecurso(TipoRecurso.Madera);
-        var maderaNecesaria = costo.ContainsKey(TipoRecurso.Madera) ? costo[TipoRecurso.Madera] : 0;
-        
-        await ReplyAsync($"🔍 **Diagnóstico:**\n" +
-                        $"• Madera actual: {maderaActual}\n" +
-                        $"• Madera necesaria: {maderaNecesaria}\n" +
-                        $"• ¿Tiene recursos?: {jugador.TieneRecursos(costo)}");
-
-        // chequeamos que el jugador tenga los recursos para construirlo
-        if (!jugador.TieneRecursos(edificio.ObtenerCosto()))
-        {
-            await ReplyAsync($" **Error:** No tenes los recursos suficientes para construir ese edificio\n" +
-                           $"Necesitas: {string.Join(", ", costo.Select(kvp => $"{kvp.Value} {kvp.Key}"))}");
-            return;
-        }
-
         try
         {
-            // mandamos a construir el edificio (se encarga el Facade)
-            Ucu.Poo.DiscordBot.Domain.Facade.Instance.Construir(jugador, edificio, ubicacion);
+            // primero buscamos al jugador que hizo el comando
+            string displayName = CommandHelper.GetDisplayName(Context);
+            var jugador = GetJugadorPorNombre(displayName);
 
-            // Agregar el edificio al mapa de la partida
-            var partidaActiva = Ucu.Poo.DiscordBot.Domain.Facade.Instance.GetPartidaActiva(displayName);
-            if (partidaActiva != null && partidaActiva.Mapa != null)
+            // si no lo encontramos, le decimos que no está en el juego
+            if (jugador == null)
             {
-                // Crear un generador de mapa y agregar el edificio
-                var generadorMapa = new GenerarMapa(20, 15);
-                generadorMapa.ColocarEdificio(x, y, tipoEdificio.ToLower());
-                
-                // Por ahora, solo confirmamos que se construyo
+                await ReplyAsync("**Error:** No se encontró tu jugador en el juego. Tenes que estar en una partida activa");
+                return;
             }
 
-            // confirmamos que se construyo y mostramos los recursos que quedan
-            await ReplyAsync($"✅ **{tipoEdificio} construido en ({x},{y})!**\n" +
-                           $"Recursos restantes: Madera = {jugador.GetRecurso(TipoRecurso.Madera)}");
+            // Verificar que es el turno del jugador
+            var partida = Ucu.Poo.DiscordBot.Domain.Facade.Instance.GetPartidaActiva(displayName);
+            if (partida != null && !partida.TieneTurno(displayName))
+            {
+                string jugadorTurno = partida.ObtenerJugadorTurno();
+                await ReplyAsync($"⏰ **No es tu turno.** Juega {jugadorTurno}");
+                return;
+            }
+
+            // armamos la coordenada con lo que puso el usuario
+            var ubicacion = new Coordenada(x, y);
+
+            // según el tipo de edificio, creamos el objeto correspondiente
+            Edificio? edificio = tipoEdificio.ToLower() switch
+            {
+                "almacen" => new Almacen(ubicacion, 100, jugador, TipoRecurso.Madera, 1000),
+                "centrocivico" => new CentroCivico(ubicacion, 150, jugador, 10),
+                "casa" => new Casa(ubicacion, 50, jugador, "Casa", 5),
+                _ => null
+            };
+
+            // si el tipo que puso no es válido, avisamos
+            if (edificio == null)
+            {
+                await ReplyAsync($"**Error:** El tipo de edificio '{tipoEdificio}' no es válido.\nTipos disponibles: `almacen`, `centrocivico`, `casa`");
+                return;
+            }
+
+            // Mostrar información de diagnóstico detallada
+            var costo = edificio.ObtenerCosto();
+            var maderaActual = jugador.GetRecurso(TipoRecurso.Madera);
+            var maderaNecesaria = costo.ContainsKey(TipoRecurso.Madera) ? costo[TipoRecurso.Madera] : 0;
+            var tieneRecursos = jugador.TieneRecursos(costo);
+            
+            await ReplyAsync($"**Diagnóstico detallado:**\n" +
+                            $"• Tipo edificio: {tipoEdificio}\n" +
+                            $"• Ubicación: ({x},{y})\n" +
+                            $"• Madera actual: {maderaActual}\n" +
+                            $"• Madera necesaria: {maderaNecesaria}\n" +
+                            $"• ¿Tiene recursos?: {tieneRecursos}\n" +
+                            $"• Costo total: {string.Join(", ", costo.Select(kvp => $"{kvp.Value} {kvp.Key}"))}");
+
+            // chequeamos que el jugador tenga los recursos para construirlo
+            if (!tieneRecursos)
+            {
+                await ReplyAsync($"**Error:** No tenes los recursos suficientes para construir ese edificio\n" +
+                               $"Necesitas: {string.Join(", ", costo.Select(kvp => $"{kvp.Value} {kvp.Key}"))}");
+                return;
+            }
+
+            // Verificar que las coordenadas estén dentro del rango válido
+            if (x < 0 || x >= 20 || y < 0 || y >= 15)
+            {
+                await ReplyAsync($"**Error:** Las coordenadas ({x},{y}) están fuera del rango válido del mapa (0-19, 0-14)");
+                return;
+            }
+
+            // Intentar construir el edificio
+            try
+            {
+                // mandamos a construir el edificio (se encarga el Facade)
+                bool construccionExitosa = Ucu.Poo.DiscordBot.Domain.Facade.Instance.Construir(jugador, edificio, ubicacion);
+
+                if (construccionExitosa)
+                {
+                    // confirmamos que se construyo y mostramos los recursos que quedan
+                    await ReplyAsync($"**{tipoEdificio} construido exitosamente en ({x},{y})!**\n" +
+                                   $"Recursos restantes: Madera = {jugador.GetRecurso(TipoRecurso.Madera)}\n" +
+                                   $"Población máxima: {jugador.PoblacionMaxima}");
+                }
+                else
+                {
+                    await ReplyAsync($"**Error:** No se pudo construir el {tipoEdificio}.\n" +
+                                   $"Verifica que tengas los recursos necesarios y que las coordenadas sean válidas.");
+                }
+            }
+            catch (Exception ex)
+            {
+                await ReplyAsync($"**Error al construir:** {ex.Message}");
+            }
         }
         catch (Exception ex)
         {
-            await ReplyAsync($"**Error al construir:** {ex.Message}");
+            await ReplyAsync($"**Error crítico en el comando:** {ex.Message}");
         }
     }
 }
