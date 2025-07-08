@@ -7,7 +7,7 @@ public class Almacen : Edificio
     /// <summary>
     /// tipo de recurso que almacena
     /// </summary>
-    public TipoRecurso Tipo { get; set; }
+    public TipoRecurso? Tipo { get; set; }
     
     /// <summary>
     /// capacidad máxima que almacena
@@ -22,7 +22,7 @@ public class Almacen : Edificio
     /// <param name="owner"> a que jugador pertenece</param>
     /// <param name="tipo"></param>
     /// <param name="capacidad"> capacidad del almacén </param>
-    public Almacen(Coordenada ubicacion, int vida, Player owner,TipoRecurso tipo, int capacidad)
+    public Almacen(Coordenada ubicacion, int vida, Player owner,TipoRecurso? tipo, int capacidad)
         : base(ubicacion, vida, owner)
     {
         Tipo = tipo;
@@ -49,9 +49,9 @@ public class Almacen : Edificio
     /// método que retorna cuanto cuesta construir un almacen (cuanto de recursos)
     /// </summary>
     /// <returns> un diccionario con los tipos de recuros y sus cantidades (usamos diccionario porque asi podemos buscar directamente por tipo de recurso y asociar más facil el tipo de recurso con la cantidad necesaria)</returns>
-    public override Dictionary<TipoRecurso, int> ObtenerCosto() 
+    public override Dictionary<TipoRecurso?, int> ObtenerCosto() 
     {
-        return new Dictionary<TipoRecurso, int>() 
+        return new Dictionary<TipoRecurso?, int>() 
         {
             { TipoRecurso.Madera, 500 }
         };

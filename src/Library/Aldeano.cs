@@ -52,7 +52,7 @@ public class Aldeano : Unidad
     /// </summary>
     /// <param name="tipo"> indica de que recurso se trata</param>
     /// <param name="ubicacion"> indica la ubicación de la recolección </param>
-    public void IniciarRecoleccion(TipoRecurso tipo, Coordenada ubicacion) 
+    public void IniciarRecoleccion(TipoRecurso? tipo, Coordenada ubicacion) 
     {
         ocupado = true;
         Owner.AgregarRecurso(tipo, 10);

@@ -16,9 +16,9 @@ namespace Library
         /// </summary>
         public int Cantidad { get; set; }
 
-        private Dictionary<TipoRecurso, int> recursos = new();
+        private Dictionary<TipoRecurso?, int> recursos = new();
 
-        public void Almacenar(TipoRecurso tipo, int cantidad)
+        public void Almacenar(TipoRecurso? tipo, int cantidad)
         {
             if (!recursos.ContainsKey(tipo))
             {
@@ -27,12 +27,12 @@ namespace Library
             recursos[tipo] += cantidad;
         }
         
-        public bool ContieneRecurso(TipoRecurso tipo)
+        public bool ContieneRecurso(TipoRecurso? tipo)
         {
             return recursos.ContainsKey(tipo) && recursos[tipo] > 0;
         }
 
-        public int Obtener(TipoRecurso tipo)
+        public int Obtener(TipoRecurso? tipo)
         {
             return recursos.TryGetValue(tipo, out int cantidad) ? cantidad : 0;
         }
@@ -53,7 +53,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo"></param>
         /// <returns></returns>
-        public int ObtenerCantidad(TipoRecurso tipo)
+        public int ObtenerCantidad(TipoRecurso? tipo)
         {
             return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
         }
@@ -63,7 +63,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo"></param>
         /// <param name="cantidad"></param>
-        public void Descontar(TipoRecurso tipo, int cantidad)
+        public void Descontar(TipoRecurso? tipo, int cantidad)
         {
             if (recursos.ContainsKey(tipo))
             {
@@ -76,7 +76,7 @@ namespace Library
         /// </summary>
         /// <param name="tipo"></param>
         /// <param name="cantidad"></param>
-        public void Agregar(TipoRecurso tipo, int cantidad) //falta implementar este metodo
+        public void Agregar(TipoRecurso? tipo, int cantidad) //falta implementar este metodo
         {
             if (!recursos.ContainsKey(tipo))
                 recursos[tipo] = 0;

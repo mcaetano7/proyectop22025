@@ -49,7 +49,7 @@ public abstract class Edificio
     /// Debe ser implementado por cada subclase
     /// </summary>
     /// <returns>un diccionario que asocia tipo de recurso y cantidad necesaria</returns>
-    public abstract Dictionary<TipoRecurso, int> ObtenerCosto();
+    public abstract Dictionary<TipoRecurso?, int> ObtenerCosto();
     
     /// <summary>
     /// daña al edificio reduciendo su vida
