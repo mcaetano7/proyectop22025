@@ -143,14 +143,25 @@ namespace Library
         /// </summary>
         public bool MoverUnidad(Unidad unidad, Coordenada destino)
         {
-            var comando = new MoverUnidadComando(unidad, destino);  // <-- CAMBIÉ EL NOMBRE
-            return comando.Ejecutar();
+
+            try
+            {
+                unidad.Mover(destino);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        
         }
 
         public Unidad ObtenerUnidadPorId(int id, string nombreJugador)
         {
             var jugador = GetJugadorPorNombre(nombreJugador);
-            return jugador?.Unidades?.FirstOrDefault(u => u?.Id == id);
+            if (jugador == null) return null;
+    
+            return jugador.Unidades?.Cast<Unidad>()?.FirstOrDefault(u => u?.Id == id);
         }
         
 
@@ -183,10 +194,7 @@ namespace Library
             }
         }
 
-        public void CrearPartida(Civilizacion civ1, Civilizacion civ2)
-        {
-            throw new NotImplementedException();
-        }
+
     }
     
     
