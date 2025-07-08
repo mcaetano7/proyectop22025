@@ -24,7 +24,7 @@ namespace Library
         /// </summary>
         /// <param name="name">Nombre del jugador</param>
         /// <param name="civilizacion">Civilización del jugador</param>
-        public Player(string name, Civilizacion civilizacion, IEnumerable unidades) 
+        public Player(string name, Civilizacion civilizacion, IEnumerable<Unidad> unidades) 
         {
             this.name = name;
             this.civilizacion = civilizacion;
@@ -237,6 +237,6 @@ namespace Library
             return recursos.ContainsKey(tipo) ? recursos[tipo] : 0;
         }
 
-        public IEnumerable Unidades { get; set; }
+        public IEnumerable<Unidad> Unidades { get; set; }
     }
 }

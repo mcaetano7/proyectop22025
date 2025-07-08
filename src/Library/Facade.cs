@@ -142,23 +142,14 @@ namespace Library
         /// </summary>
         public bool MoverUnidad(Unidad unidad, Coordenada destino)
         {
-            var comando = new MoverUnidadCommand(unidad, destino);
+            var comando = new MoverUnidadComando(unidad, destino);  // <-- CAMBIÉ EL NOMBRE
             return comando.Ejecutar();
         }
-        
+
         public Unidad ObtenerUnidadPorId(int id, string nombreJugador)
         {
             var jugador = GetJugadorPorNombre(nombreJugador);
-            if (jugador == null) return null;
-    
-            foreach (var unidad in jugador.Unidades)
-            {
-                if (unidad.Id == id)
-                {
-                    return unidad;
-                }
-            }
-            return null;
+            return jugador?.Unidades?.FirstOrDefault(u => u?.Id == id);
         }
         
 
