@@ -71,7 +71,7 @@ public class Tests
         var player = new Player("Juan",  civilizacion);
         player.InicializarJuego();
 
-        var recursosIniciales = new Dictionary<TipoRecurso, int>()
+        var recursosIniciales = new Dictionary<TipoRecurso?, int>()
         {
             { TipoRecurso.Alimento, 100 },
             { TipoRecurso.Madera, 100 },
@@ -101,7 +101,7 @@ public class Tests
         var coordenada = new Coordenada(5, 10);
         var civilizacion = new Civilizacion("Bizantinos", new List<string>());
         var player = new Player("Juan", civilizacion);
-        TipoRecurso tipoAlmacen = TipoRecurso.Madera;
+        TipoRecurso? tipoAlmacen = TipoRecurso.Madera;
         int capacidadAlmacen = 1000;
         int vidaInicial = 100;
 
@@ -299,10 +299,10 @@ public class Tests
         var civ2 = new Civilizacion("Francos", new List<string>());
 
         facade.CrearPartida(civ1, civ2);
-       // string respuesta = facade.InterpretarComando("mover unidad 1 a 3 4"); CREAR MÉTODO EN FACADE PARA INTERPRETAR COMANDOS
+        string respuesta = facade.InterpretarComando("mover unidad 1 a 3 4");
 
-       // Assert.IsNotNull(respuesta);
-      //  Assert.IsTrue(respuesta.Contains("mover"), "El comando debería haber sido procesado");
+        Assert.IsNotNull(respuesta);
+        Assert.IsTrue(respuesta.Contains("mover"), "El comando debería haber sido procesado");
     }
 
     
@@ -364,7 +364,8 @@ public class Tests
         var coordenada = new Coordenada(0, 0);
         var casa = new Casa(coordenada, 100, jugador, "Casa", 5);
 
-        jugador.GastarRecursos(new Dictionary<TipoRecurso, int> {
+        jugador.GastarRecursos(new Dictionary<TipoRecurso?, int>
+        {
             { TipoRecurso.Madera, 100 } // deja al jugador sin madera
         });
 
@@ -398,4 +399,56 @@ public class Tests
 
         Assert.That(aliado.Vida, Is.EqualTo(vidaInicial), "No se debería dañar a unidades aliadas.");
     }
+<<<<<<< HEAD
+=======
+    
+<<<<<<< HEAD
+    //21. se respetan los turnos
+=======
+    [Test]
+>>>>>>> rama-belu
+    /// <summary>
+    /// prueba que el constructor de GenerarMapa cree un mapa con el ancho y alto especificados
+    /// </summary>
+    [Test]
+    public void Constructor_CreaMapaConDimensionesCorrectas()
+    {
+        var mapa = new GenerarMapa(10, 5);
+        Assert.AreEqual(10, mapa.Ancho);
+        Assert.AreEqual(5, mapa.Alto);
+    }
+    
+    /// <summary>
+    /// Prueba que el método MostrarMapa devuelva una cadena no vacía,
+    /// lo cual indica que el mapa fue generado correctamente.
+    /// </summary>
+    [Test]
+    public void MostrarMapa_NoDevuelveCadenaVacia()
+    {
+        var mapa = new GenerarMapa(5, 5);
+        string resultado = mapa.MostrarMapa();
+        Assert.IsFalse(string.IsNullOrWhiteSpace(resultado));
+    }
+    
+    
+    /// <summary>
+    /// prueba que los bordes del mapa estén correctamente rodeados de muros ('#').
+    /// </summary>
+    [Test]
+    public void InicializarMapa_TieneMurosEnLosBordes()
+    {
+        var mapa = new GenerarMapa(5, 5);
+        string resultado = mapa.MostrarMapa();
+        string[] filas = resultado.Split('\n');
+
+        Assert.That(filas[0][0], Is.EqualTo('#'));
+        Assert.That(filas[0][4], Is.EqualTo('#'));
+        Assert.That(filas[4][0], Is.EqualTo('#'));
+        Assert.That(filas[4][4], Is.EqualTo('#'));
+    }
+
+    
+    
+>>>>>>> main
+    
 }

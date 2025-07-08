@@ -57,8 +57,7 @@ namespace Library
             else
                 return null;
         }
-
-
+        
         /// <summary>
         /// jugador que tiene el turno actual
         /// </summary>
@@ -125,7 +124,7 @@ namespace Library
         /// <summary>
         /// ordena a un jugador recolectar un recurso en una coordenada
         /// </summary>
-        public void Recolectar(Player jugador, TipoRecurso tipo, Coordenada ubicacion)
+        public void Recolectar(Player jugador, TipoRecurso? tipo, Coordenada ubicacion)
         {
             jugador.RecolectarRecurso(tipo, ubicacion);
         }

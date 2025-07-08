@@ -57,9 +57,9 @@ public class Cuartel : Edificio
     /// </summary>
     /// <returns>un diccionario con el tipo de recurso y la cantidad necesaria</returns>
 
-    public override Dictionary<TipoRecurso, int> ObtenerCosto()
+    public override Dictionary<TipoRecurso?, int> ObtenerCosto()
     {
-        return new Dictionary<TipoRecurso, int>()
+        return new Dictionary<TipoRecurso?, int>()
         {
             { TipoRecurso.Madera, 125 }
         };
