@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Ucu.Poo.DiscordBot.Commands;
 
 namespace Library
 {
@@ -139,9 +140,25 @@ namespace Library
         /// <summary>
         /// mueve una unidad a una nueva coordenada
         /// </summary>
-        public void MoverUnidad(Unidad unidad, Coordenada destino)
+        public bool MoverUnidad(Unidad unidad, Coordenada destino)
         {
-            unidad.Mover(destino);
+            var comando = new MoverUnidadCommand(unidad, destino);
+            return comando.Ejecutar();
+        }
+        
+        public Unidad ObtenerUnidadPorId(int id, string nombreJugador)
+        {
+            var jugador = GetJugadorPorNombre(nombreJugador);
+            if (jugador == null) return null;
+    
+            foreach (var unidad in jugador.Unidades)
+            {
+                if (unidad.Id == id)
+                {
+                    return unidad;
+                }
+            }
+            return null;
         }
         
 
