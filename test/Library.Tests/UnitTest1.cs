@@ -52,14 +52,18 @@ public class Tests
 
         jugador.InicializarJuego();
 
-        bool centroCivicoExiste = !jugador.Victoria();
+        Assert.IsFalse(jugador.Victoria(), "El jugador no debería haber ganado al comenzar");
 
-        var aldeanosField = typeof(Player).GetField("aldeanos", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        var listaAldeanos = (List<Aldeano>)aldeanosField.GetValue(jugador);
-        int cantidadAldeanos = listaAldeanos.Count;
+        int cantidadAldeanos = 0;
+        foreach (var unidad in jugador.Unidades)
+        {
+            if (unidad is Aldeano)
+            {
+                cantidadAldeanos++;
+            }
+        }
+        Assert.That(cantidadAldeanos, Is.EqualTo(3), "El jugador debería comenzar con 3 aldeanos");
 
-        Assert.IsTrue(centroCivicoExiste);
-        Assert.That(cantidadAldeanos, Is.EqualTo(3));
     }
     
 

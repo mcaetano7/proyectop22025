@@ -108,16 +108,17 @@ namespace Library
             var centroCivico = new CentroCivico(new Coordenada(50, 50), 100, this, 10);
             edificios.Add(centroCivico);
             
-            
-            // crear primeros 3 aldeanos 
             for (int i = 0; i < 3; i++)
             { 
                 var coordenada = new Coordenada(50 + i, 50); 
                 var aldeano = new Aldeano(i + 1, coordenada, this);
-                aldeanos.Add(aldeano); //coloca los aldeanos en coordenadas
+                aldeanos.Add(aldeano); 
             }
 
-            poblacionActual += 3; //actualiza la posición
+            poblacionActual += 3;
+            
+            Unidades = aldeanos;
+
         }
 
         /// <summary>
@@ -126,7 +127,7 @@ namespace Library
         /// <returns>Retorna true si ganó, false si no</returns>
         public bool Victoria()
         {
-            return edificios.Any(edificio => edificio is CentroCivico);
+            return !edificios.Any(edificio => edificio is CentroCivico);
         }
         
         /// <summary>
