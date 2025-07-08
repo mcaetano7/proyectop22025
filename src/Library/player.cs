@@ -255,5 +255,19 @@ namespace Library
         }
 
         public IEnumerable Unidades { get; set; }
+
+        /// <summary>
+        /// Obtiene una unidad por su ID
+        /// </summary>
+        /// <param name="id">ID de la unidad</param>
+        /// <returns>La unidad si existe, null en caso contrario</returns>
+        public Unidad? ObtenerUnidadPorId(int id)
+        {
+            if (Unidades is IEnumerable<Unidad> unidadesList)
+            {
+                return unidadesList.FirstOrDefault(u => u.Id == id);
+            }
+            return null;
+        }
     }
 }

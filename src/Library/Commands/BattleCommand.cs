@@ -47,7 +47,7 @@ public class BattleCommand : ModuleBase<SocketCommandContext>
             if (partida != null)
             {
                 string primerTurno = partida.ObtenerJugadorTurno();
-                await Context.Message.Channel.SendMessageAsync($"🎲 **Empieza la partida!** {primerTurno} empieza primero.");
+                await Context.Message.Channel.SendMessageAsync($"**Empieza la partida!** {primerTurno} empieza primero.");
             }
         }
         else
@@ -86,6 +86,6 @@ public class BattleCommand : ModuleBase<SocketCommandContext>
         partida.SiguienteTurno();
         string nuevoJugador = partida.ObtenerJugadorTurno();
         
-        await ReplyAsync($"🔄 **Turno pasado.** Ahora juega {nuevoJugador}");
+                        await ReplyAsync($"**Turno pasado.** Ahora juega {nuevoJugador}");
     }
 }

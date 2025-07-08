@@ -295,4 +295,20 @@ public class Facade
         }
         return null;
     }
+
+    /// <summary>
+    /// Mueve una unidad a una nueva ubicación
+    /// </summary>
+    /// <param name="unidad">La unidad a mover</param>
+    /// <param name="destino">La coordenada de destino</param>
+    /// <returns>True si el movimiento fue exitoso, False en caso contrario</returns>
+    public bool MoverUnidad(Library.Unidad unidad, Library.Coordenada destino)
+    {
+        var partida = GetPartidaActiva(unidad.Owner.Nombre);
+        if (partida != null)
+        {
+            return partida.MoverUnidad(unidad, destino);
+        }
+        return false;
+    }
 }
