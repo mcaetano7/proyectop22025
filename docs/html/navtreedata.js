@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "My Project", "index.html", [
+  [ "Proyecto 2025", "index.html", [
     [ "README", "md__r_e_a_d_m_e.html", [
       [ "Universidad Católica del Uruguay", "md__r_e_a_d_m_e.html#autotoc_md0", [
         [ "Facultad de Ingeniería y Tecnologías", "md__r_e_a_d_m_e.html#autotoc_md1", [
