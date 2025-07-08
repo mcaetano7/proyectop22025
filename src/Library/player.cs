@@ -263,7 +263,11 @@ namespace Library
         /// <returns>La unidad si existe, null en caso contrario</returns>
         public Unidad? ObtenerUnidadPorId(int id)
         {
-            return Unidades?.Cast<Unidad>()?.FirstOrDefault(u => u?.Id == id);
+            if (Unidades is IEnumerable<Unidad> unidadesList)
+            {
+                return unidadesList.FirstOrDefault(u => u.Id == id);
+            }
+            return null;
         }
     }
 }

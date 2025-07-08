@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
 namespace Library;
 
 /// <summary>
@@ -11,7 +17,7 @@ public class Mapa
     /// <summary>
     /// Constructor que inicializa un mapa con celdas
     /// </summary>
-    public Mapa() 
+    public Mapa()
     {
         Celdas = new List<Celda>(); 
         
@@ -25,16 +31,16 @@ public class Mapa
             }
         }
     }
-    
+
     /// <summary>
     /// Obtiene celdas dependiendo de sus coordenadas
     /// </summary>
     /// <param name="coordenada">Coordenada de las celdas que se obtienen</param>
     /// <returns>Celda en la coordenada pedida</returns>
-    public Celda ObtenerCelda(Coordenada coordenada) 
+    public Celda ObtenerCelda(Coordenada coordenada)
     {
         return Celdas.First(c =>
             c.Coordenada.X == coordenada.X &&
-            c.Coordenada.Y == coordenada.Y); 
+            c.Coordenada.Y == coordenada.Y);
     }
 }
