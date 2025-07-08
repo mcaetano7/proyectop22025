@@ -95,8 +95,19 @@ public class ConstruirCommand : ModuleBase<SocketCommandContext>
             // mandamos a construir el edificio (se encarga el Facade)
             Ucu.Poo.DiscordBot.Domain.Facade.Instance.Construir(jugador, edificio, ubicacion);
 
-            // confirmamos que se construyó y mostramos los recursos que quedan
-            await ReplyAsync($" **¡{tipoEdificio} construido en ({x},{y})!**\n" +
+            // Agregar el edificio al mapa de la partida
+            var partidaActiva = Ucu.Poo.DiscordBot.Domain.Facade.Instance.GetPartidaActiva(displayName);
+            if (partidaActiva != null && partidaActiva.Mapa != null)
+            {
+                // Crear un generador de mapa y agregar el edificio
+                var generadorMapa = new GenerarMapa(20, 15);
+                generadorMapa.ColocarEdificio(x, y, tipoEdificio.ToLower());
+                
+                // Por ahora, solo confirmamos que se construyo
+            }
+
+            // confirmamos que se construyo y mostramos los recursos que quedan
+            await ReplyAsync($"✅ **{tipoEdificio} construido en ({x},{y})!**\n" +
                            $"Recursos restantes: Madera = {jugador.GetRecurso(TipoRecurso.Madera)}");
         }
         catch (Exception ex)

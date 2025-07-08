@@ -147,4 +147,70 @@ public class PlayerInfoCommand : ModuleBase<SocketCommandContext>
 
         await ReplyAsync(info);
     }
+
+    /// <summary>
+    /// Comando para mostrar el mapa del juego
+    /// </summary>
+    [Command("mapa")]
+    [Summary("Muestra el mapa actual del juego")]
+    public async Task MostrarMapaAsync()
+    {
+        string displayName = CommandHelper.GetDisplayName(Context);
+        
+        // Verificar si está en una partida
+        var partida = Facade.Instance.GetPartidaActiva(displayName);
+        if (partida == null)
+        {
+            await ReplyAsync("**No estás en una partida activa.**\n" +
+                           "Usa `!join` para unirte a la lista de espera y luego `!battle` para iniciar una partida.");
+            return;
+        }
+
+        try
+        {
+            // Obtener el mapa base desde la partida
+            string? mapaAscii = Facade.Instance.VerMapaAscii(displayName);
+            
+            if (string.IsNullOrEmpty(mapaAscii))
+            {
+                await ReplyAsync("**Error:** No se pudo generar el mapa.");
+                return;
+            }
+
+            // Discord tiene límites de caracteres, así que dividimos el mapa si es muy largo
+            if (mapaAscii.Length > 1900) // Dejamos margen para el formato
+            {
+                var partes = mapaAscii.Split('\n');
+                var mensaje = "**Mapa del Juego:**\n```\n";
+                
+                foreach (var linea in partes)
+                {
+                    if ((mensaje + linea + "\n").Length > 1900)
+                    {
+                        mensaje += "```";
+                        await ReplyAsync(mensaje);
+                        mensaje = "```\n" + linea + "\n";
+                    }
+                    else
+                    {
+                        mensaje += linea + "\n";
+                    }
+                }
+                
+                if (mensaje.Length > 3)
+                {
+                    mensaje += "```";
+                    await ReplyAsync(mensaje);
+                }
+            }
+            else
+            {
+                await ReplyAsync("**Mapa del Juego:**\n```\n" + mapaAscii + "\n```");
+            }
+        }
+        catch (Exception ex)
+        {
+            await ReplyAsync($"**Error al mostrar el mapa:** {ex.Message}");
+        }
+    }
 }

@@ -46,7 +46,10 @@ public class GenerarMapa
             { '^', "Mountain" },
             { 'T', "Tree" },
             { '#', "Muro" },
-            { ' ', "Empty" }
+            { ' ', "Empty" },
+            {'/', "Casa" },
+            {'@', "Centro Civico" },
+            {'*', "Almacen" }
         };
 
         simbolosUnidades = new Dictionary<char, string>() //tipo de unidades y simbolos
@@ -120,6 +123,42 @@ public class GenerarMapa
             }
         }
     }
-//public bool ColocarUnidad(int x, int y, char tipoUnidad)
 
+    /// <summary>
+    /// Coloca una unidad en el mapa en las coordenadas especificadas
+    /// </summary>
+    /// <param name="x">Coordenada X</param>
+    /// <param name="y">Coordenada Y</param>
+    /// <param name="tipoUnidad">Tipo de unidad a colocar</param>
+    /// <returns>True si se pudo colocar, False en caso contrario</returns>
+    public bool ColocarUnidad(int x, int y, char tipoUnidad)
+    {
+        if (x < 0 || x >= Ancho || y < 0 || y >= Alto)
+        {
+            return false; // Fuera de los límites del mapa
+        }
+
+        unidades[(x, y)] = tipoUnidad;
+        return true;
+    }
+
+    /// <summary>
+    /// Coloca un edificio en el mapa según su tipo
+    /// </summary>
+    /// <param name="x">Coordenada X</param>
+    /// <param name="y">Coordenada Y</param>
+    /// <param name="tipoEdificio">Tipo de edificio</param>
+    /// <returns>True si se pudo colocar, False en caso contrario</returns>
+    public bool ColocarEdificio(int x, int y, string tipoEdificio)
+    {
+        char simbolo = tipoEdificio.ToLower() switch
+        {
+            "casa" => '/',
+            "centrocivico" => '@',
+            "almacen" => '*',
+            _ => 'B' // Edificio genérico
+        };
+
+        return ColocarUnidad(x, y, simbolo);
+    }
 }

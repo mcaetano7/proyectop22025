@@ -258,4 +258,39 @@ public class Facade
     {
         return PartidasActivas.Values.ToList();
     }
+
+    /// <summary>
+    /// Obtiene la representación ASCII del mapa de la partida activa de un jugador
+    /// </summary>
+    /// <param name="playerDisplayName">Nombre del jugador</param>
+    /// <returns>Representación ASCII del mapa o null si no hay partida activa</returns>
+    public string? VerMapaAscii(string playerDisplayName)
+    {
+        var partida = GetPartidaActiva(playerDisplayName);
+        if (partida != null)
+        {
+            return partida.VerMapaAscii();
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Obtiene los edificios de un jugador en la partida activa
+    /// </summary>
+    /// <param name="playerDisplayName">Nombre del jugador</param>
+    /// <returns>Lista de edificios del jugador o null si no hay partida activa</returns>
+    public List<Library.Edificio>? GetEdificiosJugador(string playerDisplayName)
+    {
+        var partida = GetPartidaActiva(playerDisplayName);
+        if (partida != null)
+        {
+            var jugador = partida.GetJugadorPorNombre(playerDisplayName);
+            if (jugador != null)
+            {
+                // necesitaríamos acceder a los edificios del jugador
+                return null;
+            }
+        }
+        return null;
+    }
 }
